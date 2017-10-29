@@ -8,22 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		89A1560D1FA6486F0081035B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A1560C1FA6486F0081035B /* AppDelegate.swift */; };
-		89A1560F1FA6486F0081035B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A1560E1FA6486F0081035B /* ViewController.swift */; };
+		89A1560F1FA6486F0081035B /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A1560E1FA6486F0081035B /* HomeVC.swift */; };
 		89A156121FA6486F0081035B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A156101FA6486F0081035B /* Main.storyboard */; };
 		89A156151FA6486F0081035B /* GPSDataCollector.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 89A156131FA6486F0081035B /* GPSDataCollector.xcdatamodeld */; };
 		89A156171FA6486F0081035B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89A156161FA6486F0081035B /* Assets.xcassets */; };
 		89A1561A1FA6486F0081035B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A156181FA6486F0081035B /* LaunchScreen.storyboard */; };
+		89A156251FA64D170081035B /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A156241FA64D170081035B /* MapVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		89A156091FA6486F0081035B /* GPSDataCollector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GPSDataCollector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89A1560C1FA6486F0081035B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		89A1560E1FA6486F0081035B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		89A1560E1FA6486F0081035B /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		89A156111FA6486F0081035B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		89A156141FA6486F0081035B /* GPSDataCollector.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GPSDataCollector.xcdatamodel; sourceTree = "<group>"; };
 		89A156161FA6486F0081035B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		89A156191FA6486F0081035B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89A1561B1FA6486F0081035B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89A156241FA64D170081035B /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +58,10 @@
 		89A1560B1FA6486F0081035B /* GPSDataCollector */ = {
 			isa = PBXGroup;
 			children = (
+				89A156231FA64CBD0081035B /* Model */,
+				89A156221FA64CBB0081035B /* View */,
+				89A156211FA64CB80081035B /* Controller */,
 				89A1560C1FA6486F0081035B /* AppDelegate.swift */,
-				89A1560E1FA6486F0081035B /* ViewController.swift */,
 				89A156101FA6486F0081035B /* Main.storyboard */,
 				89A156161FA6486F0081035B /* Assets.xcassets */,
 				89A156181FA6486F0081035B /* LaunchScreen.storyboard */,
@@ -65,6 +69,29 @@
 				89A156131FA6486F0081035B /* GPSDataCollector.xcdatamodeld */,
 			);
 			path = GPSDataCollector;
+			sourceTree = "<group>";
+		};
+		89A156211FA64CB80081035B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				89A1560E1FA6486F0081035B /* HomeVC.swift */,
+				89A156241FA64D170081035B /* MapVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		89A156221FA64CBB0081035B /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		89A156231FA64CBD0081035B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -100,6 +127,11 @@
 					89A156081FA6486F0081035B = {
 						CreatedOnToolsVersion = 9.0.1;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -139,7 +171,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89A1560F1FA6486F0081035B /* ViewController.swift in Sources */,
+				89A1560F1FA6486F0081035B /* HomeVC.swift in Sources */,
+				89A156251FA64D170081035B /* MapVC.swift in Sources */,
 				89A1560D1FA6486F0081035B /* AppDelegate.swift in Sources */,
 				89A156151FA6486F0081035B /* GPSDataCollector.xcdatamodeld in Sources */,
 			);
