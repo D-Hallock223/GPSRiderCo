@@ -144,10 +144,26 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y2y-2W-K3A">
+                                <rect key="frame" x="311" y="617" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.42574925540000003" green="0.72963815970000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelBtnClicked:" destination="Kx0-OC-aqq" eventType="touchUpInside" id="7lA-tT-sus"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.6675032383419689" green="0.6675032383419689" blue="0.6675032383419689" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="vXh-4r-VJD"/>
                     </view>
+                    <connections>
+                        <outlet property="latitudeLbl" destination="jOq-d6-u7e" id="ape-QK-SLb"/>
+                        <outlet property="longitudeLbl" destination="bBW-bt-RgT" id="mex-he-xLm"/>
+                        <outlet property="myMapView" destination="2Cm-c5-ceN" id="Jnj-od-Yx9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CNE-fu-ZEp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
