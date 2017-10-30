@@ -63,7 +63,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
-        locationManager.distanceFilter = 100.0
+        locationManager.distanceFilter = 50.0
         let status = CLLocationManager.authorizationStatus()
         if status == .notDetermined || status == .denied || status == .authorizedWhenInUse {
             
