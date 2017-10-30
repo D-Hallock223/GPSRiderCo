@@ -14,6 +14,7 @@ class MapVC: UIViewController,SendData {
     fileprivate var locations = [MKPointAnnotation]()
     
     weak var homeVC:HomeVC?
+    var username:String?
     
     @IBOutlet weak var myMapView: MKMapView!
     @IBOutlet weak var longitudeLbl: UILabel!
@@ -62,13 +63,15 @@ class MapVC: UIViewController,SendData {
             self.latitudeLbl.text = "\(latitude)"
             self.longitudeLbl.text = "\(longitude)"
             
-             let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             
             let annotation = MKPointAnnotation()
             annotation.coordinate = location
             self.locations.append(annotation)
+            if let name =  username {
+                annotation.title = name
+            }
             myMapView.addAnnotation(annotation)
-        
             myMapView.setCenter(location, animated: true)
             
             

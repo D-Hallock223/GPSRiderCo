@@ -21,6 +21,8 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
     private var _latitude:CLLocationDegrees!
     private var _longitude:CLLocationDegrees!
     weak var protocolDelegate:SendData?
+    var username:String?
+    var timerOn = false
     
     
     var latitude : CLLocationDegrees {
@@ -42,6 +44,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
         }
     }
     
+    @IBOutlet weak var nameTxtFld: UITextField!
     
     @IBOutlet weak var latitudeLbl: UILabel!
     @IBOutlet weak var longitudeLbl: UILabel!
@@ -51,9 +54,12 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
         locationSetup()
         self._latitude = CLLocationDegrees()
         self._longitude = CLLocationDegrees()
+        
     }
     
     fileprivate func locationSetup() {
+        
+        
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
@@ -64,12 +70,11 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
             locationManager.requestAlwaysAuthorization()
             locationManager.requestWhenInUseAuthorization()
         }
-        locationManager.startUpdatingLocation()
         locationManager.allowsBackgroundLocationUpdates = true
     }
     
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
         
         
         guard let location = locations.last else {return}
@@ -95,7 +100,65 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
         destination.homeVC = self
         if let locationPoint = self.locationPoint {
             destination.locationPoint = locationPoint
+            destination.username = username
         }
     }
+    
+    @objc func sendDataToserver() {
+        
+        let parameters:[String:Any] = ["user": username!,
+                                       "lat":  Double(self.latitude),
+                                       "lng":  Double(self.longitude),
+                                       "time": Date().timeIntervalSince1970]
+        guard let url = URL(string: "https://savemyloc.herokuapp.com/") else {return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {return}
+        request.httpBody = httpBody
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let response = response {
+                print(response)
+            }
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    print(json)
+                }catch {
+                    print(error)
+                }
+            }
+            }.resume()
+    }
+    
+    func callAlert(title:String,Message:String) {
+        let alertVC = UIAlertController(title: title, message: Message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+        alertVC.addAction(action)
+        self.present(alertVC, animated: true, completion: nil)
+    }
+    
+    @IBAction func startUpdateBtnPressd(_ sender: Any) {
+        let name = nameTxtFld.text
+        if name == "" {
+            callAlert(title:"Enter Name",Message:"Enter proper value in name text field")
+            return
+        }
+        self.username = name
+        locationManager.startUpdatingLocation()
+        if timerOn == false {
+            Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(sendDataToserver), userInfo: nil, repeats: true)
+        }
+        timerOn = true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    
+    
+    
 }
 
