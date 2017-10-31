@@ -23,6 +23,9 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
     weak var protocolDelegate:SendData?
     var username:String?
     var timerOn = false
+    var backgroundTimerCondition = true
+    var backgroundTimer:Timer!
+    var backgroundTimeRunning = false
     
     
     var latitude : CLLocationDegrees {
@@ -86,8 +89,23 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
         print(latitude,longitude)
         
         if UIApplication.shared.applicationState == .active {
+            self.backgroundTimerCondition = true
+            if backgroundTimeRunning {
+            self.backgroundTimer.invalidate()
+            backgroundTimeRunning = false
+            }
+            
         } else {
             print("App is backgrounded. New location is %@", location)
+            self.latitude = location.coordinate.latitude
+            self.longitude = location.coordinate.longitude
+    
+            if backgroundTimerCondition {
+                backgroundTimerCondition = false
+                backgroundTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(sendDataToserver), userInfo: nil, repeats: true)
+                backgroundTimeRunning = true
+            }
+            
         }
         self.locationPoint = CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longitude)
         guard let delegate = protocolDelegate else {return}
