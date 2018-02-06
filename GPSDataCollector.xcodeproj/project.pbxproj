@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		38441A8DDC2F635130EB17AB /* Pods_GPSDataCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2B5EBACDB4CE42A1273AFD6 /* Pods_GPSDataCollector.framework */; };
 		8940272720296D5C003832B1 /* LogInInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940272620296D5C003832B1 /* LogInInVC.swift */; };
 		8940272920296D68003832B1 /* SignUPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940272820296D68003832B1 /* SignUPVC.swift */; };
+		8940272B20296EDF003832B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8940272A20296EDF003832B1 /* GoogleService-Info.plist */; };
 		89A1560D1FA6486F0081035B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A1560C1FA6486F0081035B /* AppDelegate.swift */; };
 		89A1560F1FA6486F0081035B /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A1560E1FA6486F0081035B /* HomeVC.swift */; };
 		89A156121FA6486F0081035B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A156101FA6486F0081035B /* Main.storyboard */; };
@@ -19,8 +21,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		61F5C9D2D8CE4E6DAD0D2CEA /* Pods-GPSDataCollector.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPSDataCollector.release.xcconfig"; path = "Pods/Target Support Files/Pods-GPSDataCollector/Pods-GPSDataCollector.release.xcconfig"; sourceTree = "<group>"; };
 		8940272620296D5C003832B1 /* LogInInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInInVC.swift; sourceTree = "<group>"; };
 		8940272820296D68003832B1 /* SignUPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPVC.swift; sourceTree = "<group>"; };
+		8940272A20296EDF003832B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		89A156091FA6486F0081035B /* GPSDataCollector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GPSDataCollector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89A1560C1FA6486F0081035B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89A1560E1FA6486F0081035B /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -30,6 +34,8 @@
 		89A156191FA6486F0081035B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89A1561B1FA6486F0081035B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89A156241FA64D170081035B /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
+		A2B5EBACDB4CE42A1273AFD6 /* Pods_GPSDataCollector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GPSDataCollector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6DB647D7CC5B187DBEFFFAD /* Pods-GPSDataCollector.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPSDataCollector.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GPSDataCollector/Pods-GPSDataCollector.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,17 +43,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38441A8DDC2F635130EB17AB /* Pods_GPSDataCollector.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37FDB8BFF1FA27AD719AF6F0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A2B5EBACDB4CE42A1273AFD6 /* Pods_GPSDataCollector.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6F9C4A36E8C0AEA8FA0C32F8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A6DB647D7CC5B187DBEFFFAD /* Pods-GPSDataCollector.debug.xcconfig */,
+				61F5C9D2D8CE4E6DAD0D2CEA /* Pods-GPSDataCollector.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		89A156001FA6486F0081035B = {
 			isa = PBXGroup;
 			children = (
 				89A1560B1FA6486F0081035B /* GPSDataCollector */,
 				89A1560A1FA6486F0081035B /* Products */,
+				6F9C4A36E8C0AEA8FA0C32F8 /* Pods */,
+				37FDB8BFF1FA27AD719AF6F0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,6 +97,7 @@
 				89A156181FA6486F0081035B /* LaunchScreen.storyboard */,
 				89A1561B1FA6486F0081035B /* Info.plist */,
 				89A156131FA6486F0081035B /* GPSDataCollector.xcdatamodeld */,
+				8940272A20296EDF003832B1 /* GoogleService-Info.plist */,
 			);
 			path = GPSDataCollector;
 			sourceTree = "<group>";
@@ -107,9 +134,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 89A1561E1FA6486F0081035B /* Build configuration list for PBXNativeTarget "GPSDataCollector" */;
 			buildPhases = (
+				94C6ACE5C5397CB00A470969 /* [CP] Check Pods Manifest.lock */,
 				89A156051FA6486F0081035B /* Sources */,
 				89A156061FA6486F0081035B /* Frameworks */,
 				89A156071FA6486F0081035B /* Resources */,
+				844160F0A33690408923189C /* [CP] Embed Pods Frameworks */,
+				884F3E7DE34A8C1BC64AA0E7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -165,12 +195,71 @@
 			buildActionMask = 2147483647;
 			files = (
 				89A1561A1FA6486F0081035B /* LaunchScreen.storyboard in Resources */,
+				8940272B20296EDF003832B1 /* GoogleService-Info.plist in Resources */,
 				89A156171FA6486F0081035B /* Assets.xcassets in Resources */,
 				89A156121FA6486F0081035B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		844160F0A33690408923189C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-GPSDataCollector/Pods-GPSDataCollector-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GPSDataCollector/Pods-GPSDataCollector-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		884F3E7DE34A8C1BC64AA0E7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GPSDataCollector/Pods-GPSDataCollector-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		94C6ACE5C5397CB00A470969 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GPSDataCollector-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		89A156051FA6486F0081035B /* Sources */ = {
@@ -317,6 +406,7 @@
 		};
 		89A1561F1FA6486F0081035B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A6DB647D7CC5B187DBEFFFAD /* Pods-GPSDataCollector.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -331,6 +421,7 @@
 		};
 		89A156201FA6486F0081035B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61F5C9D2D8CE4E6DAD0D2CEA /* Pods-GPSDataCollector.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
