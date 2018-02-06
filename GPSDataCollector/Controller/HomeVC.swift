@@ -176,6 +176,15 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
         self.view.endEditing(true)
     }
     
+    @IBAction func signOutBtnPrssd(_ sender: Any) {
+        do{
+            try Auth.auth().signOut()
+            self.dismiss(animated: true, completion: nil)
+        }
+        catch{
+            print(error.localizedDescription)
+        }
+    }
     
     
     
