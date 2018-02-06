@@ -9,11 +9,24 @@
 import UIKit
 
 class SignUPVC: UIViewController {
+    
+    @IBOutlet weak var userNametxtFld: UITextField!
+    @IBOutlet weak var passwordTxtFld: UITextField!
+    
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
 
-
+    @IBAction func signUpBtnPrssd(_ sender: Any) {
+        
+    }
+    
+    @IBAction func goToLoginBtnPrssd(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }

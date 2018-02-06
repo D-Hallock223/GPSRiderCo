@@ -9,11 +9,23 @@
 import UIKit
 
 class LogInInVC: UIViewController {
+    
+    
+    @IBOutlet weak var userNameTxtFld: UITextField!
+    @IBOutlet weak var passwordTxtFld: UITextField!
+    
 
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
     }
 
-
+    @IBAction func logInBtnPrsd(_ sender: Any) {
+        
+    }
+    
 }

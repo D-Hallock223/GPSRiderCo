@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Log In InVC-->
         <scene sceneID="Lcg-bI-ScH">
             <objects>
-                <viewController id="gzy-z9-S7P" sceneMemberID="viewController">
+                <viewController id="gzy-z9-S7P" customClass="LogInInVC" customModule="GPSDataCollector" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qFJ-RJ-L1M">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -60,6 +60,9 @@
                                                 <state key="normal" title="Log In">
                                                     <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="logInBtnPrsd:" destination="gzy-z9-S7P" eventType="touchUpInside" id="Gw1-2V-MYt"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="0.60343535958904104" colorSpace="custom" customColorSpace="sRGB"/>
@@ -103,15 +106,19 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="xJl-rh-T4u"/>
                     </view>
+                    <connections>
+                        <outlet property="passwordTxtFld" destination="FpG-2j-ql1" id="tgM-xR-IBW"/>
+                        <outlet property="userNameTxtFld" destination="SzC-uu-dtL" id="HqB-d8-3wd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wux-UU-Aei" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1471.2" y="133.5832083958021"/>
         </scene>
-        <!--View Controller-->
+        <!--SignUPVC-->
         <scene sceneID="CKP-Nj-z1C">
             <objects>
-                <viewController id="xUg-ds-lP5" sceneMemberID="viewController">
+                <viewController id="xUg-ds-lP5" customClass="SignUPVC" customModule="GPSDataCollector" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="V0v-P7-f3W">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -155,6 +162,9 @@
                                         <state key="normal" title="Sign Up">
                                             <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="signUpBtnPrssd:" destination="xUg-ds-lP5" eventType="touchUpInside" id="Z1O-cL-7zh"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="0.60343535960000005" colorSpace="custom" customColorSpace="sRGB"/>
@@ -170,6 +180,9 @@
                                         <state key="normal" title="Click here">
                                             <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="goToLoginBtnPrssd:" destination="xUg-ds-lP5" eventType="touchUpInside" id="Z76-31-bVe"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Already have an account?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAy-Bb-vC4">
                                         <rect key="frame" x="44" y="24" width="196" height="21"/>
@@ -192,6 +205,10 @@
                         <color key="backgroundColor" red="0.51764705882352935" green="0.51764705882352935" blue="0.51764705882352935" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="dEm-ES-2r5"/>
                     </view>
+                    <connections>
+                        <outlet property="passwordTxtFld" destination="xwv-dA-jfX" id="gt2-Kh-l6t"/>
+                        <outlet property="userNametxtFld" destination="sYs-Sp-DkQ" id="e5C-58-CLD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PgO-YR-JOj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
