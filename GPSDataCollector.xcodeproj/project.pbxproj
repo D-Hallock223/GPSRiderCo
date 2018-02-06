@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8940272720296D5C003832B1 /* LogInInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940272620296D5C003832B1 /* LogInInVC.swift */; };
+		8940272920296D68003832B1 /* SignUPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940272820296D68003832B1 /* SignUPVC.swift */; };
 		89A1560D1FA6486F0081035B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A1560C1FA6486F0081035B /* AppDelegate.swift */; };
 		89A1560F1FA6486F0081035B /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A1560E1FA6486F0081035B /* HomeVC.swift */; };
 		89A156121FA6486F0081035B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A156101FA6486F0081035B /* Main.storyboard */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8940272620296D5C003832B1 /* LogInInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInInVC.swift; sourceTree = "<group>"; };
+		8940272820296D68003832B1 /* SignUPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPVC.swift; sourceTree = "<group>"; };
 		89A156091FA6486F0081035B /* GPSDataCollector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GPSDataCollector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89A1560C1FA6486F0081035B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89A1560E1FA6486F0081035B /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -76,6 +80,8 @@
 			children = (
 				89A1560E1FA6486F0081035B /* HomeVC.swift */,
 				89A156241FA64D170081035B /* MapVC.swift */,
+				8940272620296D5C003832B1 /* LogInInVC.swift */,
+				8940272820296D68003832B1 /* SignUPVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -173,7 +179,9 @@
 			files = (
 				89A1560F1FA6486F0081035B /* HomeVC.swift in Sources */,
 				89A156251FA64D170081035B /* MapVC.swift in Sources */,
+				8940272720296D5C003832B1 /* LogInInVC.swift in Sources */,
 				89A1560D1FA6486F0081035B /* AppDelegate.swift in Sources */,
+				8940272920296D68003832B1 /* SignUPVC.swift in Sources */,
 				89A156151FA6486F0081035B /* GPSDataCollector.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

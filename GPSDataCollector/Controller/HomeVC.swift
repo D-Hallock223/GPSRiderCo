@@ -47,8 +47,6 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
         }
     }
     
-    @IBOutlet weak var nameTxtFld: UITextField!
-    
     @IBOutlet weak var latitudeLbl: UILabel!
     @IBOutlet weak var longitudeLbl: UILabel!
     
@@ -158,7 +156,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
     }
     
     @IBAction func startUpdateBtnPressd(_ sender: Any) {
-        let name = nameTxtFld.text
+        let name = "lalalallalala"
         if name == "" {
             callAlert(title:"Enter Name",Message:"Enter proper value in name text field")
             return
