@@ -38,7 +38,8 @@ class SignUPVC: UIViewController {
             self.userNametxtFld.text = ""
             self.passwordTxtFld.text = ""
             if error != nil {
-                self.displayAlert(title: "ERROR", Message: "Error while signing in")
+                self.displayAlert(title: "ERROR", Message: (error?.localizedDescription)!)
+                self.spinner.stopAnimating()
                 return
             }
             guard let user  = user else {return}

@@ -185,6 +185,9 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
             print(error.localizedDescription)
         }
     }
+
+    
+    
     
     
     

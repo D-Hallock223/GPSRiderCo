@@ -41,7 +41,8 @@ class LogInInVC: UIViewController {
             self.userNameTxtFld.text = ""
             self.passwordTxtFld.text = ""
             if error != nil {
-                self.displayAlert(title: "ERROR", Message: "Error while signing in")
+                self.displayAlert(title: "ERROR", Message: (error?.localizedDescription)!)
+                self.spinner.stopAnimating()
                 return
             }
             guard let user  = user else {return}
@@ -51,6 +52,7 @@ class LogInInVC: UIViewController {
             self.present(vc, animated: true, completion: nil)
         }
     }
+    
     
     func displayAlert(title:String,Message:String) {
         let alert = UIAlertController(title: title, message: Message, preferredStyle: .alert)
