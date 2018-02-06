@@ -15,6 +15,7 @@ class LogInInVC: UIViewController {
     
     @IBOutlet weak var userNameTxtFld: UITextField!
     @IBOutlet weak var passwordTxtFld: UITextField!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
 
     
@@ -27,6 +28,7 @@ class LogInInVC: UIViewController {
     }
 
     @IBAction func logInBtnPrsd(_ sender: Any) {
+        spinner.startAnimating()
         guard let email = userNameTxtFld.text,email != "" else {
             displayAlert(title: "Enter the username", Message: "Please enter your username")
             return
@@ -43,7 +45,10 @@ class LogInInVC: UIViewController {
                 return
             }
             guard let user  = user else {return}
-            print(user.email)
+            self.spinner.stopAnimating()
+            let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeVC") as! HomeVC
+            vc.user = user
+            self.present(vc, animated: true, completion: nil)
         }
     }
     

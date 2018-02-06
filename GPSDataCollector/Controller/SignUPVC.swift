@@ -14,6 +14,7 @@ class SignUPVC: UIViewController {
     @IBOutlet weak var userNametxtFld: UITextField!
     @IBOutlet weak var passwordTxtFld: UITextField!
     
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     
 
@@ -23,6 +24,7 @@ class SignUPVC: UIViewController {
     }
 
     @IBAction func signUpBtnPrssd(_ sender: Any) {
+        spinner.startAnimating()
         guard let email = userNametxtFld.text,email != "" else {
             displayAlert(title: "Enter the username", Message: "Please enter your username")
             return
@@ -33,14 +35,17 @@ class SignUPVC: UIViewController {
         }
         
         Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-            self.userNameTxtFld.text = ""
+            self.userNametxtFld.text = ""
             self.passwordTxtFld.text = ""
             if error != nil {
                 self.displayAlert(title: "ERROR", Message: "Error while signing in")
                 return
             }
             guard let user  = user else {return}
-            print(user.email)
+            self.spinner.stopAnimating()
+            let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeVC") as! HomeVC
+            vc.user = user
+            self.present(vc, animated: true, completion: nil)
         }
     }
     

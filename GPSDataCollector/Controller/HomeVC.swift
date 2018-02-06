@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import Firebase
 
 protocol SendData:class {
     
@@ -15,6 +16,8 @@ protocol SendData:class {
 }
 
 class HomeVC: UIViewController,CLLocationManagerDelegate {
+    
+    var user:User?
     
     var locationPoint:CLLocationCoordinate2D?
     var locationManager:CLLocationManager!
@@ -156,7 +159,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
     }
     
     @IBAction func startUpdateBtnPressd(_ sender: Any) {
-        let name = "lalalallalala"
+        let name = user?.email
         if name == "" {
             callAlert(title:"Enter Name",Message:"Enter proper value in name text field")
             return
