@@ -8,9 +8,26 @@
 
 import UIKit
 import Firebase
+import WatchConnectivity
 
 
-class LogInInVC: UIViewController {
+class LogInInVC: UIViewController,WCSessionDelegate {
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        print("activated")
+    }
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        
+    }
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        print(message)
+    }
+    
     
     
     @IBOutlet weak var userNameTxtFld: UITextField!
@@ -19,13 +36,19 @@ class LogInInVC: UIViewController {
     
 
     
-    
+    let session = WCSession.default
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        session.delegate = self
+        session.activate()
+        
 
     }
+    
+
+    
 
     @IBAction func logInBtnPrsd(_ sender: Any) {
         spinner.startAnimating()

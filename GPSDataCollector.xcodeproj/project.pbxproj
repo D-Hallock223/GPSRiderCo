@@ -20,6 +20,8 @@
 		89961813203BCB260055364A /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89961812203BCB260055364A /* NotificationController.swift */; };
 		89961815203BCB260055364A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89961814203BCB260055364A /* Assets.xcassets */; };
 		8996181A203BCB260055364A /* RiderTrackWatchApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 899617FD203BCB260055364A /* RiderTrackWatchApp.app */; };
+		89961827203BE2320055364A /* iPhoneAppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89961826203BE2320055364A /* iPhoneAppConstants.swift */; };
+		89961829203BE2720055364A /* WatchAppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89961828203BE2720055364A /* WatchAppConstants.swift */; };
 		89A1560D1FA6486F0081035B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A1560C1FA6486F0081035B /* AppDelegate.swift */; };
 		89A1560F1FA6486F0081035B /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A1560E1FA6486F0081035B /* HomeVC.swift */; };
 		89A156121FA6486F0081035B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A156101FA6486F0081035B /* Main.storyboard */; };
@@ -88,6 +90,11 @@
 		89961814203BCB260055364A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		89961816203BCB260055364A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89961817203BCB260055364A /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		89961823203BE09D0055364A /* GPSDataCollector.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GPSDataCollector.entitlements; sourceTree = "<group>"; };
+		89961824203BE0F60055364A /* RiderTrackWatchApp Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RiderTrackWatchApp Extension.entitlements"; sourceTree = "<group>"; };
+		89961826203BE2320055364A /* iPhoneAppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPhoneAppConstants.swift; sourceTree = "<group>"; };
+		89961828203BE2720055364A /* WatchAppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchAppConstants.swift; sourceTree = "<group>"; };
+		8996182A203BE7FD0055364A /* RiderTrackWatchApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RiderTrackWatchApp.entitlements; sourceTree = "<group>"; };
 		89A156091FA6486F0081035B /* GPSDataCollector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GPSDataCollector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89A1560C1FA6486F0081035B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89A1560E1FA6486F0081035B /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -140,6 +147,7 @@
 		899617FE203BCB260055364A /* RiderTrackWatchApp */ = {
 			isa = PBXGroup;
 			children = (
+				8996182A203BE7FD0055364A /* RiderTrackWatchApp.entitlements */,
 				899617FF203BCB260055364A /* Interface.storyboard */,
 				89961802203BCB260055364A /* Assets.xcassets */,
 				89961804203BCB260055364A /* Info.plist */,
@@ -150,14 +158,24 @@
 		8996180D203BCB260055364A /* RiderTrackWatchApp Extension */ = {
 			isa = PBXGroup;
 			children = (
+				89961824203BE0F60055364A /* RiderTrackWatchApp Extension.entitlements */,
 				8996180E203BCB260055364A /* InterfaceController.swift */,
 				89961810203BCB260055364A /* ExtensionDelegate.swift */,
 				89961812203BCB260055364A /* NotificationController.swift */,
 				89961814203BCB260055364A /* Assets.xcassets */,
 				89961816203BCB260055364A /* Info.plist */,
 				89961817203BCB260055364A /* PushNotificationPayload.apns */,
+				89961828203BE2720055364A /* WatchAppConstants.swift */,
 			);
 			path = "RiderTrackWatchApp Extension";
+			sourceTree = "<group>";
+		};
+		89961825203BE2130055364A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				89961826203BE2320055364A /* iPhoneAppConstants.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		89A156001FA6486F0081035B = {
@@ -185,6 +203,8 @@
 		89A1560B1FA6486F0081035B /* GPSDataCollector */ = {
 			isa = PBXGroup;
 			children = (
+				89961825203BE2130055364A /* Utilities */,
+				89961823203BE09D0055364A /* GPSDataCollector.entitlements */,
 				89A156231FA64CBD0081035B /* Model */,
 				89A156221FA64CBB0081035B /* View */,
 				89A156211FA64CB80081035B /* Controller */,
@@ -297,15 +317,28 @@
 					899617FC203BCB260055364A = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					89961808203BCB260055364A = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					89A156081FA6486F0081035B = {
 						CreatedOnToolsVersion = 9.0.1;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
@@ -430,6 +463,7 @@
 				89961813203BCB260055364A /* NotificationController.swift in Sources */,
 				89961811203BCB260055364A /* ExtensionDelegate.swift in Sources */,
 				8996180F203BCB260055364A /* InterfaceController.swift in Sources */,
+				89961829203BE2720055364A /* WatchAppConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,6 +475,7 @@
 				89A156251FA64D170081035B /* MapVC.swift in Sources */,
 				8940272720296D5C003832B1 /* LogInInVC.swift in Sources */,
 				89A1560D1FA6486F0081035B /* AppDelegate.swift in Sources */,
+				89961827203BE2320055364A /* iPhoneAppConstants.swift in Sources */,
 				8940272920296D68003832B1 /* SignUPVC.swift in Sources */,
 				89A156151FA6486F0081035B /* GPSDataCollector.xcdatamodeld in Sources */,
 				8940272D202A496F003832B1 /* UpdateProfileVC.swift in Sources */,
@@ -495,7 +530,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = RiderTrackWatchApp/RiderTrackWatchApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = URC6LMYQPJ;
 				IBSC_MODULE = RiderTrackWatchApp_Extension;
 				INFOPLIST_FILE = RiderTrackWatchApp/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = akilkumar.GPSDataCollector.watchkitapp;
@@ -513,7 +550,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = RiderTrackWatchApp/RiderTrackWatchApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = URC6LMYQPJ;
 				IBSC_MODULE = RiderTrackWatchApp_Extension;
 				INFOPLIST_FILE = RiderTrackWatchApp/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = akilkumar.GPSDataCollector.watchkitapp;
@@ -530,7 +569,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "RiderTrackWatchApp Extension/RiderTrackWatchApp Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = URC6LMYQPJ;
 				INFOPLIST_FILE = "RiderTrackWatchApp Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = akilkumar.GPSDataCollector.watchkitapp.watchkitextension;
@@ -547,7 +588,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_ENTITLEMENTS = "RiderTrackWatchApp Extension/RiderTrackWatchApp Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = URC6LMYQPJ;
 				INFOPLIST_FILE = "RiderTrackWatchApp Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = akilkumar.GPSDataCollector.watchkitapp.watchkitextension;
@@ -672,7 +715,9 @@
 			baseConfigurationReference = A6DB647D7CC5B187DBEFFFAD /* Pods-GPSDataCollector.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GPSDataCollector/GPSDataCollector.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = URC6LMYQPJ;
 				INFOPLIST_FILE = GPSDataCollector/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = akilkumar.GPSDataCollector;
@@ -687,7 +732,9 @@
 			baseConfigurationReference = 61F5C9D2D8CE4E6DAD0D2CEA /* Pods-GPSDataCollector.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GPSDataCollector/GPSDataCollector.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = URC6LMYQPJ;
 				INFOPLIST_FILE = GPSDataCollector/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = akilkumar.GPSDataCollector;
