@@ -12,6 +12,14 @@
 		8940272920296D68003832B1 /* SignUPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940272820296D68003832B1 /* SignUPVC.swift */; };
 		8940272B20296EDF003832B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8940272A20296EDF003832B1 /* GoogleService-Info.plist */; };
 		8940272D202A496F003832B1 /* UpdateProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940272C202A496F003832B1 /* UpdateProfileVC.swift */; };
+		89961801203BCB260055364A /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 899617FF203BCB260055364A /* Interface.storyboard */; };
+		89961803203BCB260055364A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89961802203BCB260055364A /* Assets.xcassets */; };
+		8996180A203BCB260055364A /* RiderTrackWatchApp Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 89961809203BCB260055364A /* RiderTrackWatchApp Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8996180F203BCB260055364A /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8996180E203BCB260055364A /* InterfaceController.swift */; };
+		89961811203BCB260055364A /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89961810203BCB260055364A /* ExtensionDelegate.swift */; };
+		89961813203BCB260055364A /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89961812203BCB260055364A /* NotificationController.swift */; };
+		89961815203BCB260055364A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89961814203BCB260055364A /* Assets.xcassets */; };
+		8996181A203BCB260055364A /* RiderTrackWatchApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 899617FD203BCB260055364A /* RiderTrackWatchApp.app */; };
 		89A1560D1FA6486F0081035B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A1560C1FA6486F0081035B /* AppDelegate.swift */; };
 		89A1560F1FA6486F0081035B /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A1560E1FA6486F0081035B /* HomeVC.swift */; };
 		89A156121FA6486F0081035B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89A156101FA6486F0081035B /* Main.storyboard */; };
@@ -21,12 +29,65 @@
 		89A156251FA64D170081035B /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A156241FA64D170081035B /* MapVC.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		8996180B203BCB260055364A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 89A156011FA6486F0081035B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 89961808203BCB260055364A;
+			remoteInfo = "RiderTrackWatchApp Extension";
+		};
+		89961818203BCB260055364A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 89A156011FA6486F0081035B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 899617FC203BCB260055364A;
+			remoteInfo = RiderTrackWatchApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		89961820203BCB260055364A /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				8996180A203BCB260055364A /* RiderTrackWatchApp Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89961822203BCB260055364A /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				8996181A203BCB260055364A /* RiderTrackWatchApp.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		61F5C9D2D8CE4E6DAD0D2CEA /* Pods-GPSDataCollector.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPSDataCollector.release.xcconfig"; path = "Pods/Target Support Files/Pods-GPSDataCollector/Pods-GPSDataCollector.release.xcconfig"; sourceTree = "<group>"; };
 		8940272620296D5C003832B1 /* LogInInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInInVC.swift; sourceTree = "<group>"; };
 		8940272820296D68003832B1 /* SignUPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPVC.swift; sourceTree = "<group>"; };
 		8940272A20296EDF003832B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8940272C202A496F003832B1 /* UpdateProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileVC.swift; sourceTree = "<group>"; };
+		899617FD203BCB260055364A /* RiderTrackWatchApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RiderTrackWatchApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		89961800203BCB260055364A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		89961802203BCB260055364A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		89961804203BCB260055364A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89961809203BCB260055364A /* RiderTrackWatchApp Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "RiderTrackWatchApp Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8996180E203BCB260055364A /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		89961810203BCB260055364A /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		89961812203BCB260055364A /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		89961814203BCB260055364A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		89961816203BCB260055364A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89961817203BCB260055364A /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		89A156091FA6486F0081035B /* GPSDataCollector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GPSDataCollector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89A1560C1FA6486F0081035B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89A1560E1FA6486F0081035B /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -41,6 +102,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		89961806203BCB260055364A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		89A156061FA6486F0081035B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -69,10 +137,35 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		899617FE203BCB260055364A /* RiderTrackWatchApp */ = {
+			isa = PBXGroup;
+			children = (
+				899617FF203BCB260055364A /* Interface.storyboard */,
+				89961802203BCB260055364A /* Assets.xcassets */,
+				89961804203BCB260055364A /* Info.plist */,
+			);
+			path = RiderTrackWatchApp;
+			sourceTree = "<group>";
+		};
+		8996180D203BCB260055364A /* RiderTrackWatchApp Extension */ = {
+			isa = PBXGroup;
+			children = (
+				8996180E203BCB260055364A /* InterfaceController.swift */,
+				89961810203BCB260055364A /* ExtensionDelegate.swift */,
+				89961812203BCB260055364A /* NotificationController.swift */,
+				89961814203BCB260055364A /* Assets.xcassets */,
+				89961816203BCB260055364A /* Info.plist */,
+				89961817203BCB260055364A /* PushNotificationPayload.apns */,
+			);
+			path = "RiderTrackWatchApp Extension";
+			sourceTree = "<group>";
+		};
 		89A156001FA6486F0081035B = {
 			isa = PBXGroup;
 			children = (
 				89A1560B1FA6486F0081035B /* GPSDataCollector */,
+				899617FE203BCB260055364A /* RiderTrackWatchApp */,
+				8996180D203BCB260055364A /* RiderTrackWatchApp Extension */,
 				89A1560A1FA6486F0081035B /* Products */,
 				6F9C4A36E8C0AEA8FA0C32F8 /* Pods */,
 				37FDB8BFF1FA27AD719AF6F0 /* Frameworks */,
@@ -83,6 +176,8 @@
 			isa = PBXGroup;
 			children = (
 				89A156091FA6486F0081035B /* GPSDataCollector.app */,
+				899617FD203BCB260055364A /* RiderTrackWatchApp.app */,
+				89961809203BCB260055364A /* RiderTrackWatchApp Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,6 +228,40 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		899617FC203BCB260055364A /* RiderTrackWatchApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 89961821203BCB260055364A /* Build configuration list for PBXNativeTarget "RiderTrackWatchApp" */;
+			buildPhases = (
+				899617FB203BCB260055364A /* Resources */,
+				89961820203BCB260055364A /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8996180C203BCB260055364A /* PBXTargetDependency */,
+			);
+			name = RiderTrackWatchApp;
+			productName = RiderTrackWatchApp;
+			productReference = 899617FD203BCB260055364A /* RiderTrackWatchApp.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		89961808203BCB260055364A /* RiderTrackWatchApp Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8996181F203BCB260055364A /* Build configuration list for PBXNativeTarget "RiderTrackWatchApp Extension" */;
+			buildPhases = (
+				89961805203BCB260055364A /* Sources */,
+				89961806203BCB260055364A /* Frameworks */,
+				89961807203BCB260055364A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "RiderTrackWatchApp Extension";
+			productName = "RiderTrackWatchApp Extension";
+			productReference = 89961809203BCB260055364A /* RiderTrackWatchApp Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		89A156081FA6486F0081035B /* GPSDataCollector */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 89A1561E1FA6486F0081035B /* Build configuration list for PBXNativeTarget "GPSDataCollector" */;
@@ -143,10 +272,12 @@
 				89A156071FA6486F0081035B /* Resources */,
 				844160F0A33690408923189C /* [CP] Embed Pods Frameworks */,
 				884F3E7DE34A8C1BC64AA0E7 /* [CP] Copy Pods Resources */,
+				89961822203BCB260055364A /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				89961819203BCB260055364A /* PBXTargetDependency */,
 			);
 			name = GPSDataCollector;
 			productName = GPSDataCollector;
@@ -159,10 +290,18 @@
 		89A156011FA6486F0081035B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "AKIL KUMAR THOTA";
 				TargetAttributes = {
+					899617FC203BCB260055364A = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					89961808203BCB260055364A = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
 					89A156081FA6486F0081035B = {
 						CreatedOnToolsVersion = 9.0.1;
 						ProvisioningStyle = Automatic;
@@ -188,11 +327,30 @@
 			projectRoot = "";
 			targets = (
 				89A156081FA6486F0081035B /* GPSDataCollector */,
+				899617FC203BCB260055364A /* RiderTrackWatchApp */,
+				89961808203BCB260055364A /* RiderTrackWatchApp Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		899617FB203BCB260055364A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89961803203BCB260055364A /* Assets.xcassets in Resources */,
+				89961801203BCB260055364A /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89961807203BCB260055364A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89961815203BCB260055364A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		89A156071FA6486F0081035B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -265,6 +423,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		89961805203BCB260055364A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89961813203BCB260055364A /* NotificationController.swift in Sources */,
+				89961811203BCB260055364A /* ExtensionDelegate.swift in Sources */,
+				8996180F203BCB260055364A /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		89A156051FA6486F0081035B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -281,7 +449,28 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		8996180C203BCB260055364A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 89961808203BCB260055364A /* RiderTrackWatchApp Extension */;
+			targetProxy = 8996180B203BCB260055364A /* PBXContainerItemProxy */;
+		};
+		89961819203BCB260055364A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 899617FC203BCB260055364A /* RiderTrackWatchApp */;
+			targetProxy = 89961818203BCB260055364A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		899617FF203BCB260055364A /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				89961800203BCB260055364A /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		89A156101FA6486F0081035B /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -301,6 +490,76 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		8996181B203BCB260055364A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				IBSC_MODULE = RiderTrackWatchApp_Extension;
+				INFOPLIST_FILE = RiderTrackWatchApp/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = akilkumar.GPSDataCollector.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.2;
+			};
+			name = Debug;
+		};
+		8996181C203BCB260055364A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				IBSC_MODULE = RiderTrackWatchApp_Extension;
+				INFOPLIST_FILE = RiderTrackWatchApp/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = akilkumar.GPSDataCollector.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.2;
+			};
+			name = Release;
+		};
+		8996181D203BCB260055364A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "RiderTrackWatchApp Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = akilkumar.GPSDataCollector.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.2;
+			};
+			name = Debug;
+		};
+		8996181E203BCB260055364A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "RiderTrackWatchApp Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = akilkumar.GPSDataCollector.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.2;
+			};
+			name = Release;
+		};
 		89A1561C1FA6486F0081035B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -441,6 +700,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8996181F203BCB260055364A /* Build configuration list for PBXNativeTarget "RiderTrackWatchApp Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8996181D203BCB260055364A /* Debug */,
+				8996181E203BCB260055364A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		89961821203BCB260055364A /* Build configuration list for PBXNativeTarget "RiderTrackWatchApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8996181B203BCB260055364A /* Debug */,
+				8996181C203BCB260055364A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		89A156041FA6486F0081035B /* Build configuration list for PBXProject "GPSDataCollector" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
