@@ -22,6 +22,9 @@ class InterfaceController: WKInterfaceController,WCSessionDelegate {
         session?.delegate = self
         session?.activate()
         
+        
+        UserDefaults.standard.addObserver(self, forKeyPath: "loggedIn", options: .new , context: nil)
+        
         // Configure interface objects here.
     }
     
@@ -32,8 +35,12 @@ class InterfaceController: WKInterfaceController,WCSessionDelegate {
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
         if let value = message["loggedIn"] as? Bool {
-            print("user has logged inside the app")
+            UserDefaults.standard.set(true, forKey: "loggedIn")
         }
+    }
+    
+    deinit {
+        UserDefaults.standard.removeObserver(self, forKeyPath: "loggedIn")
     }
     
     
@@ -46,6 +53,20 @@ class InterfaceController: WKInterfaceController,WCSessionDelegate {
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
+        print("called deactivate")
+        UserDefaults.standard.set(false, forKey: "loggedIn")
+    }
+    
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "loggedIn" {
+            let value = UserDefaults.standard.bool(forKey: "loggedIn")
+            if value {
+                //do the segue
+                print("doing the segue")
+                
+            }
+        }
     }
 
 }
