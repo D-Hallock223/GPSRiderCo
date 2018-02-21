@@ -10,26 +10,30 @@ import WatchKit
 import Foundation
 import WatchConnectivity
 
-
 class InterfaceController: WKInterfaceController,WCSessionDelegate {
     
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        session.sendMessage(["a":123], replyHandler: { (reply) in
-            print(reply["b"])
-        }) { (error) in
-            print(error.localizedDescription)
-        }
-    }
+    var session :WCSession?
     
 
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        let session = WCSession.default
-        session.delegate = self
-        session.activate()
         
+        session  = WCSession.default
+        session?.delegate = self
+        session?.activate()
         
         // Configure interface objects here.
+    }
+    
+    
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        
+    }
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        if let value = message["loggedIn"] as? Bool {
+            print("user has logged inside the app")
+        }
     }
     
     

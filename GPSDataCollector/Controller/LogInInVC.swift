@@ -12,8 +12,36 @@ import WatchConnectivity
 
 
 class LogInInVC: UIViewController,WCSessionDelegate {
+    
+    
+    
+   
+    
+    
+    
+    @IBOutlet weak var userNameTxtFld: UITextField!
+    @IBOutlet weak var passwordTxtFld: UITextField!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
+    var session:WCSession?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if WCSession.isSupported() {
+            session = WCSession.default
+            session?.delegate = self
+            session?.activate()
+        } else {
+            displayAlert(title: "Your iPhone is incompatible", Message: "Your iPhone is not able to send message to the watch")
+        }
+        
+    }
+    
+    //MARK:- WCSession protocol Delegate Methods
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        print("activated")
+
+        
     }
     
     func sessionDidBecomeInactive(_ session: WCSession) {
@@ -22,29 +50,6 @@ class LogInInVC: UIViewController,WCSessionDelegate {
     
     func sessionDidDeactivate(_ session: WCSession) {
         
-    }
-    
-    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        print(message)
-    }
-    
-    
-    
-    @IBOutlet weak var userNameTxtFld: UITextField!
-    @IBOutlet weak var passwordTxtFld: UITextField!
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
-    
-
-    
-    let session = WCSession.default
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        session.delegate = self
-        session.activate()
-        
-
     }
     
 
@@ -70,6 +75,10 @@ class LogInInVC: UIViewController,WCSessionDelegate {
             }
             guard let user  = user else {return}
             self.spinner.stopAnimating()
+            self.session?.sendMessage(["loggedIn":true], replyHandler: nil, errorHandler: { (error) in
+                self.displayAlert(title: "Error Occured", Message: error.localizedDescription)
+                return
+            })
             let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeVC") as! HomeVC
             vc.user = user
             self.present(vc, animated: true, completion: nil)
