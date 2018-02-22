@@ -75,11 +75,108 @@
         <!--TrackVC-->
         <scene sceneID="cb1-Lm-8eA">
             <objects>
-                <controller identifier="TrackVC" id="6pX-zx-e8v">
+                <controller identifier="TrackVC" id="6pX-zx-e8v" customClass="TrackVC" customModule="RiderTrackWatchApp_Extension">
+                    <items>
+                        <group width="1" alignment="left" layout="vertical" spacing="5" id="bX2-fu-ROk">
+                            <items>
+                                <imageView width="54" height="37" alignment="center" image="RunnerImg" id="PTy-x2-Tk4"/>
+                                <group width="1" height="40" alignment="left" spacing="3" id="N0p-tj-3iH">
+                                    <items>
+                                        <label alignment="left" verticalAlignment="center" text="Latitude:" id="CX3-8D-BLt">
+                                            <color key="textColor" red="0.7725490196" green="0.91372549020000005" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="font" type="system" weight="semibold" pointSize="15"/>
+                                        </label>
+                                        <label alignment="left" verticalAlignment="center" text="134.69" id="sWg-p6-anx">
+                                            <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </label>
+                                    </items>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </group>
+                                <separator alignment="left" id="m1m-qK-lxb"/>
+                                <group width="1" height="40" alignment="left" spacing="3" id="9nz-hz-OT7">
+                                    <items>
+                                        <label alignment="left" verticalAlignment="center" text="Longitude:" id="SG4-WS-LiF">
+                                            <color key="textColor" red="0.7725490196" green="0.91372549020000005" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="font" type="system" weight="semibold" pointSize="15"/>
+                                        </label>
+                                        <label alignment="left" verticalAlignment="center" text="52.55" id="yO8-NH-d6T">
+                                            <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </label>
+                                    </items>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </group>
+                                <separator alignment="left" id="7Xp-u0-Mch"/>
+                                <group width="1" height="40" alignment="left" spacing="3" id="qdp-cR-5pu">
+                                    <items>
+                                        <label alignment="left" verticalAlignment="center" text="Speed:" id="IrW-L2-xoY">
+                                            <color key="textColor" red="0.7725490196" green="0.91372549020000005" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="font" type="system" weight="semibold" pointSize="15"/>
+                                        </label>
+                                        <label alignment="left" verticalAlignment="center" text="20 Km/H" id="P24-db-5Vw">
+                                            <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </label>
+                                    </items>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </group>
+                                <separator alignment="left" id="QiL-aW-2kB"/>
+                                <group width="1" height="40" alignment="left" spacing="3" id="wwU-6J-D4U">
+                                    <items>
+                                        <label alignment="left" verticalAlignment="center" text="Altitude:" id="D3h-yD-Vky">
+                                            <color key="textColor" red="0.7725490196" green="0.91372549020000005" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="font" type="system" weight="semibold" pointSize="15"/>
+                                        </label>
+                                        <label alignment="left" verticalAlignment="center" text="60 ft" id="BKd-Oq-bGY">
+                                            <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </label>
+                                    </items>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </group>
+                                <separator alignment="left" id="4yP-De-fSz"/>
+                                <group width="1" height="40" alignment="left" spacing="3" id="Zuf-hc-zWd">
+                                    <items>
+                                        <label alignment="left" verticalAlignment="center" text="Distance:" id="AzF-hg-gzo">
+                                            <color key="textColor" red="0.7725490196" green="0.91372549020000005" blue="0.62352941179999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="font" type="system" weight="semibold" pointSize="15"/>
+                                        </label>
+                                        <label alignment="left" verticalAlignment="center" text="400 m" id="xGT-Wb-EHu">
+                                            <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </label>
+                                    </items>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </group>
+                                <button width="1" alignment="left" title="Map View" id="5fV-RP-xns">
+                                    <color key="titleColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.42574925540000003" green="0.72963815970000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" type="system" weight="medium" pointSize="20"/>
+                                    <connections>
+                                        <action selector="mapViewbtnTapped" destination="6pX-zx-e8v" id="HdD-H0-MM0"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="altitudeLbl" destination="BKd-Oq-bGY" id="yrJ-ad-ewi"/>
+                        <outlet property="distanceLbl" destination="xGT-Wb-EHu" id="R8z-RV-XDT"/>
+                        <outlet property="latitudeLbl" destination="sWg-p6-anx" id="JTB-ZQ-s92"/>
+                        <outlet property="longitudeLbl" destination="yO8-NH-d6T" id="AKD-pe-lIP"/>
+                        <outlet property="speedLbl" destination="P24-db-5Vw" id="wHz-lc-I0q"/>
+                    </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="707" y="345"/>
+            <point key="canvasLocation" x="706.15384615384619" y="398.84615384615387"/>
+        </scene>
+        <!--MapVC-->
+        <scene sceneID="5xR-MW-dIT">
+            <objects>
+                <controller identifier="MapVC" id="fpg-p1-gRV" customClass="MapWatchVC" customModule="RiderTrackWatchApp_Extension">
+                    <items>
+                        <map width="1" height="1" alignment="left" id="369-jq-JH8"/>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="989" y="399"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">

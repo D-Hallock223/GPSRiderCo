@@ -12,13 +12,7 @@ import WatchConnectivity
 
 
 class LogInInVC: UIViewController,WCSessionDelegate {
-    
-    
-    
-   
-    
-    
-    
+
     @IBOutlet weak var userNameTxtFld: UITextField!
     @IBOutlet weak var passwordTxtFld: UITextField!
     @IBOutlet weak var spinner: UIActivityIndicatorView!

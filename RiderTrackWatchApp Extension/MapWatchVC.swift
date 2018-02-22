@@ -1,5 +1,5 @@
 //
-//  StartVC.swift
+//  MapWatchVC.swift
 //  RiderTrackWatchApp Extension
 //
 //  Created by AKIL KUMAR THOTA on 2/21/18.
@@ -8,44 +8,33 @@
 
 import WatchKit
 
-
-class StartVC: WKInterfaceController {
+class MapWatchVC: WKInterfaceController,dataTransmission {
     
-    
-    @IBOutlet var startBtn: WKInterfaceButton!
-    
-    
-    var showStopBtn:Bool!
+    var trackObject:TrackVC!
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        showStopBtn = false
+        
+        trackObject = context as! TrackVC
+        trackObject.delegate = self
+   
     }
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
-        if showStopBtn {
-           startBtn.setTitle("STOP")
-        } else{
-            startBtn.setTitle("START")
-        }
+        
     }
     
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
-    
-    }
-    
-    @IBAction func startBtnTapped() {
-        if showStopBtn {
-            showStopBtn = false
-            self.popToRootController()
-        }else{
-            showStopBtn = true
-            pushController(withName: "TrackVC", context: nil)
-        }
         
     }
+    
+    func getData(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+        print(latitude,longitude)
+    }
+    
+    
 }
