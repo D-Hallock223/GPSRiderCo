@@ -13,11 +13,13 @@ import WatchConnectivity
 class InterfaceController: WKInterfaceController,WCSessionDelegate {
     
     var session :WCSession?
+    var isLoggedInFlag = false
+    @IBOutlet var labelBtn: WKInterfaceButton!
     
-
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
+        UserDefaults.standard.set(false, forKey: "loggedIn")
         session  = WCSession.default
         session?.delegate = self
         session?.activate()
@@ -28,23 +30,6 @@ class InterfaceController: WKInterfaceController,WCSessionDelegate {
         // Configure interface objects here.
     }
     
-    
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        
-    }
-    
-    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        if let value = message["loggedIn"] as? Bool {
-            UserDefaults.standard.set(true, forKey: "loggedIn")
-        }
-    }
-    
-    deinit {
-        UserDefaults.standard.removeObserver(self, forKeyPath: "loggedIn")
-    }
-    
-    
-    
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
@@ -53,20 +38,45 @@ class InterfaceController: WKInterfaceController,WCSessionDelegate {
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
-        print("called deactivate")
-        UserDefaults.standard.set(false, forKey: "loggedIn")
     }
     
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "loggedIn" {
-            let value = UserDefaults.standard.bool(forKey: "loggedIn")
-            if value {
-                //do the segue
-                print("doing the segue")
-                
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        
+    }
+    
+    deinit {
+        UserDefaults.standard.removeObserver(self, forKeyPath: "loggedIn")
+    }
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        if let value = message["loggedIn"] as? Bool {
+            if value{
+                UserDefaults.standard.set(true, forKey: "loggedIn")
             }
         }
     }
 
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "loggedIn" {
+            let value = UserDefaults.standard.bool(forKey: "loggedIn")
+            if value {
+                isLoggedInFlag = true
+                labelBtn.setTitle("Let's Go")
+                labelBtn.setBackgroundColor( UIColor(red:0.72157, green:0.91373, blue:0.52549, alpha:1.00000))
+            }else{
+                isLoggedInFlag = false
+                labelBtn.setTitle("Please sign in from iPhone to continue !")
+                labelBtn.setBackgroundColor(UIColor.clear)
+            }
+        }
+    }
+
+    @IBAction func labelBtnTapped() {
+        if isLoggedInFlag {
+            pushController(withName: "StartVC", context: nil)
+        } else{
+            return
+        }
+    }
 }

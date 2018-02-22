@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="13771" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="13771" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Ir8-2l-Ff0">
     <device id="watch42" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -12,9 +12,9 @@
         <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller fullScreen="YES" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="RiderTrackWatchApp" customModuleProvider="target">
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="RiderTrackWatchApp" customModuleProvider="target">
                     <items>
-                        <group width="1" height="1" alignment="left" layout="vertical" spacing="30" id="iKL-ov-9ZK">
+                        <group width="1" height="1" alignment="left" layout="vertical" spacing="10" id="iKL-ov-9ZK">
                             <items>
                                 <group width="1" alignment="center" layout="vertical" id="IkI-QU-UDp">
                                     <items>
@@ -26,16 +26,60 @@
                                     </items>
                                     <edgeInsets key="margins" left="0.0" right="0.0" top="10" bottom="0.0"/>
                                 </group>
-                                <label alignment="center" text="Please sign in from iPhone to continue" textAlignment="right" numberOfLines="2" id="SNm-gk-afU">
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </label>
+                                <button width="1" alignment="center" title="Please sign in from iPhone to continue !" id="ifw-e8-kp7">
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="font" type="system" weight="medium" pointSize="15"/>
+                                    <connections>
+                                        <action selector="labelBtnTapped" destination="AgC-eL-Hgc" id="VYv-px-PNX"/>
+                                    </connections>
+                                </button>
                             </items>
                         </group>
                     </items>
-                    <color key="backgroundColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="labelBtn" destination="ifw-e8-kp7" id="gpE-ff-8Gb"/>
+                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="219.69230769230771" y="344.79487179487182"/>
+        </scene>
+        <!--StartVC-->
+        <scene sceneID="bFS-cu-WCH">
+            <objects>
+                <controller identifier="StartVC" id="Ir8-2l-Ff0" customClass="StartVC" customModule="RiderTrackWatchApp_Extension">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="vertical" spacing="25" id="Xei-dT-idN">
+                            <items>
+                                <imageView width="94" height="64" alignment="center" image="RunnerImg" contentMode="scaleAspectFit" id="bm4-we-a8q"/>
+                                <button width="1" alignment="left" title="START" id="w8n-vq-WlS">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.72549019607843135" green="0.90980392156862744" blue="0.54509803921568623" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="italicSystem" weight="bold" pointSize="40"/>
+                                    <connections>
+                                        <action selector="startBtnTapped" destination="Ir8-2l-Ff0" id="ois-86-Z14"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="10" bottom="0.0"/>
+                        </group>
+                    </items>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="startBtn" destination="w8n-vq-WlS" id="mqu-UD-xT2"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="467" y="345"/>
+        </scene>
+        <!--TrackVC-->
+        <scene sceneID="cb1-Lm-8eA">
+            <objects>
+                <controller identifier="TrackVC" id="6pX-zx-e8v">
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="707" y="345"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
