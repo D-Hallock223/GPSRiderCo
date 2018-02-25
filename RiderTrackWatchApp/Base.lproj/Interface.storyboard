@@ -174,6 +174,9 @@
                     <items>
                         <map width="1" height="1" alignment="left" id="369-jq-JH8"/>
                     </items>
+                    <connections>
+                        <outlet property="watchMapView" destination="369-jq-JH8" id="nkc-fV-XEJ"/>
+                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="989" y="399"/>

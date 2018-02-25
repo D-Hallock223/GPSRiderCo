@@ -21,7 +21,10 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
     @IBOutlet var altitudeLbl: WKInterfaceLabel!
     @IBOutlet var distanceLbl: WKInterfaceLabel!
     
+    var locationPoint:CLLocationCoordinate2D?
+    
     var finalDestination = CLLocation(latitude: 33.4484, longitude: 112.07)
+    
     var locationManager:CLLocationManager!
     weak var delegate:dataTransmission?
     
@@ -62,20 +65,19 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
         guard let location  = locations.last else {
             return
         }
-        
+        self.locationPoint = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         latitudeLbl.setText("\(location.coordinate.latitude)")
         longitudeLbl.setText("\(location.coordinate.longitude)")
         speedLbl.setText("\(location.speed) m/s")
         altitudeLbl.setText("\(location.altitude) m")
         distanceLbl.setText("\(Int(location.distance(from: finalDestination))) m")
         delegate?.getData(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-    
-        
-        
     }
     
+    
     @IBAction func mapViewbtnTapped() {
-        pushController(withName: "MapVC", context: self)
+        pushController(withName: "MapVC", context: [self,locationPoint])
+        
     }
     
 }

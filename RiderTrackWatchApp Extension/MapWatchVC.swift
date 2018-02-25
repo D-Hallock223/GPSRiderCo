@@ -7,17 +7,37 @@
 //
 
 import WatchKit
+import MapKit
 
 class MapWatchVC: WKInterfaceController,dataTransmission {
     
     var trackObject:TrackVC!
     
+    @IBOutlet var watchMapView: WKInterfaceMap!
+    
+    var userLocation:CLLocationCoordinate2D!
+    
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
-        trackObject = context as! TrackVC
+        let wContext = context as! [Any]
+        
+        trackObject = wContext[0] as! TrackVC
         trackObject.delegate = self
-   
+        
+        
+        self.userLocation = wContext[1] as! CLLocationCoordinate2D
+        
+        // mapView Setup
+        let latdelta:CLLocationDegrees = 0.01
+        let londelta:CLLocationDegrees = 0.01
+        let span:MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: latdelta, longitudeDelta: londelta)
+        let location:CLLocationCoordinate2D = self.userLocation
+        let region:MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
+        watchMapView.setRegion(region)
+        
+        watchMapView.addAnnotation(self.userLocation, with: .red)
+        
     }
     
     override func willActivate() {
@@ -29,11 +49,19 @@ class MapWatchVC: WKInterfaceController,dataTransmission {
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
+        trackObject.delegate = nil
         
     }
     
     func getData(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
-        print(latitude,longitude)
+        
+        
+        let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        watchMapView.removeAllAnnotations()
+        let span:MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+        let region:MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
+        watchMapView.setRegion(region)
+        watchMapView.addAnnotation(location, with: .red)
     }
     
     
