@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import Firebase
+import WatchConnectivity
 
 protocol SendData:class {
     
@@ -16,11 +17,13 @@ protocol SendData:class {
 }
 
 class HomeVC: UIViewController,CLLocationManagerDelegate {
+
     
     
     @IBOutlet weak var currentUserNameTxtLbl: UILabel!
     @IBOutlet weak var extraInfoMessageLbl: UILabel!
     
+    var session:WCSession?
     
     var user:User?
     var locationPoint:CLLocationCoordinate2D?
@@ -206,11 +209,22 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
     @IBAction func signOutBtnPrssd(_ sender: Any) {
         do{
             try Auth.auth().signOut()
+            self.session?.sendMessage(["loggedIn":false], replyHandler: nil, errorHandler: { (error) in
+                self.displayAlert(title: "Error Occured", Message: error.localizedDescription)
+                return
+            })
             self.dismiss(animated: true, completion: nil)
         }
         catch{
             print(error.localizedDescription)
         }
+    }
+    
+    func displayAlert(title:String,Message:String) {
+        let alert = UIAlertController(title: title, message: Message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
  
 }

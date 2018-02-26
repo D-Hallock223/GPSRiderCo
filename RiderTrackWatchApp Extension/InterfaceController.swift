@@ -20,10 +20,10 @@ class InterfaceController: WKInterfaceController,WCSessionDelegate {
         super.awake(withContext: context)
         
         UserDefaults.standard.set(false, forKey: "loggedIn")
+        
         session  = WCSession.default
         session?.delegate = self
         session?.activate()
-        
         
         UserDefaults.standard.addObserver(self, forKeyPath: "loggedIn", options: .new , context: nil)
         
@@ -53,6 +53,8 @@ class InterfaceController: WKInterfaceController,WCSessionDelegate {
         if let value = message["loggedIn"] as? Bool {
             if value{
                 UserDefaults.standard.set(true, forKey: "loggedIn")
+            }else{
+                UserDefaults.standard.set(false, forKey: "loggedIn")
             }
         }
     }
@@ -62,12 +64,19 @@ class InterfaceController: WKInterfaceController,WCSessionDelegate {
             let value = UserDefaults.standard.bool(forKey: "loggedIn")
             if value {
                 isLoggedInFlag = true
-                labelBtn.setTitle("Let's Go")
-                labelBtn.setBackgroundColor( UIColor(red:0.72157, green:0.91373, blue:0.52549, alpha:1.00000))
+                DispatchQueue.main.async {
+                    self.labelBtn.setTitle("Let's Go")
+                    self.labelBtn.setBackgroundColor( UIColor(red:0.72157, green:0.91373, blue:0.52549, alpha:1.00000))
+                }
             }else{
+                DispatchQueue.main.async {
+                    self.popToRootController()
+                }
                 isLoggedInFlag = false
-                labelBtn.setTitle("Please sign in from iPhone to continue !")
-                labelBtn.setBackgroundColor(UIColor.clear)
+                DispatchQueue.main.async {
+                    self.labelBtn.setTitle("Please sign in from iPhone to continue !")
+                    self.labelBtn.setBackgroundColor(UIColor.clear)
+                }
             }
         }
     }

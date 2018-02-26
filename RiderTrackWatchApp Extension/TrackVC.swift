@@ -26,6 +26,7 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
     var finalDestination = CLLocation(latitude: 33.4484, longitude: 112.07)
     
     var locationManager:CLLocationManager!
+    
     weak var delegate:dataTransmission?
     
     override func awake(withContext context: Any?) {
@@ -77,7 +78,6 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
     
     @IBAction func mapViewbtnTapped() {
         pushController(withName: "MapVC", context: [self,locationPoint])
-        
     }
     
 }

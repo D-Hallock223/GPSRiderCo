@@ -21,7 +21,6 @@ class LogInInVC: UIViewController,WCSessionDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         if WCSession.isSupported() {
             session = WCSession.default
             session?.delegate = self
@@ -75,6 +74,7 @@ class LogInInVC: UIViewController,WCSessionDelegate {
             })
             let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeVC") as! HomeVC
             vc.user = user
+            vc.session = self.session
             self.present(vc, animated: true, completion: nil)
         }
     }
