@@ -43,4 +43,28 @@ class Authentication {
         }
         
     }
+    
+    
+    func logInUser(email:String,password:String,completion: @escaping (Bool,User?)-> ()) {
+        guard let url = URL(string: URL_LOG_IN) else {
+            completion(false,nil)
+            return }
+        
+        let parameters:[String:Any] = ["email":  email,
+                                       "password":  password]
+        let headers = ["Content-Type":"application/x-www-form-urlencoded"]
+        
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
+            if response.result.isSuccess {
+                let json = try! JSON(data: response.data!)
+                let resultUsername = json["user"]["username"].stringValue
+                let resultEmail = json["user"]["email"].stringValue
+                let resultToken = json["user"]["token"].stringValue
+                let userObj = User(username: resultUsername, email: resultEmail, token: resultToken)
+                completion(true,userObj)
+            } else {
+                completion(false,nil)
+            }
+        }
+    }
 }

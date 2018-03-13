@@ -12,7 +12,6 @@ import Firebase
 class UpdateProfileVC: UIViewController {
 
     @IBOutlet weak var displayNameTxtFld: UITextField!
-    
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     

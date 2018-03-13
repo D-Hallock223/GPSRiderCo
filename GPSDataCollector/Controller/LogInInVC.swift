@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Firebase
 import WatchConnectivity
 
 
@@ -28,7 +27,6 @@ class LogInInVC: UIViewController,WCSessionDelegate {
         } else {
             displayAlert(title: "Your iPhone is incompatible", Message: "Your iPhone is not able to send message to the watch")
         }
-        
     }
     
     //MARK:- WCSession protocol Delegate Methods
@@ -51,32 +49,53 @@ class LogInInVC: UIViewController,WCSessionDelegate {
     @IBAction func logInBtnPrsd(_ sender: Any) {
         spinner.startAnimating()
         guard let email = userNameTxtFld.text,email != "" else {
-            displayAlert(title: "Enter the username", Message: "Please enter your username")
+            displayAlert(title: "Enter the email", Message: "Please enter your email")
             return
         }
         guard let password = passwordTxtFld.text,password != "" else {
             displayAlert(title: "Enter the password", Message: "Please enter your password")
             return
         }
-//        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
-//            self.userNameTxtFld.text = ""
-//            self.passwordTxtFld.text = ""
-//            if error != nil {
-//                self.displayAlert(title: "ERROR", Message: (error?.localizedDescription)!)
-//                self.spinner.stopAnimating()
-//                return
-//            }
-//            guard let user  = user else {return}
-//            self.spinner.stopAnimating()
-//            self.session?.sendMessage(["loggedIn":true], replyHandler: nil, errorHandler: { (error) in
-//                self.displayAlert(title: "Error Occured", Message: error.localizedDescription)
-//                return
-//            })
-//            let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeVC") as! HomeVC
-//            vc.user = user
-//            vc.session = self.session
-//            self.present(vc, animated: true, completion: nil)
-//        }
+        
+        Authentication.sharedInstance.logInUser(email: email, password: password) { (success, returnedUser) in
+            self.userNameTxtFld.text = ""
+            self.passwordTxtFld.text = ""
+            if success {
+                guard let user  = returnedUser else {return}
+                self.spinner.stopAnimating()
+                self.session?.sendMessage(["loggedIn":true], replyHandler: nil, errorHandler: { (error) in
+                    self.displayAlert(title: "Error Occured", Message: error.localizedDescription)
+                    return
+                })
+                let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeVC") as! HomeVC
+                vc.user = user
+                vc.session = self.session
+                self.present(vc, animated: true, completion: nil)
+            } else {
+                self.displayAlert(title: "ERROR", Message: "Error while logging in")
+                self.spinner.stopAnimating()
+                return
+            }
+        }
+        //        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+        //            self.userNameTxtFld.text = ""
+        //            self.passwordTxtFld.text = ""
+        //            if error != nil {
+        //                self.displayAlert(title: "ERROR", Message: (error?.localizedDescription)!)
+        //                self.spinner.stopAnimating()
+        //                return
+        //            }
+        //            guard let user  = user else {return}
+        //            self.spinner.stopAnimating()
+        //            self.session?.sendMessage(["loggedIn":true], replyHandler: nil, errorHandler: { (error) in
+        //                self.displayAlert(title: "Error Occured", Message: error.localizedDescription)
+        //                return
+        //            })
+        //            let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeVC") as! HomeVC
+        //            vc.user = user
+        //            vc.session = self.session
+        //            self.present(vc, animated: true, completion: nil)
+        //        }
     }
     
     
