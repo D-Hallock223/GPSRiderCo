@@ -20,7 +20,6 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
     
     
     @IBOutlet weak var currentUserNameTxtLbl: UILabel!
-    @IBOutlet weak var extraInfoMessageLbl: UILabel!
     
     var session:WCSession?
     
@@ -66,30 +65,10 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
         locationSetup()
         self._latitude = CLLocationDegrees()
         self._longitude = CLLocationDegrees()
-        
-        currentUserNameCheck()
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        currentUserNameCheck()
+        self.currentUserNameTxtLbl.text = "Hello \((self.user?.username)!)"
         
     }
-    
-    fileprivate func currentUserNameCheck() {
-//        if Auth.auth().currentUser?.displayName != nil {
-//            currentUserNameTxtLbl.text = (Auth.auth().currentUser?.displayName)!
-//            extraInfoMessageLbl.isHidden = true
-//        }else{
-//            currentUserNameTxtLbl.text = "Hello Random User"
-//            extraInfoMessageLbl.isHidden = false
-//        }
-    }
-    
-    
-    
+
     fileprivate func locationSetup() {
         
         

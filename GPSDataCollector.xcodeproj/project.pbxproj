@@ -14,7 +14,6 @@
 		8940272720296D5C003832B1 /* LogInInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940272620296D5C003832B1 /* LogInInVC.swift */; };
 		8940272920296D68003832B1 /* SignUPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940272820296D68003832B1 /* SignUPVC.swift */; };
 		8940272B20296EDF003832B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8940272A20296EDF003832B1 /* GoogleService-Info.plist */; };
-		8940272D202A496F003832B1 /* UpdateProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940272C202A496F003832B1 /* UpdateProfileVC.swift */; };
 		89631B65203E370C0063CCE0 /* StartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89631B64203E370C0063CCE0 /* StartVC.swift */; };
 		89631B67203E72FE0063CCE0 /* TrackVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89631B66203E72FE0063CCE0 /* TrackVC.swift */; };
 		89631B69203E730F0063CCE0 /* MapWatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89631B68203E730F0063CCE0 /* MapWatchVC.swift */; };
@@ -26,7 +25,6 @@
 		89961813203BCB260055364A /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89961812203BCB260055364A /* NotificationController.swift */; };
 		89961815203BCB260055364A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89961814203BCB260055364A /* Assets.xcassets */; };
 		8996181A203BCB260055364A /* RiderTrackWatchApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 899617FD203BCB260055364A /* RiderTrackWatchApp.app */; };
-		89961827203BE2320055364A /* iPhoneAppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89961826203BE2320055364A /* iPhoneAppConstants.swift */; };
 		89961829203BE2720055364A /* WatchAppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89961828203BE2720055364A /* WatchAppConstants.swift */; };
 		89A1560D1FA6486F0081035B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A1560C1FA6486F0081035B /* AppDelegate.swift */; };
 		89A1560F1FA6486F0081035B /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A1560E1FA6486F0081035B /* HomeVC.swift */; };
@@ -87,7 +85,6 @@
 		8940272620296D5C003832B1 /* LogInInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInInVC.swift; sourceTree = "<group>"; };
 		8940272820296D68003832B1 /* SignUPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPVC.swift; sourceTree = "<group>"; };
 		8940272A20296EDF003832B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		8940272C202A496F003832B1 /* UpdateProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileVC.swift; sourceTree = "<group>"; };
 		89631B64203E370C0063CCE0 /* StartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartVC.swift; sourceTree = "<group>"; };
 		89631B66203E72FE0063CCE0 /* TrackVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackVC.swift; sourceTree = "<group>"; };
 		89631B68203E730F0063CCE0 /* MapWatchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapWatchVC.swift; sourceTree = "<group>"; };
@@ -104,7 +101,6 @@
 		89961817203BCB260055364A /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		89961823203BE09D0055364A /* GPSDataCollector.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GPSDataCollector.entitlements; sourceTree = "<group>"; };
 		89961824203BE0F60055364A /* RiderTrackWatchApp Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "RiderTrackWatchApp Extension.entitlements"; sourceTree = "<group>"; };
-		89961826203BE2320055364A /* iPhoneAppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPhoneAppConstants.swift; sourceTree = "<group>"; };
 		89961828203BE2720055364A /* WatchAppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchAppConstants.swift; sourceTree = "<group>"; };
 		8996182A203BE7FD0055364A /* RiderTrackWatchApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RiderTrackWatchApp.entitlements; sourceTree = "<group>"; };
 		89A156091FA6486F0081035B /* GPSDataCollector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GPSDataCollector.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -195,7 +191,6 @@
 		89961825203BE2130055364A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				89961826203BE2320055364A /* iPhoneAppConstants.swift */,
 				891322F92057573E004B9C0D /* Authentication.swift */,
 				891322FD20575A15004B9C0D /* Constants.swift */,
 			);
@@ -250,7 +245,6 @@
 				89A156241FA64D170081035B /* MapVC.swift */,
 				8940272620296D5C003832B1 /* LogInInVC.swift */,
 				8940272820296D68003832B1 /* SignUPVC.swift */,
-				8940272C202A496F003832B1 /* UpdateProfileVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -509,11 +503,9 @@
 				89A156251FA64D170081035B /* MapVC.swift in Sources */,
 				8940272720296D5C003832B1 /* LogInInVC.swift in Sources */,
 				89A1560D1FA6486F0081035B /* AppDelegate.swift in Sources */,
-				89961827203BE2320055364A /* iPhoneAppConstants.swift in Sources */,
 				891322FC205757C3004B9C0D /* UserClass.swift in Sources */,
 				8940272920296D68003832B1 /* SignUPVC.swift in Sources */,
 				89A156151FA6486F0081035B /* GPSDataCollector.xcdatamodeld in Sources */,
-				8940272D202A496F003832B1 /* UpdateProfileVC.swift in Sources */,
 				891322FA2057573E004B9C0D /* Authentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
