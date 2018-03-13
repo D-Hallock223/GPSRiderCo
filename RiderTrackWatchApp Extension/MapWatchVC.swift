@@ -20,6 +20,7 @@ class MapWatchVC: WKInterfaceController,dataTransmission {
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
+        
         let wContext = context as! [Any]
         
         trackObject = wContext[0] as! TrackVC

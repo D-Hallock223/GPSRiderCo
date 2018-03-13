@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import Firebase
 
 class SignUPVC: UIViewController {
     
-    @IBOutlet weak var userNametxtFld: UITextField!
+    @IBOutlet weak var userNameTxtField: UITextField!
+    @IBOutlet weak var emailtxtFld: UITextField!
     @IBOutlet weak var passwordTxtFld: UITextField!
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!
@@ -25,29 +25,51 @@ class SignUPVC: UIViewController {
 
     @IBAction func signUpBtnPrssd(_ sender: Any) {
         spinner.startAnimating()
-        guard let email = userNametxtFld.text,email != "" else {
-            displayAlert(title: "Enter the username", Message: "Please enter your username")
+        guard let email = emailtxtFld.text,email != "" else {
+            displayAlert(title: "Enter the email", Message: "Please enter your email")
             return
         }
         guard let password = passwordTxtFld.text,password != "" else {
             displayAlert(title: "Enter the password", Message: "Please enter your password")
             return
         }
+        guard let username = userNameTxtField.text, username != "" else {
+            displayAlert(title: "Enter the username", Message: "Please enter your username")
+            return
+        }
         
-        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-            self.userNametxtFld.text = ""
+        Authentication.sharedInstance.signInuser(userName: username, email: email, password: password) { (success, returnedUser) in
+            self.userNameTxtField.text = ""
             self.passwordTxtFld.text = ""
-            if error != nil {
-                self.displayAlert(title: "ERROR", Message: (error?.localizedDescription)!)
+            self.emailtxtFld.text = ""
+            if success {
+                guard let user  = returnedUser else {return}
+                self.spinner.stopAnimating()
+                let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeVC") as! HomeVC
+                vc.user = user
+                self.present(vc, animated: true, completion: nil)
+            } else {
+                self.displayAlert(title: "ERROR", Message: "Error cccured while signing up")
                 self.spinner.stopAnimating()
                 return
             }
-            guard let user  = user else {return}
-            self.spinner.stopAnimating()
-            let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeVC") as! HomeVC
-            vc.user = user
-            self.present(vc, animated: true, completion: nil)
         }
+        
+//        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+//            self.userNametxtFld.text = ""
+//            self.passwordTxtFld.text = ""
+//            if error != nil {
+//                self.displayAlert(title: "ERROR", Message: (error?.localizedDescription)!)
+//                self.spinner.stopAnimating()
+//                return
+//            }
+//            guard let user  = user else {return}
+//            self.spinner.stopAnimating()
+//            let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeVC") as! HomeVC
+//            vc.user = user
+//            self.present(vc, animated: true, completion: nil)
+//        }
+        
     }
     
     @IBAction func goToLoginBtnPrssd(_ sender: Any) {

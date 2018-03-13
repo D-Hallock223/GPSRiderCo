@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		38441A8DDC2F635130EB17AB /* Pods_GPSDataCollector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2B5EBACDB4CE42A1273AFD6 /* Pods_GPSDataCollector.framework */; };
+		891322FA2057573E004B9C0D /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891322F92057573E004B9C0D /* Authentication.swift */; };
+		891322FC205757C3004B9C0D /* UserClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891322FB205757C3004B9C0D /* UserClass.swift */; };
+		891322FE20575A15004B9C0D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891322FD20575A15004B9C0D /* Constants.swift */; };
 		8940272720296D5C003832B1 /* LogInInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940272620296D5C003832B1 /* LogInInVC.swift */; };
 		8940272920296D68003832B1 /* SignUPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940272820296D68003832B1 /* SignUPVC.swift */; };
 		8940272B20296EDF003832B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8940272A20296EDF003832B1 /* GoogleService-Info.plist */; };
@@ -78,6 +81,9 @@
 
 /* Begin PBXFileReference section */
 		61F5C9D2D8CE4E6DAD0D2CEA /* Pods-GPSDataCollector.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPSDataCollector.release.xcconfig"; path = "Pods/Target Support Files/Pods-GPSDataCollector/Pods-GPSDataCollector.release.xcconfig"; sourceTree = "<group>"; };
+		891322F92057573E004B9C0D /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		891322FB205757C3004B9C0D /* UserClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClass.swift; sourceTree = "<group>"; };
+		891322FD20575A15004B9C0D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8940272620296D5C003832B1 /* LogInInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInInVC.swift; sourceTree = "<group>"; };
 		8940272820296D68003832B1 /* SignUPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPVC.swift; sourceTree = "<group>"; };
 		8940272A20296EDF003832B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -115,6 +121,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7881742D03DE5C332AEBF60B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		89961806203BCB260055364A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -183,6 +196,8 @@
 			isa = PBXGroup;
 			children = (
 				89961826203BE2320055364A /* iPhoneAppConstants.swift */,
+				891322F92057573E004B9C0D /* Authentication.swift */,
+				891322FD20575A15004B9C0D /* Constants.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -250,6 +265,7 @@
 		89A156231FA64CBD0081035B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				891322FB205757C3004B9C0D /* UserClass.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -263,6 +279,7 @@
 			buildPhases = (
 				899617FB203BCB260055364A /* Resources */,
 				89961820203BCB260055364A /* Embed App Extensions */,
+				7881742D03DE5C332AEBF60B /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -414,14 +431,18 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-GPSDataCollector/Pods-GPSDataCollector-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,13 +505,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				89A1560F1FA6486F0081035B /* HomeVC.swift in Sources */,
+				891322FE20575A15004B9C0D /* Constants.swift in Sources */,
 				89A156251FA64D170081035B /* MapVC.swift in Sources */,
 				8940272720296D5C003832B1 /* LogInInVC.swift in Sources */,
 				89A1560D1FA6486F0081035B /* AppDelegate.swift in Sources */,
 				89961827203BE2320055364A /* iPhoneAppConstants.swift in Sources */,
+				891322FC205757C3004B9C0D /* UserClass.swift in Sources */,
 				8940272920296D68003832B1 /* SignUPVC.swift in Sources */,
 				89A156151FA6486F0081035B /* GPSDataCollector.xcdatamodeld in Sources */,
 				8940272D202A496F003832B1 /* UpdateProfileVC.swift in Sources */,
+				891322FA2057573E004B9C0D /* Authentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreLocation
-import Firebase
 import WatchConnectivity
 
 protocol SendData:class {
@@ -80,13 +79,13 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
     }
     
     fileprivate func currentUserNameCheck() {
-        if Auth.auth().currentUser?.displayName != nil {
-            currentUserNameTxtLbl.text = (Auth.auth().currentUser?.displayName)!
-            extraInfoMessageLbl.isHidden = true
-        }else{
-            currentUserNameTxtLbl.text = "Hello Random User"
-            extraInfoMessageLbl.isHidden = false
-        }
+//        if Auth.auth().currentUser?.displayName != nil {
+//            currentUserNameTxtLbl.text = (Auth.auth().currentUser?.displayName)!
+//            extraInfoMessageLbl.isHidden = true
+//        }else{
+//            currentUserNameTxtLbl.text = "Hello Random User"
+//            extraInfoMessageLbl.isHidden = false
+//        }
     }
     
     
@@ -207,17 +206,17 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
     }
     
     @IBAction func signOutBtnPrssd(_ sender: Any) {
-        do{
-            try Auth.auth().signOut()
-            self.session?.sendMessage(["loggedIn":false], replyHandler: nil, errorHandler: { (error) in
-                self.displayAlert(title: "Error Occured", Message: error.localizedDescription)
-                return
-            })
-            self.dismiss(animated: true, completion: nil)
-        }
-        catch{
-            print(error.localizedDescription)
-        }
+//        do{
+//            try Auth.auth().signOut()
+//            self.session?.sendMessage(["loggedIn":false], replyHandler: nil, errorHandler: { (error) in
+//                self.displayAlert(title: "Error Occured", Message: error.localizedDescription)
+//                return
+//            })
+//            self.dismiss(animated: true, completion: nil)
+//        }
+//        catch{
+//            print(error.localizedDescription)
+//        }
     }
     
     func displayAlert(title:String,Message:String) {

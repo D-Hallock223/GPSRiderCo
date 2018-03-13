@@ -12,7 +12,7 @@ import WatchConnectivity
 
 
 class LogInInVC: UIViewController,WCSessionDelegate {
-
+    
     @IBOutlet weak var userNameTxtFld: UITextField!
     @IBOutlet weak var passwordTxtFld: UITextField!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
@@ -33,7 +33,7 @@ class LogInInVC: UIViewController,WCSessionDelegate {
     
     //MARK:- WCSession protocol Delegate Methods
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-
+        
         
     }
     
@@ -45,9 +45,9 @@ class LogInInVC: UIViewController,WCSessionDelegate {
         
     }
     
-
     
-
+    
+    
     @IBAction func logInBtnPrsd(_ sender: Any) {
         spinner.startAnimating()
         guard let email = userNameTxtFld.text,email != "" else {
@@ -58,25 +58,25 @@ class LogInInVC: UIViewController,WCSessionDelegate {
             displayAlert(title: "Enter the password", Message: "Please enter your password")
             return
         }
-        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
-            self.userNameTxtFld.text = ""
-            self.passwordTxtFld.text = ""
-            if error != nil {
-                self.displayAlert(title: "ERROR", Message: (error?.localizedDescription)!)
-                self.spinner.stopAnimating()
-                return
-            }
-            guard let user  = user else {return}
-            self.spinner.stopAnimating()
-            self.session?.sendMessage(["loggedIn":true], replyHandler: nil, errorHandler: { (error) in
-                self.displayAlert(title: "Error Occured", Message: error.localizedDescription)
-                return
-            })
-            let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeVC") as! HomeVC
-            vc.user = user
-            vc.session = self.session
-            self.present(vc, animated: true, completion: nil)
-        }
+//        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+//            self.userNameTxtFld.text = ""
+//            self.passwordTxtFld.text = ""
+//            if error != nil {
+//                self.displayAlert(title: "ERROR", Message: (error?.localizedDescription)!)
+//                self.spinner.stopAnimating()
+//                return
+//            }
+//            guard let user  = user else {return}
+//            self.spinner.stopAnimating()
+//            self.session?.sendMessage(["loggedIn":true], replyHandler: nil, errorHandler: { (error) in
+//                self.displayAlert(title: "Error Occured", Message: error.localizedDescription)
+//                return
+//            })
+//            let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeVC") as! HomeVC
+//            vc.user = user
+//            vc.session = self.session
+//            self.present(vc, animated: true, completion: nil)
+//        }
     }
     
     

@@ -73,6 +73,7 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
         altitudeLbl.setText("\(location.altitude) m")
         distanceLbl.setText("\(Int(location.distance(from: finalDestination))) m")
         delegate?.getData(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        
     }
     
     
