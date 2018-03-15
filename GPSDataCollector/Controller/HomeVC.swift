@@ -16,13 +16,15 @@ protocol SendData:class {
 }
 
 class HomeVC: UIViewController,CLLocationManagerDelegate {
-
     
     
+    
+    @IBOutlet weak var startUpdateBtn: FancyButton!
+    @IBOutlet weak var mapInfoLbl: UILabel!
     @IBOutlet weak var currentUserNameTxtLbl: UILabel!
+    @IBOutlet weak var mapVCBtn: UIButton!
     
     var session:WCSession?
-    
     var user:User?
     var locationPoint:CLLocationCoordinate2D?
     var locationManager:CLLocationManager!
@@ -34,6 +36,8 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
     var backgroundTimerCondition = true
     var backgroundTimer:Timer!
     var backgroundTimeRunning = false
+    var stopUpdating:Bool!
+    var myTimer:Timer?
     
     
     var latitude : CLLocationDegrees {
@@ -66,9 +70,16 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
         self._latitude = CLLocationDegrees()
         self._longitude = CLLocationDegrees()
         self.currentUserNameTxtLbl.text = "Hello \((self.user?.username)!)"
+        stopUpdating = false
         
     }
-
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        mapVCBtn.layer.cornerRadius = 75.0
+        
+    }
+    
     fileprivate func locationSetup() {
         
         
@@ -100,15 +111,15 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
         if UIApplication.shared.applicationState == .active {
             self.backgroundTimerCondition = true
             if backgroundTimeRunning {
-            self.backgroundTimer.invalidate()
-            backgroundTimeRunning = false
+                self.backgroundTimer.invalidate()
+                backgroundTimeRunning = false
             }
             
         } else {
             print("App is backgrounded. New location is %@", location)
             self.latitude = location.coordinate.latitude
             self.longitude = location.coordinate.longitude
-    
+            
             if backgroundTimerCondition {
                 backgroundTimerCondition = false
                 backgroundTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(sendDataToserver), userInfo: nil, repeats: true)
@@ -167,17 +178,28 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
     }
     
     @IBAction func startUpdateBtnPressd(_ sender: Any) {
-        let name = user?.email
-        if name == "" {
-            callAlert(title:"Enter Name",Message:"Enter proper value in name text field")
-            return
+        if !stopUpdating {
+            stopUpdating = true
+            startUpdateBtn.setTitle("Stop Updating Location", for: .normal)
+            mapVCBtn.isHidden = false
+            mapInfoLbl.isHidden = false
+            self.username = user?.email
+            locationManager.startUpdatingLocation()
+            if timerOn == false {
+                self.myTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(sendDataToserver), userInfo: nil, repeats: true)
+            }
+            timerOn = true
+        } else {
+            stopUpdating = false
+            startUpdateBtn.setTitle("Start Updating Location", for: .normal)
+            mapVCBtn.isHidden = true
+            mapInfoLbl.isHidden = true
+            locationManager.stopUpdatingLocation()
+            self.myTimer?.invalidate()
+            self.myTimer = nil
+            timerOn = false
         }
-        self.username = name
-        locationManager.startUpdatingLocation()
-        if timerOn == false {
-            Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(sendDataToserver), userInfo: nil, repeats: true)
-        }
-        timerOn = true
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -185,17 +207,17 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
     }
     
     @IBAction func signOutBtnPrssd(_ sender: Any) {
-//        do{
-//            try Auth.auth().signOut()
-//            self.session?.sendMessage(["loggedIn":false], replyHandler: nil, errorHandler: { (error) in
-//                self.displayAlert(title: "Error Occured", Message: error.localizedDescription)
-//                return
-//            })
-//            self.dismiss(animated: true, completion: nil)
-//        }
-//        catch{
-//            print(error.localizedDescription)
-//        }
+        if self.myTimer != nil {
+            self.myTimer?.invalidate()
+            self.myTimer = nil
+        }
+        self.locationManager.stopUpdatingLocation()
+        self.user = nil
+        self.session?.sendMessage(["loggedIn":false], replyHandler: nil, errorHandler: { (error) in
+            self.displayAlert(title: "Error Occured", Message: error.localizedDescription)
+            return
+        })
+        self.dismiss(animated: true, completion: nil)
     }
     
     func displayAlert(title:String,Message:String) {
@@ -204,6 +226,6 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
- 
+    
 }
 

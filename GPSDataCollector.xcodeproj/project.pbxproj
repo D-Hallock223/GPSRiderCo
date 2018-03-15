@@ -11,6 +11,8 @@
 		891322FA2057573E004B9C0D /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891322F92057573E004B9C0D /* Authentication.swift */; };
 		891322FC205757C3004B9C0D /* UserClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891322FB205757C3004B9C0D /* UserClass.swift */; };
 		891322FE20575A15004B9C0D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891322FD20575A15004B9C0D /* Constants.swift */; };
+		892A6724205A3A4D00243972 /* FancyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892A6723205A3A4D00243972 /* FancyButton.swift */; };
+		892A6726205A3A6300243972 /* FancyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892A6725205A3A6300243972 /* FancyView.swift */; };
 		8940272720296D5C003832B1 /* LogInInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940272620296D5C003832B1 /* LogInInVC.swift */; };
 		8940272920296D68003832B1 /* SignUPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940272820296D68003832B1 /* SignUPVC.swift */; };
 		8940272B20296EDF003832B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8940272A20296EDF003832B1 /* GoogleService-Info.plist */; };
@@ -82,6 +84,8 @@
 		891322F92057573E004B9C0D /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		891322FB205757C3004B9C0D /* UserClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClass.swift; sourceTree = "<group>"; };
 		891322FD20575A15004B9C0D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		892A6723205A3A4D00243972 /* FancyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyButton.swift; sourceTree = "<group>"; };
+		892A6725205A3A6300243972 /* FancyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyView.swift; sourceTree = "<group>"; };
 		8940272620296D5C003832B1 /* LogInInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInInVC.swift; sourceTree = "<group>"; };
 		8940272820296D68003832B1 /* SignUPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPVC.swift; sourceTree = "<group>"; };
 		8940272A20296EDF003832B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -252,6 +256,8 @@
 		89A156221FA64CBB0081035B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				892A6723205A3A4D00243972 /* FancyButton.swift */,
+				892A6725205A3A6300243972 /* FancyView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -504,9 +510,11 @@
 				8940272720296D5C003832B1 /* LogInInVC.swift in Sources */,
 				89A1560D1FA6486F0081035B /* AppDelegate.swift in Sources */,
 				891322FC205757C3004B9C0D /* UserClass.swift in Sources */,
+				892A6726205A3A6300243972 /* FancyView.swift in Sources */,
 				8940272920296D68003832B1 /* SignUPVC.swift in Sources */,
 				89A156151FA6486F0081035B /* GPSDataCollector.xcdatamodeld in Sources */,
 				891322FA2057573E004B9C0D /* Authentication.swift in Sources */,
+				892A6724205A3A4D00243972 /* FancyButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

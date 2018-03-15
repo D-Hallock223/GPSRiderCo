@@ -13,7 +13,6 @@ class SignUPVC: UIViewController {
     @IBOutlet weak var userNameTxtField: UITextField!
     @IBOutlet weak var emailtxtFld: UITextField!
     @IBOutlet weak var passwordTxtFld: UITextField!
-    
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     
