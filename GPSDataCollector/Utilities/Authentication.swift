@@ -60,6 +60,10 @@ class Authentication {
                 let resultUsername = json["user"]["username"].stringValue
                 let resultEmail = json["user"]["email"].stringValue
                 let resultToken = json["user"]["token"].stringValue
+                if resultToken == "" {
+                    completion(false,nil)
+                    return
+                }
                 let userObj = User(username: resultUsername, email: resultEmail, token: resultToken)
                 completion(true,userObj)
             } else {
