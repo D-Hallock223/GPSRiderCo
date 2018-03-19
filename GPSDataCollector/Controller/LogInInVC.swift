@@ -50,10 +50,12 @@ class LogInInVC: UIViewController,WCSessionDelegate {
         spinner.startAnimating()
         guard let email = userNameTxtFld.text,email != "" else {
             displayAlert(title: "Enter the email", Message: "Please enter your email")
+            self.spinner.stopAnimating()
             return
         }
         guard let password = passwordTxtFld.text,password != "" else {
             displayAlert(title: "Enter the password", Message: "Please enter your password")
+            self.spinner.stopAnimating()
             return
         }
         
@@ -64,8 +66,7 @@ class LogInInVC: UIViewController,WCSessionDelegate {
                 guard let user  = returnedUser else {return}
                 self.spinner.stopAnimating()
                 self.session?.sendMessage(["loggedIn":true], replyHandler: nil, errorHandler: { (error) in
-                    self.displayAlert(title: "Error Occured", Message: error.localizedDescription)
-                    return
+                    print("watch connectivity error occured")
                 })
                 let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeVC") as! HomeVC
                 vc.user = user
@@ -77,25 +78,6 @@ class LogInInVC: UIViewController,WCSessionDelegate {
                 return
             }
         }
-        //        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
-        //            self.userNameTxtFld.text = ""
-        //            self.passwordTxtFld.text = ""
-        //            if error != nil {
-        //                self.displayAlert(title: "ERROR", Message: (error?.localizedDescription)!)
-        //                self.spinner.stopAnimating()
-        //                return
-        //            }
-        //            guard let user  = user else {return}
-        //            self.spinner.stopAnimating()
-        //            self.session?.sendMessage(["loggedIn":true], replyHandler: nil, errorHandler: { (error) in
-        //                self.displayAlert(title: "Error Occured", Message: error.localizedDescription)
-        //                return
-        //            })
-        //            let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeVC") as! HomeVC
-        //            vc.user = user
-        //            vc.session = self.session
-        //            self.present(vc, animated: true, completion: nil)
-        //        }
     }
     
     
@@ -105,5 +87,5 @@ class LogInInVC: UIViewController,WCSessionDelegate {
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
-    
+  
 }

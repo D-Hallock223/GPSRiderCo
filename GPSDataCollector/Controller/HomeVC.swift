@@ -12,7 +12,7 @@ import WatchConnectivity
 
 protocol SendData:class {
     
-    func receiveAndUpdate(latitude:CLLocationDegrees?,longitude:CLLocationDegrees?)
+    func receiveAndUpdate(location:CLLocation?)
 }
 
 class HomeVC: UIViewController,CLLocationManagerDelegate {
@@ -26,7 +26,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
     
     var session:WCSession?
     var user:User?
-    var locationPoint:CLLocationCoordinate2D?
+    var locationPoint:CLLocation?
     var locationManager:CLLocationManager!
     private var _latitude:CLLocationDegrees!
     private var _longitude:CLLocationDegrees!
@@ -127,9 +127,9 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
             }
             
         }
-        self.locationPoint = CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longitude)
+        self.locationPoint = location
         guard let delegate = protocolDelegate else {return}
-        delegate.receiveAndUpdate(latitude: self.latitude, longitude: self.longitude)
+        delegate.receiveAndUpdate(location: location)
     }
     
     
@@ -144,30 +144,30 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
     
     @objc func sendDataToserver() {
         
-        let parameters:[String:Any] = ["user": username!,
-                                       "lat":  Double(self.latitude),
-                                       "lng":  Double(self.longitude),
-                                       "time": Date().timeIntervalSince1970]
-        guard let url = URL(string: "https://savemyloc.herokuapp.com/") else {return }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {return}
-        request.httpBody = httpBody
-        
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if let response = response {
-                print(response)
-            }
-            if let data = data {
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    print(json)
-                }catch {
-                    print(error)
-                }
-            }
-            }.resume()
+//        let parameters:[String:Any] = ["user": username!,
+//                                       "lat":  Double(self.latitude),
+//                                       "lng":  Double(self.longitude),
+//                                       "time": Date().timeIntervalSince1970]
+//        guard let url = URL(string: "https://savemyloc.herokuapp.com/") else {return }
+//        var request = URLRequest(url: url)
+//        request.httpMethod = "POST"
+//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {return}
+//        request.httpBody = httpBody
+//
+//        URLSession.shared.dataTask(with: request) { (data, response, error) in
+//            if let response = response {
+//                print(response)
+//            }
+//            if let data = data {
+//                do {
+//                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+//                    print(json)
+//                }catch {
+//                    print(error)
+//                }
+//            }
+//            }.resume()
     }
     
     func callAlert(title:String,Message:String) {

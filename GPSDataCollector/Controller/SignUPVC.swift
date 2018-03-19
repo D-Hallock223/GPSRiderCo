@@ -26,14 +26,17 @@ class SignUPVC: UIViewController {
         spinner.startAnimating()
         guard let email = emailtxtFld.text,email != "" else {
             displayAlert(title: "Enter the email", Message: "Please enter your email")
+            self.spinner.stopAnimating()
             return
         }
         guard let password = passwordTxtFld.text,password != "" else {
             displayAlert(title: "Enter the password", Message: "Please enter your password")
+            self.spinner.stopAnimating()
             return
         }
         guard let username = userNameTxtField.text, username != "" else {
             displayAlert(title: "Enter the username", Message: "Please enter your username")
+            self.spinner.stopAnimating()
             return
         }
         
@@ -53,22 +56,6 @@ class SignUPVC: UIViewController {
                 return
             }
         }
-        
-//        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-//            self.userNametxtFld.text = ""
-//            self.passwordTxtFld.text = ""
-//            if error != nil {
-//                self.displayAlert(title: "ERROR", Message: (error?.localizedDescription)!)
-//                self.spinner.stopAnimating()
-//                return
-//            }
-//            guard let user  = user else {return}
-//            self.spinner.stopAnimating()
-//            let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeVC") as! HomeVC
-//            vc.user = user
-//            self.present(vc, animated: true, completion: nil)
-//        }
-        
     }
     
     @IBAction func goToLoginBtnPrssd(_ sender: Any) {

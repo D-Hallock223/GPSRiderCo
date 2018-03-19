@@ -46,6 +46,8 @@ class Authentication {
     
     
     func logInUser(email:String,password:String,completion: @escaping (Bool,User?)-> ()) {
+        
+        
         guard let url = URL(string: URL_LOG_IN) else {
             completion(false,nil)
             return }
@@ -65,6 +67,7 @@ class Authentication {
                     return
                 }
                 let userObj = User(username: resultUsername, email: resultEmail, token: resultToken)
+                
                 completion(true,userObj)
             } else {
                 completion(false,nil)
