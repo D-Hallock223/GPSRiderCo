@@ -69,10 +69,6 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate {
         }
     }
     
-    
-    
-    
-    
     func receiveAndUpdate(location:CLLocation?) {
         
         

@@ -20,6 +20,7 @@ class LogInInVC: UIViewController,WCSessionDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if WCSession.isSupported() {
             session = WCSession.default
             session?.delegate = self
@@ -31,7 +32,6 @@ class LogInInVC: UIViewController,WCSessionDelegate {
     
     //MARK:- WCSession protocol Delegate Methods
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        
         
     }
     
@@ -51,11 +51,14 @@ class LogInInVC: UIViewController,WCSessionDelegate {
         guard let email = userNameTxtFld.text,email != "" else {
             displayAlert(title: "Enter the email", Message: "Please enter your email")
             self.spinner.stopAnimating()
+            self.userNameTxtFld.resignFirstResponder()
             return
         }
+        
         guard let password = passwordTxtFld.text,password != "" else {
             displayAlert(title: "Enter the password", Message: "Please enter your password")
             self.spinner.stopAnimating()
+            self.passwordTxtFld.resignFirstResponder()
             return
         }
         
@@ -75,8 +78,8 @@ class LogInInVC: UIViewController,WCSessionDelegate {
             } else {
                 self.displayAlert(title: "ERROR", Message: "Error while logging in")
                 self.spinner.stopAnimating()
-                return
             }
+            self.view.endEditing(true)
         }
     }
     
@@ -87,5 +90,12 @@ class LogInInVC: UIViewController,WCSessionDelegate {
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    
   
 }
