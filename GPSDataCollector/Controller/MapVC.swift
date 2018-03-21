@@ -8,8 +8,8 @@
 
 import UIKit
 import MapKit
-
-class MapVC: UIViewController,SendData,UIScrollViewDelegate {
+//
+class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
     
     fileprivate var locations = [MKPointAnnotation]()
     
@@ -29,8 +29,21 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate {
     
     var locationPoint:CLLocation!
     
+    
+    
+    //
+    let routeCoordinates = [[34.4313,-118.59890],[34.4274,-118.60246],[34.4268,-118.60181],[34.4202,-118.6004],[34.42013,-118.59239],[34.42049,-118.59051],[34.42305,-118.59276],[34.42557,-118.59289],[34.42739,-118.59171]]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //
+        myMapView.delegate = self
+        exampleTest()
+        
+        
+        
         myScrollView.delegate = self
         myScrollView.contentSize = CGSize(width: (UIScreen.main.bounds.width)*2, height: 246)
         
@@ -53,6 +66,36 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate {
         
         homeVC?.protocolDelegate = nil
         homeVC = nil
+    }
+    
+    
+    func exampleTest() {
+        
+        var resCoord2dArr = [CLLocationCoordinate2D]()
+        for x in self.routeCoordinates {
+            let lat = x[0]
+            let long = x[1]
+            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+            resCoord2dArr.append(coordinate)
+        }
+        let mkPolyline = MKPolyline(coordinates: resCoord2dArr, count: resCoord2dArr.count)
+        myMapView.add(mkPolyline)
+        for x in resCoord2dArr{
+            let anno = MKPointAnnotation()
+            anno.coordinate = x
+            myMapView.addAnnotation(anno)
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        
+        renderer.strokeColor = UIColor.blue
+        
+        renderer.lineWidth = 5.0
+        
+        return renderer
     }
     
     
@@ -100,3 +143,11 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate {
         }
     }
 }
+
+
+
+    
+    
+
+    
+
