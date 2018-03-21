@@ -68,16 +68,10 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
         homeVC = nil
     }
     
-    
+    //
     func exampleTest() {
         
-        var resCoord2dArr = [CLLocationCoordinate2D]()
-        for x in self.routeCoordinates {
-            let lat = x[0]
-            let long = x[1]
-            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-            resCoord2dArr.append(coordinate)
-        }
+        let resCoord2dArr = allCoordinates()
         let mkPolyline = MKPolyline(coordinates: resCoord2dArr, count: resCoord2dArr.count)
         myMapView.add(mkPolyline)
         for x in resCoord2dArr{
@@ -86,10 +80,62 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
             myMapView.addAnnotation(anno)
         }
     }
+    //
+    func allCoordinates() -> [CLLocationCoordinate2D] {
+        var resCoord2dArr = [CLLocationCoordinate2D]()
+        for x in self.routeCoordinates {
+            let lat = x[0]
+            let long = x[1]
+            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+            resCoord2dArr.append(coordinate)
+        }
+        return resCoord2dArr
+    }
+    
+    //
+    func exampleTest2() {
+        let resCoord2dArr = allCoordinates()
+        for x in 0..<resCoord2dArr.count - 1 {
+            let p1 = resCoord2dArr[x]
+            let p2 = resCoord2dArr[x+1]
+            drawDirectionFunction(point1: p1, point2: p2)
+        }
+
+    }
+    
+    func drawDirectionFunction(point1:CLLocationCoordinate2D,point2:CLLocationCoordinate2D) {
+                let directionRequest = MKDirectionsRequest()
+                directionRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: point1))
+                directionRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: point2))
+                directionRequest.transportType = .automobile
+        
+                // Calculate the direction
+                let directions = MKDirections(request: directionRequest)
+        
+                directions.calculate {
+                    (response, error) -> Void in
+        
+                    guard let response = response else {
+                        if let error = error {
+                            print("Error: \(error)")
+                        }
+        
+                        return
+                    }
+        
+                    let route = response.routes[0]
+        
+                    self.myMapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
+                    
+//                    let rect = route.polyline.boundingMapRect
+//                    self.myMapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
+                }
+    }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         
         let renderer = MKPolylineRenderer(overlay: overlay)
+    
         
         renderer.strokeColor = UIColor.blue
         
