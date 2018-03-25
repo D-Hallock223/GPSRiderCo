@@ -9,6 +9,8 @@
 import UIKit
 import CoreLocation
 import WatchConnectivity
+import Alamofire
+import SwiftyJSON
 
 protocol SendData:class {
     
@@ -32,32 +34,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
     private var _longitude:CLLocationDegrees!
     weak var protocolDelegate:SendData?
     var username:String?
-    var timerOn = false
-    var backgroundTimerCondition = true
-    var backgroundTimer:Timer!
-    var backgroundTimeRunning = false
     var stopUpdating:Bool!
-    var myTimer:Timer?
-    
-    
-    var latitude : CLLocationDegrees {
-        get {
-            return self._latitude
-        }
-        set{
-            self._latitude = newValue
-            
-        }
-    }
-    
-    var longitude : CLLocationDegrees {
-        get {
-            return self._longitude
-        }
-        set{
-            self._longitude = newValue
-        }
-    }
     
     @IBOutlet weak var latitudeLbl: UILabel!
     @IBOutlet weak var longitudeLbl: UILabel!
@@ -101,33 +78,13 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
         
         
         guard let location = locations.last else {return}
-        self.latitude = location.coordinate.latitude
-        self.longitude = location.coordinate.longitude
-        self.latitudeLbl.text = "\(self.latitude)" + "°"
-        self.longitudeLbl.text = "\(self.longitude)" + "°"
-        
-        print(latitude,longitude)
-        
-        if UIApplication.shared.applicationState == .active {
-            self.backgroundTimerCondition = true
-            if backgroundTimeRunning {
-                self.backgroundTimer.invalidate()
-                backgroundTimeRunning = false
-            }
-            
-        } else {
-            print("App is backgrounded. New location is %@", location)
-            self.latitude = location.coordinate.latitude
-            self.longitude = location.coordinate.longitude
-            
-            if backgroundTimerCondition {
-                backgroundTimerCondition = false
-                backgroundTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(sendDataToserver), userInfo: nil, repeats: true)
-                backgroundTimeRunning = true
-            }
-            
-        }
         self.locationPoint = location
+        self.latitudeLbl.text = "\(location.coordinate.latitude)" + "°"
+        self.longitudeLbl.text = "\(location.coordinate.longitude)" + "°"
+        
+        
+        sendDataToserver()
+        
         guard let delegate = protocolDelegate else {return}
         delegate.receiveAndUpdate(location: location)
     }
@@ -142,33 +99,36 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
         }
     }
     
+    //TODO:- Fix sending event id and distance
     @objc func sendDataToserver() {
         
-//        let parameters:[String:Any] = ["user": username!,
-//                                       "lat":  Double(self.latitude),
-//                                       "lng":  Double(self.longitude),
-//                                       "time": Date().timeIntervalSince1970]
-//        guard let url = URL(string: "https://savemyloc.herokuapp.com/") else {return }
-//        var request = URLRequest(url: url)
-//        request.httpMethod = "POST"
-//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {return}
-//        request.httpBody = httpBody
-//
-//        URLSession.shared.dataTask(with: request) { (data, response, error) in
-//            if let response = response {
-//                print(response)
-//            }
-//            if let data = data {
-//                do {
-//                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-//                    print(json)
-//                }catch {
-//                    print(error)
-//                }
-//            }
-//            }.resume()
+        guard let sendURL = URL(string: URL_SEND_DATA_TO_SERVER) else {
+            self.displayAlert(title: "Error", Message: "Error sending data to the server")
+            return}
+        let parameters:[String:Any] = ["eventid":"5a9536fad047af0030c2500f",
+                                       "lat":"\(self.locationPoint?.coordinate.latitude ?? 0.0)",
+            "lng":"\(self.locationPoint?.coordinate.longitude ?? 0.0)",
+            "speed":"\(self.locationPoint?.speed ?? 0.0)",
+            "alt":"\(self.locationPoint?.altitude ?? 0)",
+            "distance":"30000"]
+        let headers = ["Content-Type":"application/x-www-form-urlencoded",
+                       "Authorization":"Bearer \(self.user?.token ?? "")"]
+        
+        Alamofire.request(sendURL, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
+            if response.result.isSuccess{
+                let json = try! JSON(data: response.data!)
+                let result = json["result"].stringValue.lowercased()
+                if result == "ok" {
+                    print("Data successfully sent to the server")
+                }else{
+                   print("Error sending data")
+                }
+            }else{
+                print("Error sending data")
+            }
+        }
     }
+    
     
     func callAlert(title:String,Message:String) {
         let alertVC = UIAlertController(title: title, message: Message, preferredStyle: .alert)
@@ -185,19 +145,13 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
             mapInfoLbl.isHidden = false
             self.username = user?.email
             locationManager.startUpdatingLocation()
-            if timerOn == false {
-                self.myTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(sendDataToserver), userInfo: nil, repeats: true)
-            }
-            timerOn = true
+            
         } else {
             stopUpdating = false
             startUpdateBtn.setTitle("Start Updating Location", for: .normal)
             mapVCBtn.isHidden = true
             mapInfoLbl.isHidden = true
             locationManager.stopUpdatingLocation()
-            self.myTimer?.invalidate()
-            self.myTimer = nil
-            timerOn = false
         }
         
     }
@@ -207,10 +161,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
     }
     
     @IBAction func signOutBtnPrssd(_ sender: Any) {
-        if self.myTimer != nil {
-            self.myTimer?.invalidate()
-            self.myTimer = nil
-        }
+        
         self.locationManager.stopUpdatingLocation()
         self.user = nil
         self.session?.sendMessage(["loggedIn":false], replyHandler: nil, errorHandler: { (error) in
