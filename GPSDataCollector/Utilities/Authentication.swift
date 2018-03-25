@@ -74,4 +74,33 @@ class Authentication {
             }
         }
     }
+    
+    
+    func forgotPassword(email:String,completion:@escaping (Bool)->()) {
+        guard let fpURL = URL(string: URL_FORGOT_PASSWORD) else {
+            completion(false)
+            return
+        }
+        let parameters:[String:Any] = ["email":  email]
+        let headers = ["Content-Type":"application/x-www-form-urlencoded"]
+        Alamofire.request(fpURL, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
+            if response.result.isSuccess {
+                let json = try! JSON(data: response.data!)
+                print(json)
+                let result = json["result"].stringValue.lowercased()
+                if result == "ok" {
+                    completion(true)
+                    return
+                }
+                completion(false)
+            } else {
+                completion(false)
+            }
+        }
+    }
+    
+    
+    
+    
+    
 }

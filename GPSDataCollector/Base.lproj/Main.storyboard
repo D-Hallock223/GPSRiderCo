@@ -123,6 +123,27 @@
                                         <rect key="frame" x="169.33333333333334" y="525" width="37" height="37"/>
                                         <color key="color" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </activityIndicatorView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="kJ2-DU-nyO">
+                                        <rect key="frame" x="101.33333333333333" y="483" width="174.33333333333337" height="28"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Password?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qdK-LF-C8F">
+                                                <rect key="frame" x="0.0" y="0.0" width="108.33333333333333" height="28"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jyD-PB-BjZ">
+                                                <rect key="frame" x="113.33333333333331" y="0.0" width="61" height="28"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <state key="normal" title="Click here">
+                                                    <color key="titleColor" red="0.56862745100000001" green="0.78039215689999997" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="forgotPasswordBtnTapped:" destination="gzy-z9-S7P" eventType="touchUpInside" id="DlS-ab-KjV"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -133,9 +154,11 @@
                                     <constraint firstItem="c4g-zP-idJ" firstAttribute="centerX" secondItem="Sgh-eL-y5X" secondAttribute="centerX" id="S2W-2g-lpx"/>
                                     <constraint firstItem="Flf-Mu-fzL" firstAttribute="top" secondItem="y3R-nP-aH5" secondAttribute="bottom" constant="8" id="Ub2-LK-DdM"/>
                                     <constraint firstItem="y3R-nP-aH5" firstAttribute="centerX" secondItem="Sgh-eL-y5X" secondAttribute="centerX" id="WVo-ok-nER"/>
+                                    <constraint firstItem="kJ2-DU-nyO" firstAttribute="centerX" secondItem="Sgh-eL-y5X" secondAttribute="centerX" id="aIM-xy-sZq"/>
                                     <constraint firstItem="5f8-w3-DAd" firstAttribute="top" secondItem="Sgh-eL-y5X" secondAttribute="top" id="c7V-sY-dZN"/>
                                     <constraint firstAttribute="trailing" secondItem="5f8-w3-DAd" secondAttribute="trailing" id="hK4-0x-ckl"/>
                                     <constraint firstAttribute="trailing" secondItem="l7f-wq-kgh" secondAttribute="trailing" id="n3F-LK-8ew"/>
+                                    <constraint firstItem="kJ2-DU-nyO" firstAttribute="top" secondItem="Flf-Mu-fzL" secondAttribute="bottom" constant="8" id="tQt-eT-E2H"/>
                                     <constraint firstItem="5f8-w3-DAd" firstAttribute="leading" secondItem="Sgh-eL-y5X" secondAttribute="leading" id="vSN-vL-E04"/>
                                     <constraint firstItem="y3R-nP-aH5" firstAttribute="top" secondItem="5f8-w3-DAd" secondAttribute="bottom" constant="31" id="vYP-KK-7Gt"/>
                                     <constraint firstAttribute="bottom" secondItem="l7f-wq-kgh" secondAttribute="bottom" id="xhQ-g3-SkI"/>

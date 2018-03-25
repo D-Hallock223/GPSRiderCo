@@ -96,6 +96,40 @@ class LogInInVC: UIViewController,WCSessionDelegate {
         self.view.endEditing(true)
     }
     
+    @IBAction func forgotPasswordBtnTapped(_ sender: Any) {
+        forgotPasswordAlert()
+    }
+    
+    func passwordReset(email:String) {
+        Authentication.sharedInstance.forgotPassword(email: email) { (Success) in
+            if Success {
+                self.displayAlert(title: "Password reset successfull", Message: "A password reset link has been sent to your registered email id")
+            }else{
+                self.displayAlert(title: "Password reset failed", Message: "Password could not be reseted. Please check your email id and try again")
+            }
+        }
+    }
+    
+    func forgotPasswordAlert() {
+        let alertVC = UIAlertController(title: "Forgot Password", message: "Please enter your email", preferredStyle: .alert)
+        alertVC.addTextField { (textfield) in
+            textfield.placeholder = "Enter your email here..."
+        }
+        let action = UIAlertAction(title: "Done", style: .default) { (action) in
+            let emailtxtField = alertVC.textFields![0]
+            guard let value = emailtxtField.text, value != "" else {
+                self.displayAlert(title: "Error", Message: "Email cannot be blank")
+                return}
+            self.passwordReset(email: value)
+        }
+        let cacelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertVC.addAction(action)
+        alertVC.addAction(cacelAction)
+        present(alertVC, animated: true, completion: nil)
+    }
+    
+    
+    
     
   
 }
