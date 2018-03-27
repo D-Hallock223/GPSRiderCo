@@ -101,7 +101,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
     
     //TODO:- Fix sending event id and distance
     @objc func sendDataToserver() {
-        
+
         guard let sendURL = URL(string: URL_SEND_DATA_TO_SERVER) else {
             self.displayAlert(title: "Error", Message: "Error sending data to the server")
             return}
@@ -113,7 +113,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
             "distance":"30000"]
         let headers = ["Content-Type":"application/x-www-form-urlencoded",
                        "Authorization":"Bearer \(self.user?.token ?? "")"]
-        
+
         Alamofire.request(sendURL, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
             if response.result.isSuccess{
                 let json = try! JSON(data: response.data!)
@@ -128,6 +128,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
             }
         }
     }
+    
     
     
     func callAlert(title:String,Message:String) {

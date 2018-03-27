@@ -73,7 +73,10 @@ class SignUPVC: UIViewController,WCSessionDelegate {
             if success {
                 guard let user  = returnedUser else {return}
                 self.spinner.stopAnimating()
-                self.session?.sendMessage(["loggedIn":true], replyHandler: nil, errorHandler: { (error) in
+                self.session?.sendMessage(["loggedIn":true,
+                                           "username":user.username,
+                                           "email":user.email,
+                                           "token":user.token], replyHandler: nil, errorHandler: { (error) in
                     print("watch connectivity error occured")
                 })
                 let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeVC") as! HomeVC

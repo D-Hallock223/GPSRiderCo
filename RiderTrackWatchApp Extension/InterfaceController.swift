@@ -12,9 +12,12 @@ import WatchConnectivity
 
 class InterfaceController: WKInterfaceController,WCSessionDelegate {
     
+    
+    @IBOutlet var labelBtn: WKInterfaceButton!
+    
+    
     var session :WCSession?
     var isLoggedInFlag = false
-    @IBOutlet var labelBtn: WKInterfaceButton!
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
@@ -57,6 +60,25 @@ class InterfaceController: WKInterfaceController,WCSessionDelegate {
                 UserDefaults.standard.set(false, forKey: "loggedIn")
             }
         }
+        
+        var wUsername = ""
+        var wEmail = ""
+        var wToken = ""
+        
+        if let username = message["username"] as? String {
+            wUsername = username
+        }
+        if let email = message["email"] as? String {
+            wEmail = email
+        }
+        if let token = message["token"] as? String {
+            wToken = token
+        }
+        if wUsername != "" && wEmail != "" && wToken != "" {
+            WatchUser.sharedInstance.username = wUsername
+            WatchUser.sharedInstance.email = wEmail
+            WatchUser.sharedInstance.token = wToken
+        }
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -72,6 +94,9 @@ class InterfaceController: WKInterfaceController,WCSessionDelegate {
                 DispatchQueue.main.async {
                     self.popToRootController()
                 }
+                WatchUser.sharedInstance.username = nil
+                WatchUser.sharedInstance.email = nil
+                WatchUser.sharedInstance.token = nil
                 isLoggedInFlag = false
                 DispatchQueue.main.async {
                     self.labelBtn.setTitle("Please sign in from iPhone to continue !")

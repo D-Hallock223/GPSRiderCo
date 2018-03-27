@@ -19,6 +19,7 @@
 		89631B65203E370C0063CCE0 /* StartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89631B64203E370C0063CCE0 /* StartVC.swift */; };
 		89631B67203E72FE0063CCE0 /* TrackVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89631B66203E72FE0063CCE0 /* TrackVC.swift */; };
 		89631B69203E730F0063CCE0 /* MapWatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89631B68203E730F0063CCE0 /* MapWatchVC.swift */; };
+		8994E1AA2069D22F0072DBF0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8994E1A92069D22F0072DBF0 /* User.swift */; };
 		89961801203BCB260055364A /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 899617FF203BCB260055364A /* Interface.storyboard */; };
 		89961803203BCB260055364A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89961802203BCB260055364A /* Assets.xcassets */; };
 		8996180A203BCB260055364A /* RiderTrackWatchApp Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 89961809203BCB260055364A /* RiderTrackWatchApp Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -92,6 +93,7 @@
 		89631B64203E370C0063CCE0 /* StartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartVC.swift; sourceTree = "<group>"; };
 		89631B66203E72FE0063CCE0 /* TrackVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackVC.swift; sourceTree = "<group>"; };
 		89631B68203E730F0063CCE0 /* MapWatchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapWatchVC.swift; sourceTree = "<group>"; };
+		8994E1A92069D22F0072DBF0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		899617FD203BCB260055364A /* RiderTrackWatchApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RiderTrackWatchApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89961800203BCB260055364A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		89961802203BCB260055364A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				89961816203BCB260055364A /* Info.plist */,
 				89961817203BCB260055364A /* PushNotificationPayload.apns */,
 				89961828203BE2720055364A /* WatchAppConstants.swift */,
+				8994E1A92069D22F0072DBF0 /* User.swift */,
 			);
 			path = "RiderTrackWatchApp Extension";
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 				89961813203BCB260055364A /* NotificationController.swift in Sources */,
 				89631B67203E72FE0063CCE0 /* TrackVC.swift in Sources */,
 				89961811203BCB260055364A /* ExtensionDelegate.swift in Sources */,
+				8994E1AA2069D22F0072DBF0 /* User.swift in Sources */,
 				89631B69203E730F0063CCE0 /* MapWatchVC.swift in Sources */,
 				8996180F203BCB260055364A /* InterfaceController.swift in Sources */,
 				89961829203BE2720055364A /* WatchAppConstants.swift in Sources */,

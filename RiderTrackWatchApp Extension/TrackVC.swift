@@ -9,6 +9,8 @@
 import WatchKit
 import CoreLocation
 
+
+
 protocol dataTransmission:class {
     func getData(latitude:CLLocationDegrees,longitude:CLLocationDegrees)
 }
@@ -21,13 +23,17 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
     @IBOutlet var altitudeLbl: WKInterfaceLabel!
     @IBOutlet var distanceLbl: WKInterfaceLabel!
     
-    var locationPoint:CLLocationCoordinate2D?
+    let URL_SEND_DATA_TO_SERVER = "https://athlete-tracker.herokuapp.com/tracking/saveloc"
+    var locationPoint:CLLocation?
     
     var finalDestination = CLLocation(latitude: 33.4484, longitude: 112.07)
     
     var locationManager:CLLocationManager!
     
     weak var delegate:dataTransmission?
+    
+    
+    
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
@@ -62,18 +68,54 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-       
+        
         guard let location  = locations.last else {
             return
         }
-        self.locationPoint = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        self.locationPoint = location
         latitudeLbl.setText("\(location.coordinate.latitude)")
         longitudeLbl.setText("\(location.coordinate.longitude)")
         speedLbl.setText("\(location.speed) m/s")
         altitudeLbl.setText("\(location.altitude) m")
         distanceLbl.setText("\(Int(location.distance(from: finalDestination))) m")
+        sendDataToserver()
         delegate?.getData(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         
+    }
+    
+    //TODO:- sending Event id and distance
+    func sendDataToserver() {
+        
+        guard let sendURL = URL(string: URL_SEND_DATA_TO_SERVER) else {return}
+        
+        var request = URLRequest(url: sendURL)
+        let id = "5a9536fad047af0030c2500f"
+        guard let location = self.locationPoint else {return}
+        let parameters = "eventid=\(id)&lat=\(location.coordinate.latitude)&lng=\(location.coordinate.longitude)&speed=\(location.speed)&alt=\(location.altitude)&distLeft=\(location.distance(from: finalDestination))".data(using:String.Encoding.ascii, allowLossyConversion: false)
+        
+        request.httpMethod = "POST"
+        request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(WatchUser.sharedInstance.token!)", forHTTPHeaderField: "Authorization")
+
+        request.httpBody = parameters
+        
+        URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
+            if error != nil {
+                print("urlsession error occured")
+                print(error!.localizedDescription)
+                return
+            }
+            if let data = data {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    print(json)
+                }catch {
+                    print(error.localizedDescription)
+                }
+            } else {
+                print("No data available")
+            }
+        }).resume()
     }
     
     
