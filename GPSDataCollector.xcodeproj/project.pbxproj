@@ -23,6 +23,7 @@
 		8994E1AC2069F5BE0072DBF0 /* AllEventsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8994E1AB2069F5BE0072DBF0 /* AllEventsVC.swift */; };
 		8994E1AE2069F5F50072DBF0 /* AllEventsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8994E1AD2069F5F50072DBF0 /* AllEventsCell.swift */; };
 		8994E1B02069F7780072DBF0 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8994E1AF2069F7780072DBF0 /* DataSource.swift */; };
+		8994E1B22069F8410072DBF0 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8994E1B12069F8410072DBF0 /* Event.swift */; };
 		89961801203BCB260055364A /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 899617FF203BCB260055364A /* Interface.storyboard */; };
 		89961803203BCB260055364A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89961802203BCB260055364A /* Assets.xcassets */; };
 		8996180A203BCB260055364A /* RiderTrackWatchApp Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 89961809203BCB260055364A /* RiderTrackWatchApp Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -100,6 +101,7 @@
 		8994E1AB2069F5BE0072DBF0 /* AllEventsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEventsVC.swift; sourceTree = "<group>"; };
 		8994E1AD2069F5F50072DBF0 /* AllEventsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEventsCell.swift; sourceTree = "<group>"; };
 		8994E1AF2069F7780072DBF0 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
+		8994E1B12069F8410072DBF0 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		899617FD203BCB260055364A /* RiderTrackWatchApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RiderTrackWatchApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89961800203BCB260055364A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		89961802203BCB260055364A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				891322FB205757C3004B9C0D /* UserClass.swift */,
+				8994E1B12069F8410072DBF0 /* Event.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				89A1560F1FA6486F0081035B /* HomeVC.swift in Sources */,
 				891322FE20575A15004B9C0D /* Constants.swift in Sources */,
 				89A156251FA64D170081035B /* MapVC.swift in Sources */,
+				8994E1B22069F8410072DBF0 /* Event.swift in Sources */,
 				8940272720296D5C003832B1 /* LogInInVC.swift in Sources */,
 				89A1560D1FA6486F0081035B /* AppDelegate.swift in Sources */,
 				891322FC205757C3004B9C0D /* UserClass.swift in Sources */,
