@@ -10,6 +10,7 @@ import UIKit
 import WatchConnectivity
 
 
+
 class LogInInVC: UIViewController,WCSessionDelegate {
     
     @IBOutlet weak var userNameTxtFld: UITextField!
