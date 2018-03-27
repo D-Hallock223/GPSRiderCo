@@ -20,6 +20,9 @@
 		89631B67203E72FE0063CCE0 /* TrackVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89631B66203E72FE0063CCE0 /* TrackVC.swift */; };
 		89631B69203E730F0063CCE0 /* MapWatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89631B68203E730F0063CCE0 /* MapWatchVC.swift */; };
 		8994E1AA2069D22F0072DBF0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8994E1A92069D22F0072DBF0 /* User.swift */; };
+		8994E1AC2069F5BE0072DBF0 /* AllEventsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8994E1AB2069F5BE0072DBF0 /* AllEventsVC.swift */; };
+		8994E1AE2069F5F50072DBF0 /* AllEventsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8994E1AD2069F5F50072DBF0 /* AllEventsCell.swift */; };
+		8994E1B02069F7780072DBF0 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8994E1AF2069F7780072DBF0 /* DataSource.swift */; };
 		89961801203BCB260055364A /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 899617FF203BCB260055364A /* Interface.storyboard */; };
 		89961803203BCB260055364A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89961802203BCB260055364A /* Assets.xcassets */; };
 		8996180A203BCB260055364A /* RiderTrackWatchApp Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 89961809203BCB260055364A /* RiderTrackWatchApp Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -94,6 +97,9 @@
 		89631B66203E72FE0063CCE0 /* TrackVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackVC.swift; sourceTree = "<group>"; };
 		89631B68203E730F0063CCE0 /* MapWatchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapWatchVC.swift; sourceTree = "<group>"; };
 		8994E1A92069D22F0072DBF0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8994E1AB2069F5BE0072DBF0 /* AllEventsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEventsVC.swift; sourceTree = "<group>"; };
+		8994E1AD2069F5F50072DBF0 /* AllEventsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEventsCell.swift; sourceTree = "<group>"; };
+		8994E1AF2069F7780072DBF0 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		899617FD203BCB260055364A /* RiderTrackWatchApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RiderTrackWatchApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89961800203BCB260055364A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		89961802203BCB260055364A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -200,6 +206,7 @@
 			children = (
 				891322F92057573E004B9C0D /* Authentication.swift */,
 				891322FD20575A15004B9C0D /* Constants.swift */,
+				8994E1AF2069F7780072DBF0 /* DataSource.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -252,6 +259,7 @@
 				89A156241FA64D170081035B /* MapVC.swift */,
 				8940272620296D5C003832B1 /* LogInInVC.swift */,
 				8940272820296D68003832B1 /* SignUPVC.swift */,
+				8994E1AB2069F5BE0072DBF0 /* AllEventsVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -261,6 +269,7 @@
 			children = (
 				892A6723205A3A4D00243972 /* FancyButton.swift */,
 				892A6725205A3A6300243972 /* FancyView.swift */,
+				8994E1AD2069F5F50072DBF0 /* AllEventsCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -510,6 +519,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8994E1B02069F7780072DBF0 /* DataSource.swift in Sources */,
 				89A1560F1FA6486F0081035B /* HomeVC.swift in Sources */,
 				891322FE20575A15004B9C0D /* Constants.swift in Sources */,
 				89A156251FA64D170081035B /* MapVC.swift in Sources */,
@@ -520,7 +530,9 @@
 				8940272920296D68003832B1 /* SignUPVC.swift in Sources */,
 				89A156151FA6486F0081035B /* GPSDataCollector.xcdatamodeld in Sources */,
 				891322FA2057573E004B9C0D /* Authentication.swift in Sources */,
+				8994E1AE2069F5F50072DBF0 /* AllEventsCell.swift in Sources */,
 				892A6724205A3A4D00243972 /* FancyButton.swift in Sources */,
+				8994E1AC2069F5BE0072DBF0 /* AllEventsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
