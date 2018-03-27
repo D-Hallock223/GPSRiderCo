@@ -15,7 +15,7 @@ class MapWatchVC: WKInterfaceController,dataTransmission {
     
     @IBOutlet var watchMapView: WKInterfaceMap!
     
-    var userLocation:CLLocationCoordinate2D!
+    var userLocation:CLLocation!
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
@@ -27,17 +27,17 @@ class MapWatchVC: WKInterfaceController,dataTransmission {
         trackObject.delegate = self
         
         
-        self.userLocation = wContext[1] as! CLLocationCoordinate2D
+        self.userLocation = wContext[1] as! CLLocation
         
         // mapView Setup
         let latdelta:CLLocationDegrees = 0.01
         let londelta:CLLocationDegrees = 0.01
         let span:MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: latdelta, longitudeDelta: londelta)
-        let location:CLLocationCoordinate2D = self.userLocation
+        let location:CLLocationCoordinate2D = self.userLocation.coordinate
         let region:MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
         watchMapView.setRegion(region)
         
-        watchMapView.addAnnotation(self.userLocation, with: .red)
+        watchMapView.addAnnotation(self.userLocation.coordinate, with: .red)
         
     }
     
