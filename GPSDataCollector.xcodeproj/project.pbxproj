@@ -17,6 +17,7 @@
 		8940272920296D68003832B1 /* SignUPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940272820296D68003832B1 /* SignUPVC.swift */; };
 		8940272B20296EDF003832B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8940272A20296EDF003832B1 /* GoogleService-Info.plist */; };
 		8949A362206B2A59007BC20E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8949A361206B2A59007BC20E /* Extensions.swift */; };
+		8949A364206B3AE7007BC20E /* EventDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8949A363206B3AE7007BC20E /* EventDetailVC.swift */; };
 		89631B65203E370C0063CCE0 /* StartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89631B64203E370C0063CCE0 /* StartVC.swift */; };
 		89631B67203E72FE0063CCE0 /* TrackVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89631B66203E72FE0063CCE0 /* TrackVC.swift */; };
 		89631B69203E730F0063CCE0 /* MapWatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89631B68203E730F0063CCE0 /* MapWatchVC.swift */; };
@@ -96,6 +97,7 @@
 		8940272820296D68003832B1 /* SignUPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPVC.swift; sourceTree = "<group>"; };
 		8940272A20296EDF003832B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8949A361206B2A59007BC20E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		8949A363206B3AE7007BC20E /* EventDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailVC.swift; sourceTree = "<group>"; };
 		89631B64203E370C0063CCE0 /* StartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartVC.swift; sourceTree = "<group>"; };
 		89631B66203E72FE0063CCE0 /* TrackVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackVC.swift; sourceTree = "<group>"; };
 		89631B68203E730F0063CCE0 /* MapWatchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapWatchVC.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				8940272620296D5C003832B1 /* LogInInVC.swift */,
 				8940272820296D68003832B1 /* SignUPVC.swift */,
 				8994E1AB2069F5BE0072DBF0 /* AllEventsVC.swift */,
+				8949A363206B3AE7007BC20E /* EventDetailVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 				8994E1B22069F8410072DBF0 /* Event.swift in Sources */,
 				8940272720296D5C003832B1 /* LogInInVC.swift in Sources */,
 				89A1560D1FA6486F0081035B /* AppDelegate.swift in Sources */,
+				8949A364206B3AE7007BC20E /* EventDetailVC.swift in Sources */,
 				891322FC205757C3004B9C0D /* UserClass.swift in Sources */,
 				892A6726205A3A6300243972 /* FancyView.swift in Sources */,
 				8940272920296D68003832B1 /* SignUPVC.swift in Sources */,
@@ -785,7 +789,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = akilkumar.GPSDataCollector;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -802,7 +806,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = akilkumar.GPSDataCollector;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

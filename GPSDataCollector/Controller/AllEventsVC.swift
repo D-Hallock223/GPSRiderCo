@@ -105,5 +105,31 @@ extension AllEventsVC:UITableViewDelegate,UITableViewDataSource {
             return AllEventsCell()
         }
     }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let event:Event?
+        let pastEvent:Bool?
+        if mySegmentControl.selectedSegmentIndex == 0 {
+            event = upcomingEvent[indexPath.row]
+            pastEvent = false
+        } else {
+            event = pastEvents[indexPath.row]
+            pastEvent = true
+        }
+        performSegue(withIdentifier: "toEventDetailVC", sender: [event!,pastEvent!])
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? EventDetailVC {
+            if let arr = sender as? Array<Any> {
+                if let choosenEvent = arr[0] as? Event,let pastEvent = arr[1] as? Bool {
+                    destination.event = choosenEvent
+                    destination.isPast = pastEvent
+                }
+            }
+        }
+    }
 
 }

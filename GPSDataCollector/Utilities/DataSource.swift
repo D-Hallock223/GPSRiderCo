@@ -41,7 +41,7 @@ class DataSource {
                     let Dlocation = event["location"].stringValue
                     let DeventTimeRange = event["time"].stringValue
                     
-                    let eventObj = Event(raceWinners: DraceWinners as? [String], id: Did, name: Dname, eventImgLink: DeventImgLink, description: Ddescription, date: Ddate, location: Dlocation, eventTimeRange: DeventTimeRange)
+                    let eventObj = Event(raceWinners: DraceWinners as? [String], id: Did, name: Dname, eventImgLink: DeventImgLink, eventDescription: Ddescription, date: Ddate, location: Dlocation, eventTimeRange: DeventTimeRange)
                     events.append(eventObj)
                 }
                 Completion(events)

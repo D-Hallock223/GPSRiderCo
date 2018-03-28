@@ -15,7 +15,7 @@ struct Event {
     let id:String
     let name:String
     var eventImgLink:String
-    let description:String
+    let eventDescription:String
     let date:String
     let location:String
     let eventTimeRange:String
