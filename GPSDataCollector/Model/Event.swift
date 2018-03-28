@@ -18,5 +18,6 @@ struct Event {
     let description:String
     let date:String
     let location:String
-    let eventTimeRange:String    
+    let eventTimeRange:String
+    
 }
