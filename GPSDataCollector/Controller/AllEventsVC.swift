@@ -16,9 +16,8 @@ class AllEventsVC: UIViewController {
     
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var mySegmentControl: UISegmentedControl!
-    
-    
-    
+    @IBOutlet weak var myActivityIndicator: UIActivityIndicatorView!
+
     
     
     //MARK:- Properties
@@ -26,7 +25,7 @@ class AllEventsVC: UIViewController {
     var allEvents = [Event]()
     var pastEvents = [Event]()
     var upcomingEvent = [Event]()
-    
+    var refreshControl: UIRefreshControl!
     
     
     
@@ -37,19 +36,42 @@ class AllEventsVC: UIViewController {
         // Do any additional setup after loading the view.
         myTableView.dataSource = self
         myTableView.delegate = self
-        DataSource.sharedInstance.getAllEvents { (events) in
-            if let eventArr = events {
-                self.allEvents = eventArr
-                self.segregateData()
-                self.myTableView.reloadData()
-            }
-        }
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        let attributedStringColor = [NSAttributedStringKey.foregroundColor : UIColor.white,
+                                     NSAttributedStringKey.font: UIFont(name: "Chalkduster", size: 18.0)! ]
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh", attributes: attributedStringColor)
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        self.myTableView.addSubview(refreshControl)
+        loadData()
     }
     
     
     
     
     //MARK:- Functions
+    
+    
+    func loadData() {
+        myActivityIndicator.startAnimating()
+        self.allEvents = []
+        self.upcomingEvent = []
+        self.pastEvents = []
+        self.myTableView.reloadData()
+        DataSource.sharedInstance.getAllEvents { (events) in
+            if let eventArr = events {
+                self.allEvents = eventArr
+                self.segregateData()
+                self.myTableView.reloadData()
+                self.myActivityIndicator.stopAnimating()
+                self.refreshControl.endRefreshing()
+            }
+        }
+    }
+    
+    @objc func refresh() {
+        loadData()
+    }
     
     func segregateData() {
         for event in self.allEvents {
@@ -95,6 +117,13 @@ extension AllEventsVC:UITableViewDelegate,UITableViewDataSource {
         }
         if let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? AllEventsCell {
             cell.eventNameLbl.text = event!.name
+            let daysremValue = RemainingDays(date: event!.date)
+            if let value = daysremValue, value >= 0 {
+                cell.daysRemainingLbl.text = "\(value) days remaining"
+            } else {
+                cell.daysRemainingLbl.text = "\(0) days remaining"
+            }
+            cell.locationLbl.text = event?.location
             if let imgURL = URL(string: event!.eventImgLink) {
               cell.eventsImageView.sd_setImage(with: imgURL, placeholderImage: #imageLiteral(resourceName: "placeholder"), options: [.continueInBackground,.scaleDownLargeImages], completed: nil)
             } else {
@@ -104,6 +133,38 @@ extension AllEventsVC:UITableViewDelegate,UITableViewDataSource {
         } else {
             return AllEventsCell()
         }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        var numOfSections: Int = 0
+        var youHaveData:Int!
+        if mySegmentControl.selectedSegmentIndex == 0 {
+            youHaveData = upcomingEvent.count
+        } else {
+            youHaveData = pastEvents.count
+        }
+        if youHaveData > 0
+        {
+            numOfSections            = 1
+            tableView.backgroundView = nil
+            tableView.separatorStyle = .singleLine
+        }
+        else
+        {
+            let noDataLabel: UILabel     = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+            if myActivityIndicator.isAnimating {
+                noDataLabel.text = "Loading"
+            }else{
+                noDataLabel.text = "No data available!"
+            }
+            noDataLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
+            noDataLabel.textColor     = UIColor.white
+            noDataLabel.textAlignment = .center
+            tableView.backgroundView  = noDataLabel
+            tableView.separatorStyle  = .none
+        }
+        return numOfSections
     }
     
     

@@ -74,7 +74,14 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate {
         }
         
         locationLbl.text = event.location
-        dateLbl.text = event.date
+        let normalDate = Formatter.iso8601.date(from: event.date)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let myString = formatter.string(from: normalDate!)
+        let yourDate = formatter.date(from: myString)
+        formatter.dateFormat = "dd-MMM-yyyy"
+        let myStringafd = formatter.string(from: yourDate!)
+        dateLbl.text = myStringafd
         timeLbl.text = event.eventTimeRange
         descriptionLbl.text = event.eventDescription
     }

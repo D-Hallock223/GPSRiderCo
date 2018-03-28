@@ -15,7 +15,12 @@ class AllEventsCell: UITableViewCell {
     @IBOutlet weak var eventsImageView: UIImageView!
     @IBOutlet weak var eventNameLbl: UILabel!
     
-
+    @IBOutlet weak var daysRemainingLbl: UILabel!
+    
+    @IBOutlet weak var locationLbl: UILabel!
+    
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
