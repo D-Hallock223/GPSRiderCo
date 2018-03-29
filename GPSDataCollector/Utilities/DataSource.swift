@@ -50,11 +50,38 @@ class DataSource {
                 return
             }
         }
-        
-        
-        
-        
-        
+   
+    }
+    
+    
+    func registerForanEvent(eventId:String,token:String,completion:@escaping(Bool,Bool)->()) {
+        guard let sendURL = URL(string: URL_PREPOD_REGISTER_FOR_EVENT) else {return}
+        let parameters:[String:Any] = ["eventid": eventId]
+        let headers = ["Content-Type":"application/json",
+                       "Authorization":"Bearer \(token)"
+                       ]
+        Alamofire.request(sendURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
+            if response.result.error != nil {
+                print("error occured during registerForanEvent request")
+                completion(false,false)
+                return
+            }
+            if response.result.isSuccess {
+                let json = try! JSON(data: response.data!)
+                let value = json["result"].stringValue
+                if value == "newRegistration" {
+                    completion(true,true)
+                }else if value == "alreadyRegistered"{
+                    completion(true,false)
+                }else{
+                    print("spelling error occured")
+                    completion(false,false)
+                }
+            } else {
+                print("error occured during registerForanEvent request")
+                completion(false,false)
+            }
+        }
     }
     
     

@@ -15,3 +15,10 @@ let URL_FORGOT_PASSWORD = "https://athlete-tracker.herokuapp.com/users/forgotpwd
 let URL_SEND_DATA_TO_SERVER = "https://athlete-tracker.herokuapp.com/tracking/saveloc"
 let URL_GET_ALL_EVENTS = "https://athlete-tracker.herokuapp.com/events/getAllEvents"
 
+
+//MARK:- Pre-Pod URL's
+
+let URL_PREPOD_REGISTER_FOR_EVENT = "https://athlete-tracker-preprod.herokuapp.com/events/addRiderToEvent"
+
+
+

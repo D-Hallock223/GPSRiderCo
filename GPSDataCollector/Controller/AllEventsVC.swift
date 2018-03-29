@@ -119,9 +119,13 @@ extension AllEventsVC:UITableViewDelegate,UITableViewDataSource {
             cell.eventNameLbl.text = event!.name
             let daysremValue = RemainingDays(date: event!.date)
             if let value = daysremValue, value >= 0 {
-                cell.daysRemainingLbl.text = "\(value) days remaining"
+                if value == 0 {
+                    cell.daysRemainingLbl.text = "Happening Today"
+                } else {
+                    cell.daysRemainingLbl.text = "\(value) days remaining"
+                }
             } else {
-                cell.daysRemainingLbl.text = "\(0) days remaining"
+                cell.daysRemainingLbl.text = "Not Applicable"
             }
             cell.locationLbl.text = event?.location
             if let imgURL = URL(string: event!.eventImgLink) {

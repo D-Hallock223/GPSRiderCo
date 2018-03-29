@@ -93,6 +93,13 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate {
             myPageIndicator.currentPage = Int(page)
         }
     }
+    
+    func displayAlert(title:String,Message:String) {
+        let alert = UIAlertController(title: title, message: Message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
         
         
         
@@ -103,7 +110,26 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate {
             if registerBtn.isEnabled == false {
                 return
             }
-            print("registered for the event")
+            
+            DataSource.sharedInstance.registerForanEvent(eventId: event.id, token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYjZlMjdiYTIxZDYyMDAxYjRiMWM3OCIsInVzZXJuYW1lIjoiYWRtaW4iLCJleHAiOjE1MjIzNjYyNjksImlhdCI6MTUyMjI3OTg2OX0.yniBlvw0T7Vtaue07OvnFMi4qM63RG1MI1F-hzLMMs8") { (Success,isNew) in
+                if Success {
+                    if isNew {
+                       self.displayAlert(title: "Registration Successfull!", Message: "You have successfully enrolled in the event")
+                        self.registerBtn.setTitle("Registered Already!", for: .normal)
+                        self.registerBtn.isEnabled = false
+                        self.registerBtn.backgroundColor = UIColor(red:0.39216, green:0.39216, blue:0.39216, alpha:1.00000)
+                    }else{
+                        self.displayAlert(title: "Already Registered!", Message: "You have already enrolled in the event")
+                    }
+                    
+                }else{
+                    self.displayAlert(title: "Registration Failed!", Message: "Failed to register for the event")
+                    self.registerBtn.setTitle("Register", for: .normal)
+                    self.registerBtn.isEnabled = true
+                    self.registerBtn.backgroundColor = UIColor(red:0.57255, green:0.77647, blue:0.44706, alpha:1.00000)
+                }
+            }
+            
         }
         
         
