@@ -84,9 +84,34 @@ class DataSource {
         }
     }
     
-    
-    
-    
-    
-    
+    func getEventsRegisteredForCurrentUser(token:String,completion:@escaping([String]?)->()) {
+        guard let sendURL = URL(string: URL_PREPOD_GET_REGISTERED_EVENTS) else {
+            completion(nil)
+            return}
+        let headers = ["Content-Type":"application/json",
+                       "Authorization":"Bearer \(token)"
+        ]
+        Alamofire.request(sendURL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
+            if response.result.error != nil {
+                print("error occured during getting registered Events request")
+                completion(nil)
+                return
+            }
+            if response.result.isSuccess {
+                let json = try! JSON(data: response.data!)
+                let eventsArray = json["registeredEvents"].arrayValue
+                var res = [String]()
+                for event in eventsArray {
+                    let id = event["_id"].stringValue
+                    res.append(id)
+                }
+                completion(res)
+            }else{
+                print("error occured during getting registered Events request")
+                completion(nil)
+                return
+            }
+        }
+        
+    } 
 }

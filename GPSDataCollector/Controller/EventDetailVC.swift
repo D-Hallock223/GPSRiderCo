@@ -30,12 +30,15 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate {
     
     var event:Event!
     var isPast:Bool!
+    var isRegistered:Bool!
+    
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
         myScrollView.delegate = self
         myScrollView.contentSize = CGSize(width: (UIScreen.main.bounds.width) * 3, height: 290)
         setupEventData()
@@ -64,12 +67,15 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate {
                 raceWinnersLbl.text = res
             }
         } else {
-            
-            let randomNum = arc4random_uniform(2)
-            if randomNum != 0 {
-                registerBtn.setTitle("Registered Already!", for: .normal)
-                registerBtn.isEnabled = false
-                registerBtn.backgroundColor = UIColor(red:0.39216, green:0.39216, blue:0.39216, alpha:1.00000)
+            if isRegistered {
+                if raceStartCheck() {
+                    registerBtn.setTitle("Let's Go", for: .normal)
+                    registerBtn.isEnabled = true
+                }else{
+                    registerBtn.setTitle("Registered Already!", for: .normal)
+                    registerBtn.isEnabled = false
+                    registerBtn.backgroundColor = UIColor(red:0.39216, green:0.39216, blue:0.39216, alpha:1.00000)
+                }
             }
         }
         
@@ -87,6 +93,14 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate {
     }
     
     
+    func raceStartCheck() -> Bool {
+        let num = arc4random_uniform(2)
+        if num == 1 {
+            return true
+        }
+        return false
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let page = myScrollView.contentOffset.x / myScrollView.frame.width
         if page == 0.0 || page == 1.0 || page == 2.0 {
@@ -100,42 +114,51 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate {
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
+    
+    
+    
+    
+    //MARK:- IBActions
+    
+    @IBAction func registerBtnTapped(_ sender: Any) {
+        if registerBtn.isEnabled == false {
+            return
+        }
         
+        if registerBtn.titleLabel?.text == "Let's Go" {
+            print("perform segur here")
+            return
+        }
         
-        
-        
-        //MARK:- IBActions
-        
-        @IBAction func registerBtnTapped(_ sender: Any) {
-            if registerBtn.isEnabled == false {
-                return
-            }
-            
-            DataSource.sharedInstance.registerForanEvent(eventId: event.id, token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYjZlMjdiYTIxZDYyMDAxYjRiMWM3OCIsInVzZXJuYW1lIjoiYWRtaW4iLCJleHAiOjE1MjIzNjYyNjksImlhdCI6MTUyMjI3OTg2OX0.yniBlvw0T7Vtaue07OvnFMi4qM63RG1MI1F-hzLMMs8") { (Success,isNew) in
-                if Success {
-                    if isNew {
-                       self.displayAlert(title: "Registration Successfull!", Message: "You have successfully enrolled in the event")
+        DataSource.sharedInstance.registerForanEvent(eventId: event.id, token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYjZlMjdiYTIxZDYyMDAxYjRiMWM3OCIsInVzZXJuYW1lIjoiYWRtaW4iLCJleHAiOjE1MjIzNjYyNjksImlhdCI6MTUyMjI3OTg2OX0.yniBlvw0T7Vtaue07OvnFMi4qM63RG1MI1F-hzLMMs8") { (Success,isNew) in
+            if Success {
+                if isNew {
+                    self.displayAlert(title: "Registration Successfull!", Message: "You have successfully enrolled in the event")
+                    if self.raceStartCheck() {
+                        self.registerBtn.setTitle("Let's Go", for: .normal)
+                    }else{
                         self.registerBtn.setTitle("Registered Already!", for: .normal)
                         self.registerBtn.isEnabled = false
                         self.registerBtn.backgroundColor = UIColor(red:0.39216, green:0.39216, blue:0.39216, alpha:1.00000)
-                    }else{
-                        self.displayAlert(title: "Already Registered!", Message: "You have already enrolled in the event")
                     }
-                    
                 }else{
-                    self.displayAlert(title: "Registration Failed!", Message: "Failed to register for the event")
-                    self.registerBtn.setTitle("Register", for: .normal)
-                    self.registerBtn.isEnabled = true
-                    self.registerBtn.backgroundColor = UIColor(red:0.57255, green:0.77647, blue:0.44706, alpha:1.00000)
+                    self.displayAlert(title: "Already Registered!", Message: "You have already enrolled in the event")
                 }
+                
+            }else{
+                self.displayAlert(title: "Registration Failed!", Message: "Failed to register for the event")
+                self.registerBtn.setTitle("Register", for: .normal)
+                self.registerBtn.isEnabled = true
+                self.registerBtn.backgroundColor = UIColor(red:0.57255, green:0.77647, blue:0.44706, alpha:1.00000)
             }
-            
         }
         
-        
+    }
+    
+    
     @IBAction func closeBtnTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
-        
+    
 }

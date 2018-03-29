@@ -25,7 +25,10 @@ class AllEventsVC: UIViewController {
     var allEvents = [Event]()
     var pastEvents = [Event]()
     var upcomingEvent = [Event]()
+    var userRegisteredEventsArr = [String]()
     var refreshControl: UIRefreshControl!
+    
+    var userToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYjZlMjdiYTIxZDYyMDAxYjRiMWM3OCIsInVzZXJuYW1lIjoiYWRtaW4iLCJleHAiOjE1MjIzNjYyNjksImlhdCI6MTUyMjI3OTg2OX0.yniBlvw0T7Vtaue07OvnFMi4qM63RG1MI1F-hzLMMs8"
     
     
     
@@ -46,10 +49,24 @@ class AllEventsVC: UIViewController {
         loadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getRegisteredEventsForTheCurrentUser()
+    }
+    
     
     
     
     //MARK:- Functions
+    
+    func getRegisteredEventsForTheCurrentUser() {
+        self.userRegisteredEventsArr = []
+        DataSource.sharedInstance.getEventsRegisteredForCurrentUser(token: userToken) { (eventArr) in
+            if let arr = eventArr {
+               self.userRegisteredEventsArr = arr
+            }
+        }
+    }
     
     
     func loadData() {
@@ -183,15 +200,20 @@ extension AllEventsVC:UITableViewDelegate,UITableViewDataSource {
             event = pastEvents[indexPath.row]
             pastEvent = true
         }
-        performSegue(withIdentifier: "toEventDetailVC", sender: [event!,pastEvent!])
+        var isRegistered = false
+        if userRegisteredEventsArr.contains(event!.id) {
+            isRegistered = true
+        }
+        performSegue(withIdentifier: "toEventDetailVC", sender: [event!,pastEvent!,isRegistered])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? EventDetailVC {
             if let arr = sender as? Array<Any> {
-                if let choosenEvent = arr[0] as? Event,let pastEvent = arr[1] as? Bool {
+                if let choosenEvent = arr[0] as? Event,let pastEvent = arr[1] as? Bool,let registered = arr[2] as? Bool {
                     destination.event = choosenEvent
                     destination.isPast = pastEvent
+                    destination.isRegistered = registered
                 }
             }
         }

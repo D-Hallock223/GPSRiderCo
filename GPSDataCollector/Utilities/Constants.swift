@@ -20,5 +20,7 @@ let URL_GET_ALL_EVENTS = "https://athlete-tracker.herokuapp.com/events/getAllEve
 
 let URL_PREPOD_REGISTER_FOR_EVENT = "https://athlete-tracker-preprod.herokuapp.com/events/addRiderToEvent"
 
+let URL_PREPOD_GET_REGISTERED_EVENTS = "https://athlete-tracker-preprod.herokuapp.com/events/getRegisteredEvents"
+
 
 
