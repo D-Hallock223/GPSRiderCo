@@ -13,7 +13,6 @@ class WatchUser {
     var username:String?
     var email:String?
     var token:String?
-    var participatingEventId:String?
     
     private init() {}
     

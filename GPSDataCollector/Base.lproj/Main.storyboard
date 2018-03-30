@@ -352,26 +352,11 @@
                                         <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LhB-5O-JtA" customClass="FancyButton" customModule="GPSDataCollector" customModuleProvider="target">
-                                        <rect key="frame" x="150" y="87" width="75" height="30"/>
-                                        <color key="backgroundColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="75" id="NNK-XO-wnB"/>
-                                        </constraints>
-                                        <state key="normal" title="Sign Out">
-                                            <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="SignOutBtnTapped:" destination="8FG-oR-Kvw" eventType="touchUpInside" id="STx-eE-Jut"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.56862745100000001" green="0.78039215689999997" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="CzM-SR-PIT" firstAttribute="centerX" secondItem="3gN-QO-8d2" secondAttribute="centerX" id="5zu-dk-B0M"/>
                                     <constraint firstItem="CzM-SR-PIT" firstAttribute="centerY" secondItem="3gN-QO-8d2" secondAttribute="centerY" id="JnL-bT-eAx"/>
-                                    <constraint firstItem="LhB-5O-JtA" firstAttribute="centerX" secondItem="3gN-QO-8d2" secondAttribute="centerX" id="h6K-d6-GIa"/>
-                                    <constraint firstItem="LhB-5O-JtA" firstAttribute="top" secondItem="CzM-SR-PIT" secondAttribute="bottom" constant="8" id="h8w-mQ-rot"/>
                                 </constraints>
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bZ3-Zc-oZZ">
@@ -768,21 +753,21 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0EZ-a1-PM8">
-                                        <rect key="frame" x="113" y="39.000000000000007" width="150" height="68.666666666666686"/>
+                                        <rect key="frame" x="124.66666666666666" y="39.000000000000007" width="126.66666666666666" height="68.666666666666686"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rider Track" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQZ-Nr-znp">
-                                                <rect key="frame" x="11.666666666666664" y="0.0" width="126.66666666666669" height="28.666666666666668"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="126.66666666666667" height="28.666666666666668"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                                 <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZn-Jw-b0t" customClass="FancyButton" customModule="GPSDataCollector" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="38.666666666666671" width="150" height="30"/>
+                                                <rect key="frame" x="25.999999999999986" y="38.666666666666671" width="75" height="30"/>
                                                 <color key="backgroundColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="150" id="nPH-ZN-reR"/>
+                                                    <constraint firstAttribute="width" constant="75" id="nPH-ZN-reR"/>
                                                 </constraints>
-                                                <state key="normal" title="Exit to events page">
+                                                <state key="normal" title="Sign Out">
                                                     <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>

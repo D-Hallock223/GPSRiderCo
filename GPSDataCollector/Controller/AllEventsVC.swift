@@ -18,7 +18,7 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var mySegmentControl: UISegmentedControl!
     @IBOutlet weak var myActivityIndicator: UIActivityIndicatorView!
-    
+
     
     
     //MARK:- Properties
@@ -26,8 +26,6 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
     var allEvents = [Event]()
     var pastEvents = [Event]()
     var upcomingEvent = [Event]()
-    var currentRegisteredEvents = [Event]()
-    
     var userRegisteredEventsArr = [String]()
     var refreshControl: UIRefreshControl!
     
@@ -37,10 +35,10 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
     
     
     
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Do any additional setup after loading the view.
         
         //watch part
@@ -93,7 +91,7 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
         self.userRegisteredEventsArr = []
         DataSource.sharedInstance.getEventsRegisteredForCurrentUser(token: user.token) { (eventArr) in
             if let arr = eventArr {
-                self.userRegisteredEventsArr = arr
+               self.userRegisteredEventsArr = arr
             }
         }
     }
@@ -147,10 +145,7 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
         self.myTableView.reloadData()
     }
     
-    @IBAction func SignOutBtnTapped(_ sender: Any) {
-        
-        self.dismiss(animated: true, completion: nil)
-    }
+
 }
 
 
@@ -186,7 +181,7 @@ extension AllEventsVC:UITableViewDelegate,UITableViewDataSource {
             }
             cell.locationLbl.text = event?.location
             if let imgURL = URL(string: event!.eventImgLink) {
-                cell.eventsImageView.sd_setImage(with: imgURL, placeholderImage: #imageLiteral(resourceName: "placeholder"), options: [.continueInBackground,.scaleDownLargeImages], completed: nil)
+              cell.eventsImageView.sd_setImage(with: imgURL, placeholderImage: #imageLiteral(resourceName: "placeholder"), options: [.continueInBackground,.scaleDownLargeImages], completed: nil)
             } else {
                 cell.eventsImageView.image = #imageLiteral(resourceName: "placeholder")
             }
@@ -260,5 +255,5 @@ extension AllEventsVC:UITableViewDelegate,UITableViewDataSource {
             }
         }
     }
-    
+
 }
