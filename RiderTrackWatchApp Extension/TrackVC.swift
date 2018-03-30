@@ -24,6 +24,8 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
     @IBOutlet var distanceLbl: WKInterfaceLabel!
     
     let URL_SEND_DATA_TO_SERVER = "https://athlete-tracker.herokuapp.com/tracking/saveloc"
+    
+    
     var locationPoint:CLLocation?
     
     var finalDestination = CLLocation(latitude: 33.4484, longitude: 112.07)
@@ -89,7 +91,7 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
         guard let sendURL = URL(string: URL_SEND_DATA_TO_SERVER) else {return}
         
         var request = URLRequest(url: sendURL)
-        let id = "5a9536fad047af0030c2500f"
+        let id = WatchUser.sharedInstance.participatingEventId!
         guard let location = self.locationPoint else {return}
         let parameters = "eventid=\(id)&lat=\(location.coordinate.latitude)&lng=\(location.coordinate.longitude)&speed=\(location.speed)&alt=\(location.altitude)&distLeft=\(location.distance(from: finalDestination))".data(using:String.Encoding.ascii, allowLossyConversion: false)
         

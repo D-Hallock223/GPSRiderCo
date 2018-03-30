@@ -19,6 +19,9 @@ class InterfaceController: WKInterfaceController,WCSessionDelegate {
     var session :WCSession?
     var isLoggedInFlag = false
     
+    //last seen.
+    var eventToken:String?
+    
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
@@ -64,6 +67,7 @@ class InterfaceController: WKInterfaceController,WCSessionDelegate {
         var wUsername = ""
         var wEmail = ""
         var wToken = ""
+        var wEventID = ""
         
         if let username = message["username"] as? String {
             wUsername = username
@@ -74,10 +78,14 @@ class InterfaceController: WKInterfaceController,WCSessionDelegate {
         if let token = message["token"] as? String {
             wToken = token
         }
-        if wUsername != "" && wEmail != "" && wToken != "" {
+        if let eventID = message["eventId"] as? String {
+            wEventID = eventID
+        }
+        if wUsername != "" && wEmail != "" && wToken != "" && wEventID != "" {
             WatchUser.sharedInstance.username = wUsername
             WatchUser.sharedInstance.email = wEmail
             WatchUser.sharedInstance.token = wToken
+            WatchUser.sharedInstance.participatingEventId = wEventID
         }
     }
 
@@ -97,9 +105,10 @@ class InterfaceController: WKInterfaceController,WCSessionDelegate {
                 WatchUser.sharedInstance.username = nil
                 WatchUser.sharedInstance.email = nil
                 WatchUser.sharedInstance.token = nil
+                WatchUser.sharedInstance.participatingEventId = nil
                 isLoggedInFlag = false
                 DispatchQueue.main.async {
-                    self.labelBtn.setTitle("Please sign in from iPhone to continue !")
+                    self.labelBtn.setTitle("Select an event from iPhone to continue!")
                     self.labelBtn.setBackgroundColor(UIColor.clear)
                 }
             }
