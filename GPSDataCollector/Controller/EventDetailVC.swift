@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import WatchConnectivity
 
 
 class EventDetailVC: UIViewController,UIScrollViewDelegate {
@@ -33,6 +34,13 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate {
     var isRegistered:Bool!
     
     
+    var user:User!
+    
+    var session:WCSession?
+    
+    
+    
+    
     
     
     override func viewDidLoad() {
@@ -42,6 +50,8 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate {
         myScrollView.delegate = self
         myScrollView.contentSize = CGSize(width: (UIScreen.main.bounds.width) * 3, height: 290)
         setupEventData()
+        
+        
     }
     
     //MARK:- Functions
@@ -116,6 +126,15 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate {
     }
     
     
+    func sendMessageToWatch() {
+        self.session?.sendMessage(["loggedIn":true,
+                                   "username":user.username,
+                                   "email":user.email,
+                                   "token":user.token], replyHandler: nil, errorHandler: { (error) in
+                                    print("watch connectivity error occured")
+        })
+    }
+    
     
     
     //MARK:- IBActions
@@ -126,11 +145,16 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate {
         }
         
         if registerBtn.titleLabel?.text == "Let's Go" {
-            print("perform segur here")
+            self.sendMessageToWatch()
+            let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeVC") as! HomeVC
+            vc.user = self.user
+            vc.session = self.session
+            vc.selectedEvent = self.event
+            self.present(vc, animated: true, completion: nil)
             return
         }
         
-        DataSource.sharedInstance.registerForanEvent(eventId: event.id, token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYjZlMjdiYTIxZDYyMDAxYjRiMWM3OCIsInVzZXJuYW1lIjoiYWRtaW4iLCJleHAiOjE1MjIzNjYyNjksImlhdCI6MTUyMjI3OTg2OX0.yniBlvw0T7Vtaue07OvnFMi4qM63RG1MI1F-hzLMMs8") { (Success,isNew) in
+        DataSource.sharedInstance.registerForanEvent(eventId: event.id, token: user.token) { (Success,isNew) in
             if Success {
                 if isNew {
                     self.displayAlert(title: "Registration Successfull!", Message: "You have successfully enrolled in the event")

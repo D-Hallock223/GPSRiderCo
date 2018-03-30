@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import WatchConnectivity
 
-class SignUPVC: UIViewController,WCSessionDelegate {
+class SignUPVC: UIViewController {
     
     
     
@@ -18,32 +17,15 @@ class SignUPVC: UIViewController,WCSessionDelegate {
     @IBOutlet weak var passwordTxtFld: UITextField!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
-    var session:WCSession?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if WCSession.isSupported() {
-            session = WCSession.default
-            session?.delegate = self
-            session?.activate()
-        } else {
-            displayAlert(title: "Your iPhone is incompatible", Message: "Your iPhone is not able to send message to the watch")
-        }
+        
 
     }
     
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        
-    }
     
-    func sessionDidBecomeInactive(_ session: WCSession) {
-        
-    }
-    
-    func sessionDidDeactivate(_ session: WCSession) {
-        
-    }
 
     @IBAction func signUpBtnPrssd(_ sender: Any) {
         spinner.startAnimating()
@@ -73,15 +55,8 @@ class SignUPVC: UIViewController,WCSessionDelegate {
             if success {
                 guard let user  = returnedUser else {return}
                 self.spinner.stopAnimating()
-                self.session?.sendMessage(["loggedIn":true,
-                                           "username":user.username,
-                                           "email":user.email,
-                                           "token":user.token], replyHandler: nil, errorHandler: { (error) in
-                    print("watch connectivity error occured")
-                })
-                let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeVC") as! HomeVC
+                let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "allEventsVC") as! AllEventsVC
                 vc.user = user
-                vc.session = self.session
                 self.present(vc, animated: true, completion: nil)
             } else {
                 self.displayAlert(title: "ERROR", Message: "Error cccured while signing up")

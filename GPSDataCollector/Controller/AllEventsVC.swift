@@ -8,8 +8,9 @@
 
 import UIKit
 import SDWebImage
+import WatchConnectivity
 
-class AllEventsVC: UIViewController {
+class AllEventsVC: UIViewController,WCSessionDelegate {
     
     
     //MARK:- IBOutlets
@@ -28,7 +29,9 @@ class AllEventsVC: UIViewController {
     var userRegisteredEventsArr = [String]()
     var refreshControl: UIRefreshControl!
     
-    var userToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYjZlMjdiYTIxZDYyMDAxYjRiMWM3OCIsInVzZXJuYW1lIjoiYWRtaW4iLCJleHAiOjE1MjIzNjYyNjksImlhdCI6MTUyMjI3OTg2OX0.yniBlvw0T7Vtaue07OvnFMi4qM63RG1MI1F-hzLMMs8"
+    
+    var user:User!
+    var session:WCSession?
     
     
     
@@ -37,6 +40,20 @@ class AllEventsVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        //watch part
+        
+        if WCSession.isSupported() {
+            session = WCSession.default
+            session?.delegate = self
+            session?.activate()
+        } else {
+            displayAlert(title: "Your iPhone is incompatible", Message: "Your iPhone is not able to send message to the watch")
+        }
+        
+        
+        
+        
         myTableView.dataSource = self
         myTableView.delegate = self
         refreshControl = UIRefreshControl()
@@ -54,14 +71,25 @@ class AllEventsVC: UIViewController {
         getRegisteredEventsForTheCurrentUser()
     }
     
+    //MARK:- WCSession protocol Delegate Methods
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        
+    }
     
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        
+    }
     
     
     //MARK:- Functions
     
     func getRegisteredEventsForTheCurrentUser() {
         self.userRegisteredEventsArr = []
-        DataSource.sharedInstance.getEventsRegisteredForCurrentUser(token: userToken) { (eventArr) in
+        DataSource.sharedInstance.getEventsRegisteredForCurrentUser(token: user.token) { (eventArr) in
             if let arr = eventArr {
                self.userRegisteredEventsArr = arr
             }
@@ -101,6 +129,13 @@ class AllEventsVC: UIViewController {
                 }
             }
         }
+    }
+    
+    func displayAlert(title:String,Message:String) {
+        let alert = UIAlertController(title: title, message: Message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
     
     
@@ -214,6 +249,8 @@ extension AllEventsVC:UITableViewDelegate,UITableViewDataSource {
                     destination.event = choosenEvent
                     destination.isPast = pastEvent
                     destination.isRegistered = registered
+                    destination.user = self.user
+                    destination.session = self.session
                 }
             }
         }

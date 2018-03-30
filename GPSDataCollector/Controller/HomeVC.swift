@@ -36,6 +36,8 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
     var username:String?
     var stopUpdating:Bool!
     
+    var selectedEvent:Event!
+    
     @IBOutlet weak var latitudeLbl: UILabel!
     @IBOutlet weak var longitudeLbl: UILabel!
     
@@ -105,7 +107,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
         guard let sendURL = URL(string: URL_SEND_DATA_TO_SERVER) else {
             self.displayAlert(title: "Error", Message: "Error sending data to the server")
             return}
-        let parameters:[String:Any] = ["eventid":"5a9536fad047af0030c2500f",
+        let parameters:[String:Any] = ["eventid":self.selectedEvent.id,
                                        "lat":"\(self.locationPoint?.coordinate.latitude ?? 0.0)",
             "lng":"\(self.locationPoint?.coordinate.longitude ?? 0.0)",
             "speed":"\(self.locationPoint?.speed ?? 0.0)",
