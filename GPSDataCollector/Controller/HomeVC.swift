@@ -164,20 +164,30 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
     }
     
     @IBAction func signOutBtnPrssd(_ sender: Any) {
-        
-        self.locationManager.stopUpdatingLocation()
-        self.user = nil
-        self.session?.sendMessage(["loggedIn":false], replyHandler: nil, errorHandler: { (error) in
-            self.displayAlert(title: "Error Occured", Message: error.localizedDescription)
-            return
-        })
-        self.dismiss(animated: true, completion: nil)
+        displayLogOutAlert()
     }
     
     func displayAlert(title:String,Message:String) {
         let alert = UIAlertController(title: title, message: Message, preferredStyle: .alert)
         let action = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
         alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func displayLogOutAlert() {
+        let alert = UIAlertController(title: "Are you sure you want to quit?", message: "Click 'OK' to confirm.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .destructive) { (action) in
+            self.locationManager.stopUpdatingLocation()
+            self.user = nil
+            self.session?.sendMessage(["loggedIn":false], replyHandler: nil, errorHandler: { (error) in
+                self.displayAlert(title: "Error Occured", Message: error.localizedDescription)
+                return
+            })
+            self.dismiss(animated: true, completion: nil)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
     }
     

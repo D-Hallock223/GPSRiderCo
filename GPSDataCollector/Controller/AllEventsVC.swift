@@ -28,7 +28,7 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
     var upcomingEvent = [Event]()
     var currentRegisteredEvents = [Event]()
     
-    var userRegisteredEventsArr = [String]()
+    
     var refreshControl: UIRefreshControl!
     
     
@@ -90,10 +90,11 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
     //MARK:- Functions
     
     func getRegisteredEventsForTheCurrentUser() {
-        self.userRegisteredEventsArr = []
         DataSource.sharedInstance.getEventsRegisteredForCurrentUser(token: user.token) { (eventArr) in
             if let arr = eventArr {
-                self.userRegisteredEventsArr = arr
+                self.currentRegisteredEvents = arr
+                self.myTableView.reloadData()
+                self.refreshControl.endRefreshing()
             }
         }
     }
@@ -117,7 +118,11 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
     }
     
     @objc func refresh() {
-        loadData()
+        if mySegmentControl.selectedSegmentIndex == 0{
+            getRegisteredEventsForTheCurrentUser()
+        } else {
+            loadData()
+        }
     }
     
     func segregateData() {
@@ -140,6 +145,15 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
         present(alert, animated: true, completion: nil)
     }
     
+    func checkCurrentEventArr(id:String) -> Bool {
+        for event in currentRegisteredEvents {
+            if event.id == id {
+                return true
+            }
+        }
+        return false
+    }
+    
     
     //MARK:- IBActions
     
@@ -159,6 +173,8 @@ extension AllEventsVC:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if mySegmentControl.selectedSegmentIndex == 0 {
+            return self.currentRegisteredEvents.count
+        } else if mySegmentControl.selectedSegmentIndex == 1 {
             return self.upcomingEvent.count
         } else {
             return self.pastEvents.count
@@ -168,8 +184,10 @@ extension AllEventsVC:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let event:Event?
         if mySegmentControl.selectedSegmentIndex == 0 {
+            event = currentRegisteredEvents[indexPath.row]
+        }else if mySegmentControl.selectedSegmentIndex == 1{
             event = upcomingEvent[indexPath.row]
-        }else{
+        } else {
             event = pastEvents[indexPath.row]
         }
         if let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? AllEventsCell {
@@ -201,6 +219,8 @@ extension AllEventsVC:UITableViewDelegate,UITableViewDataSource {
         var numOfSections: Int = 0
         var youHaveData:Int!
         if mySegmentControl.selectedSegmentIndex == 0 {
+            youHaveData = currentRegisteredEvents.count
+        } else if mySegmentControl.selectedSegmentIndex == 1 {
             youHaveData = upcomingEvent.count
         } else {
             youHaveData = pastEvents.count
@@ -234,6 +254,9 @@ extension AllEventsVC:UITableViewDelegate,UITableViewDataSource {
         let event:Event?
         let pastEvent:Bool?
         if mySegmentControl.selectedSegmentIndex == 0 {
+            event = currentRegisteredEvents[indexPath.row]
+            pastEvent = false
+        } else if mySegmentControl.selectedSegmentIndex == 1 {
             event = upcomingEvent[indexPath.row]
             pastEvent = false
         } else {
@@ -241,7 +264,7 @@ extension AllEventsVC:UITableViewDelegate,UITableViewDataSource {
             pastEvent = true
         }
         var isRegistered = false
-        if userRegisteredEventsArr.contains(event!.id) {
+        if mySegmentControl.selectedSegmentIndex == 0 || checkCurrentEventArr(id: event!.id) {
             isRegistered = true
         }
         performSegue(withIdentifier: "toEventDetailVC", sender: [event!,pastEvent!,isRegistered])

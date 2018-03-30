@@ -84,7 +84,7 @@ class DataSource {
         }
     }
     
-    func getEventsRegisteredForCurrentUser(token:String,completion:@escaping([String]?)->()) {
+    func getEventsRegisteredForCurrentUser(token:String,completion:@escaping([Event]?)->()) {
         guard let sendURL = URL(string: URL_PREPOD_GET_REGISTERED_EVENTS) else {
             completion(nil)
             return}
@@ -98,14 +98,24 @@ class DataSource {
                 return
             }
             if response.result.isSuccess {
+                var events = [Event]()
                 let json = try! JSON(data: response.data!)
                 let eventsArray = json["registeredEvents"].arrayValue
-                var res = [String]()
                 for event in eventsArray {
-                    let id = event["_id"].stringValue
-                    res.append(id)
+                    let DraceWinners = event["raceWinners"].arrayObject
+                    let Did = event["_id"].stringValue
+                    let Dname = event["name"].stringValue
+                    let DeventImgLink = event["image"].stringValue
+                    let Ddescription = event["description"].stringValue
+                    let Ddate = event["date"].stringValue
+                    let Dlocation = event["location"].stringValue
+                    let DeventTimeRange = event["time"].stringValue
+                    
+                    let eventObj = Event(raceWinners: DraceWinners as? [String], id: Did, name: Dname, eventImgLink: DeventImgLink, eventDescription: Ddescription, date: Ddate, location: Dlocation, eventTimeRange: DeventTimeRange)
+                    events.append(eventObj)
                 }
-                completion(res)
+                completion(events)
+
             }else{
                 print("error occured during getting registered Events request")
                 completion(nil)

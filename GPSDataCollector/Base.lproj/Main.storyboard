@@ -377,6 +377,7 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bZ3-Zc-oZZ">
                                 <rect key="frame" x="16" y="138" width="343" height="29"/>
                                 <segments>
+                                    <segment title="Registered"/>
                                     <segment title="Upcoming"/>
                                     <segment title="Past"/>
                                 </segments>
