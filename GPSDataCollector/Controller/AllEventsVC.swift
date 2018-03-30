@@ -93,8 +93,13 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
         DataSource.sharedInstance.getEventsRegisteredForCurrentUser(token: user.token) { (eventArr) in
             if let arr = eventArr {
                 self.currentRegisteredEvents = arr
-                self.myTableView.reloadData()
                 self.refreshControl.endRefreshing()
+                self.currentRegisteredEvents.sort { (e1, e2) -> Bool in
+                    let days1 = RemainingDays(date: e1.date)
+                    let days2 = RemainingDays(date: e2.date)
+                    return days1! < days2!
+                }
+                self.myTableView.reloadData()
             }
         }
     }
@@ -135,6 +140,16 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
                     self.upcomingEvent.append(event)
                 }
             }
+        }
+        self.upcomingEvent.sort { (e1, e2) -> Bool in
+            let days1 = RemainingDays(date: e1.date)
+            let days2 = RemainingDays(date: e2.date)
+            return days1! < days2!
+        }
+        self.pastEvents.sort { (e1, e2) -> Bool in
+            let days1 = RemainingDays(date: e1.date)
+            let days2 = RemainingDays(date: e2.date)
+            return days1! < days2!
         }
     }
     
