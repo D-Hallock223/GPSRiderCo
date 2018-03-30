@@ -130,7 +130,8 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate {
         self.session?.sendMessage(["loggedIn":true,
                                    "username":user.username,
                                    "email":user.email,
-                                   "token":user.token], replyHandler: nil, errorHandler: { (error) in
+                                   "token":user.token,
+                                   "eventId":event.id], replyHandler: nil, errorHandler: { (error) in
                                     print("watch connectivity error occured")
         })
     }
