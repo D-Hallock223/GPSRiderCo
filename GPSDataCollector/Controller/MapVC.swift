@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import Alamofire
 //
 class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
     
@@ -32,7 +33,7 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
     
     
     //
-    let routeCoordinates = [[34.4313,-118.59890],[34.4274,-118.60246],[34.4268,-118.60181],[34.4202,-118.6004],[34.42013,-118.59239],[34.42049,-118.59051],[34.42305,-118.59276],[34.42557,-118.59289],[34.42739,-118.59171]]
+    var routeCoordinates = [CLLocationCoordinate2D]()
     
     
     override func viewDidLoad() {
@@ -40,7 +41,6 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
         
         //
         myMapView.delegate = self
-        exampleTest()
         
         
         
@@ -59,6 +59,14 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
         let region:MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
         myMapView.setRegion(region, animated: true)
         
+        getCoordinatesFromDownloadURL(fileURL: "https://firebasestorage.googleapis.com/v0/b/gpsdatacollector-44050.appspot.com/o/1.gpx?alt=media&token=a33334b0-d6c1-40b5-88fd-82bb61568455") { (Success) in
+            if Success {
+                self.drawLinesOnMap()
+            }else{
+                print("failed")
+            }
+        }
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -68,76 +76,50 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
         homeVC = nil
     }
     
-    //
-    func exampleTest() {
+    func drawLinesOnMap() {
+        let startCoordinate = self.routeCoordinates[0]
+        let endCoordinate = self.routeCoordinates[self.routeCoordinates.count - 1]
+        let startAnno = MKPointAnnotation()
+        let endAnno = MKPointAnnotation()
+        startAnno.title = "Start"
+        endAnno.title = "End"
+        startAnno.coordinate = startCoordinate
+        endAnno.coordinate = endCoordinate
+        self.myMapView.addAnnotations([startAnno,endAnno])
+        let mkPoly = MKPolyline(coordinates: self.routeCoordinates, count: self.routeCoordinates.count)
+        self.myMapView.add(mkPoly)
         
-        let resCoord2dArr = allCoordinates()
-        let mkPolyline = MKPolyline(coordinates: resCoord2dArr, count: resCoord2dArr.count)
-        myMapView.add(mkPolyline)
-        for x in resCoord2dArr{
-            let anno = MKPointAnnotation()
-            anno.coordinate = x
-            myMapView.addAnnotation(anno)
-        }
-    }
-    //
-    func allCoordinates() -> [CLLocationCoordinate2D] {
-        var resCoord2dArr = [CLLocationCoordinate2D]()
-        for x in self.routeCoordinates {
-            let lat = x[0]
-            let long = x[1]
-            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-            resCoord2dArr.append(coordinate)
-        }
-        return resCoord2dArr
     }
     
-    //
-    func exampleTest2() {
-        let resCoord2dArr = allCoordinates()
-        for x in 0..<resCoord2dArr.count - 1 {
-            let p1 = resCoord2dArr[x]
-            let p2 = resCoord2dArr[x+1]
-            drawDirectionFunction(point1: p1, point2: p2)
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let reuseId = "pin"
+        var anView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
+        anView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+        anView?.canShowCallout = true
+        anView!.image = nil
+        var pinImage:UIImage!
+        if annotation.title == "Start" {
+            pinImage = UIImage(named: "startPin")
+        } else {
+            pinImage = UIImage(named: "finishPin")
         }
+        let size = CGSize(width: 50, height: 50)
+        UIGraphicsBeginImageContext(size)
+        pinImage.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        anView?.image = resizedImage
 
+        return anView
     }
     
-    func drawDirectionFunction(point1:CLLocationCoordinate2D,point2:CLLocationCoordinate2D) {
-                let directionRequest = MKDirectionsRequest()
-                directionRequest.source = MKMapItem(placemark: MKPlacemark(coordinate: point1))
-                directionRequest.destination = MKMapItem(placemark: MKPlacemark(coordinate: point2))
-                directionRequest.transportType = .automobile
-        
-                // Calculate the direction
-                let directions = MKDirections(request: directionRequest)
-        
-                directions.calculate {
-                    (response, error) -> Void in
-        
-                    guard let response = response else {
-                        if let error = error {
-                            print("Error: \(error)")
-                        }
-        
-                        return
-                    }
-        
-                    let route = response.routes[0]
-        
-                    self.myMapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
-                    
-//                    let rect = route.polyline.boundingMapRect
-//                    self.myMapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
-                }
-    }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        
+
         let renderer = MKPolylineRenderer(overlay: overlay)
-    
         
-        renderer.strokeColor = UIColor.blue
+        renderer.strokeColor = UIColor(red: 17.0/255.0, green: 147.0/255.0, blue: 255.0/255.0, alpha: 1)
         
         renderer.lineWidth = 5.0
         
@@ -186,6 +168,50 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
                 self.locations.remove(at: 0)
                 myMapView.removeAnnotation(annotationToRemove)
             }
+        }
+    }
+}
+
+extension MapVC:XMLParserDelegate {
+    
+    func getCoordinatesFromDownloadURL(fileURL:String,completion:@escaping (Bool)->()) {
+        guard let fileRequestURL = URL(string: fileURL) else {
+            print("URL error occured")
+            completion(false)
+            return
+        }
+        
+        Alamofire.request(fileRequestURL).responseData { (response) in
+            if response.result.error != nil {
+                print("request error occured")
+                completion(false)
+                return
+            } else {
+                let parser = XMLParser(data: response.data!)
+                parser.delegate = self
+                
+                //Parse the data, here the file will be read
+                let success = parser.parse()
+                
+                //Log an error if the parsing failed
+                if !success {
+                    print("parsing error occured")
+                    completion(false)
+                    return
+                }
+                completion(true)
+                
+            }
+        }
+    }
+    
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+        
+        if elementName == "trkpt" || elementName == "wpt" {
+            //Create a World map coordinate from the file
+            let lat = attributeDict["lat"]!
+            let lon = attributeDict["lon"]!
+            self.routeCoordinates.append(CLLocationCoordinate2DMake(CLLocationDegrees(lat)!, CLLocationDegrees(lon)!))
         }
     }
 }

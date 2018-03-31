@@ -102,10 +102,10 @@ class InterfaceController: WKInterfaceController,WCSessionDelegate {
                 DispatchQueue.main.async {
                     self.popToRootController()
                 }
-                WatchUser.sharedInstance.username = nil
-                WatchUser.sharedInstance.email = nil
-                WatchUser.sharedInstance.token = nil
-                WatchUser.sharedInstance.participatingEventId = nil
+//                WatchUser.sharedInstance.username = nil
+//                WatchUser.sharedInstance.email = nil
+//                WatchUser.sharedInstance.token = nil
+//                WatchUser.sharedInstance.participatingEventId = nil
                 isLoggedInFlag = false
                 DispatchQueue.main.async {
                     self.labelBtn.setTitle("Select an event from iPhone to continue!")
