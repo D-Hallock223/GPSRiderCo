@@ -13,9 +13,12 @@ This repository consist of both the iOS and watchOS application.
 ## 3rd party libraries used in this application are:
 1) Alamofire
 2) SwiftJSON
+3) SdWebImage
 
 ## Methods to run the application:
 Download the zip file. Xcode is required to open the project and run it. Change the schema to RiderTrackWatchApp and make sure both the iOS and watchOS simulators are selected. Finally run the project.
+
+P.S Looks perfect on iPhone X. Other device screen sizes may look little off.
 
 
 
