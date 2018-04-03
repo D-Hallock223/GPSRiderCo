@@ -21,7 +21,8 @@ class DataSource {
         guard let eventURL = URL(string: URL_GET_ALL_EVENTS) else {
             Completion(nil)
             return}
-        Alamofire.request(eventURL, method: .get, parameters: nil, encoding: URLEncoding.default, headers: nil).responseJSON { (response) in
+
+        Alamofire.request(eventURL).responseJSON { (response) in
             
             if response.result.error != nil {
                 Completion(nil)
@@ -40,8 +41,11 @@ class DataSource {
                     let Ddate = event["date"].stringValue
                     let Dlocation = event["location"].stringValue
                     let DeventTimeRange = event["time"].stringValue
+                    let DstartTime = event["startTime"].stringValue
+                    let DendTime = event["endTime"].stringValue
                     
-                    let eventObj = Event(raceWinners: DraceWinners as? [String], id: Did, name: Dname, eventImgLink: DeventImgLink, eventDescription: Ddescription, date: Ddate, location: Dlocation, eventTimeRange: DeventTimeRange)
+                    let eventObj = Event(raceWinners: DraceWinners as? [String], id: Did, name: Dname, eventImgLink: DeventImgLink, eventDescription: Ddescription, date: Ddate, location: Dlocation, eventTimeRange: DeventTimeRange, startTime: DstartTime, endTime: DendTime)
+                    
                     events.append(eventObj)
                 }
                 Completion(events)
@@ -55,12 +59,12 @@ class DataSource {
     
     
     func registerForanEvent(eventId:String,token:String,completion:@escaping(Bool,Bool)->()) {
-        guard let sendURL = URL(string: URL_PREPOD_REGISTER_FOR_EVENT) else {return}
-        let parameters:[String:Any] = ["eventid": eventId]
-        let headers = ["Content-Type":"application/json",
+        guard let sendURL = URL(string: URL_REGISTER_FOR_EVENT) else {return}
+        let parameters:[String:Any] = ["eventId": eventId]
+        let headers = ["Content-Type":"application/x-www-form-urlencoded",
                        "Authorization":"Bearer \(token)"
                        ]
-        Alamofire.request(sendURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
+        Alamofire.request(sendURL, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
             if response.result.error != nil {
                 print("error occured during registerForanEvent request")
                 completion(false,false)
@@ -68,10 +72,10 @@ class DataSource {
             }
             if response.result.isSuccess {
                 let json = try! JSON(data: response.data!)
-                let value = json["result"].stringValue
-                if value == "newRegistration" {
+                let value = json["result"].stringValue.lowercased()
+                if value == "ok" {
                     completion(true,true)
-                }else if value == "alreadyRegistered"{
+                }else if value != "ok"{
                     completion(true,false)
                 }else{
                     print("spelling error occured")
@@ -85,13 +89,14 @@ class DataSource {
     }
     
     func getEventsRegisteredForCurrentUser(token:String,completion:@escaping([Event]?)->()) {
-        guard let sendURL = URL(string: URL_PREPOD_GET_REGISTERED_EVENTS) else {
+        guard let sendURL = URL(string: URL_GET_REGISTERED_EVENTS) else {
             completion(nil)
             return}
-        let headers = ["Content-Type":"application/json",
+        let headers = [
                        "Authorization":"Bearer \(token)"
         ]
-        Alamofire.request(sendURL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
+        
+        Alamofire.request(sendURL, method: .get,headers: headers).responseJSON { (response) in
             if response.result.error != nil {
                 print("error occured during getting registered Events request")
                 completion(nil)
@@ -100,7 +105,7 @@ class DataSource {
             if response.result.isSuccess {
                 var events = [Event]()
                 let json = try! JSON(data: response.data!)
-                let eventsArray = json["registeredEvents"].arrayValue
+                let eventsArray = json.arrayValue
                 for event in eventsArray {
                     let DraceWinners = event["raceWinners"].arrayObject
                     let Did = event["_id"].stringValue
@@ -110,8 +115,10 @@ class DataSource {
                     let Ddate = event["date"].stringValue
                     let Dlocation = event["location"].stringValue
                     let DeventTimeRange = event["time"].stringValue
+                    let DstartTime = event["startTime"].stringValue
+                    let DendTime = event["endTime"].stringValue
                     
-                    let eventObj = Event(raceWinners: DraceWinners as? [String], id: Did, name: Dname, eventImgLink: DeventImgLink, eventDescription: Ddescription, date: Ddate, location: Dlocation, eventTimeRange: DeventTimeRange)
+                    let eventObj = Event(raceWinners: DraceWinners as? [String], id: Did, name: Dname, eventImgLink: DeventImgLink, eventDescription: Ddescription, date: Ddate, location: Dlocation, eventTimeRange: DeventTimeRange, startTime: DstartTime, endTime: DendTime)
                     events.append(eventObj)
                 }
                 completion(events)

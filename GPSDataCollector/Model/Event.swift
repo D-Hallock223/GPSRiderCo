@@ -19,5 +19,7 @@ struct Event {
     let date:String
     let location:String
     let eventTimeRange:String
+    let startTime:String
+    let endTime:String
     
 }

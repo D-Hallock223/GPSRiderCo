@@ -210,8 +210,8 @@
 		89961825203BE2130055364A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				891322F92057573E004B9C0D /* Authentication.swift */,
 				891322FD20575A15004B9C0D /* Constants.swift */,
+				891322F92057573E004B9C0D /* Authentication.swift */,
 				8994E1AF2069F7780072DBF0 /* DataSource.swift */,
 				8949A361206B2A59007BC20E /* Extensions and helpers.swift */,
 			);

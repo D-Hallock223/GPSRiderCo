@@ -112,7 +112,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
             "lng":"\(self.locationPoint?.coordinate.longitude ?? 0.0)",
             "speed":"\(self.locationPoint?.speed ?? 0.0)",
             "alt":"\(self.locationPoint?.altitude ?? 0)",
-            "distance":"30000"]
+            "distLeft":"30000"]
         let headers = ["Content-Type":"application/x-www-form-urlencoded",
                        "Authorization":"Bearer \(self.user?.token ?? "")"]
 

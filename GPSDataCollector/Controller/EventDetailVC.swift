@@ -109,6 +109,20 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate {
             return true
         }
         return false
+//        let startTime = Formatter.iso8601.date(from: event.startTime)
+//        let endTime = Formatter.iso8601.date(from: event.endTime)
+//        let date = Date()
+//        let calendar = Calendar.current
+//        let Chour = calendar.component(.hour, from: date)
+//        let Shour = calendar.component(.hour, from: startTime!)
+//        let Ehour = calendar.component(.hour, from: endTime!)
+//
+//        if Shour <= Chour && Chour <= Ehour {
+//            return true
+//        }
+//
+//        return false
+        
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
