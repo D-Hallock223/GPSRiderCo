@@ -12,11 +12,20 @@ import Alamofire
 //
 class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
     
-    fileprivate var locations = [MKPointAnnotation]()
     
     weak var homeVC:HomeVC?
     var username:String?
     var finalDestination = CLLocation(latitude: 33.4484, longitude: 112.07)
+    var startAnno:MKPointAnnotation!
+    var endAnno:MKPointAnnotation!
+    
+    
+    var leftValue:CGFloat?
+    var rightValue:CGFloat?
+    
+    var leftPoint:CLLocationCoordinate2D!
+    var rightPoint:CLLocationCoordinate2D!
+    
 
     
     @IBOutlet weak var distanceLbl: UILabel!
@@ -30,20 +39,15 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
     
     var locationPoint:CLLocation!
     
-    
-    
-    //
     var routeCoordinates = [CLLocationCoordinate2D]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //
+        
         myMapView.delegate = self
-        
-        
-        
+
         myScrollView.delegate = self
         myScrollView.contentSize = CGSize(width: (UIScreen.main.bounds.width)*2, height: 246)
         
@@ -58,6 +62,7 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
         let location:CLLocationCoordinate2D = self.locationPoint.coordinate
         let region:MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
         myMapView.setRegion(region, animated: true)
+        myMapView.userTrackingMode = .followWithHeading
         
         getCoordinatesFromDownloadURL(fileURL: "https://firebasestorage.googleapis.com/v0/b/gpsdatacollector-44050.appspot.com/o/1.gpx?alt=media&token=a33334b0-d6c1-40b5-88fd-82bb61568455") { (Success) in
             if Success {
@@ -79,8 +84,8 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
     func drawLinesOnMap() {
         let startCoordinate = self.routeCoordinates[0]
         let endCoordinate = self.routeCoordinates[self.routeCoordinates.count - 1]
-        let startAnno = MKPointAnnotation()
-        let endAnno = MKPointAnnotation()
+        startAnno = MKPointAnnotation()
+        endAnno = MKPointAnnotation()
         startAnno.title = "Start"
         endAnno.title = "End"
         startAnno.coordinate = startCoordinate
@@ -92,18 +97,21 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
         let reuseId = "pin"
+        var pinImage:UIImage!
+        
+        if annotation.title == "Start" {
+            pinImage = UIImage(named: "startPin")
+        } else if annotation.title == "End" {
+            pinImage = UIImage(named: "finishPin")
+        } else {
+            return nil
+        }
         var anView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
         anView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
         anView?.canShowCallout = true
         anView!.image = nil
-        var pinImage:UIImage!
-        if annotation.title == "Start" {
-            pinImage = UIImage(named: "startPin")
-        } else {
-            pinImage = UIImage(named: "finishPin")
-        }
+        
         let size = CGSize(width: 50, height: 50)
         UIGraphicsBeginImageContext(size)
         pinImage.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
@@ -132,6 +140,29 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func userLocationBtnTapped(_ sender: Any) {
+        
+        let userLocation = myMapView.userLocation.coordinate
+        myMapView.setCenter(userLocation, animated: true)
+        
+    }
+    
+    @IBAction func eventLocationBtnTapped(_ sender: Any) {
+        
+        let anno1 = MKPointAnnotation()
+        anno1.coordinate = leftPoint
+        let anno2 = MKPointAnnotation()
+        anno2.coordinate = rightPoint
+        myMapView.showAnnotations([anno1,anno2], animated: true)
+        
+        
+    
+    }
+    
+    
+    
+    
+    
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let page = myScrollView.contentOffset.x / myScrollView.frame.width
@@ -150,24 +181,6 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
             self.speedLbl.text = "\(location.speed) m/h"
             self.altitudeLbl.text = "\(location.altitude) ft"
             self.distanceLbl.text = "\(location.distance(from: finalDestination)) m"
-            
-            let location = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-            
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = location
-            self.locations.append(annotation)
-            if let name =  username {
-                annotation.title = name
-            }
-            myMapView.addAnnotation(annotation)
-            myMapView.setCenter(location, animated: true)
-            
-            
-            while locations.count > 100 {
-                let annotationToRemove = self.locations.first!
-                self.locations.remove(at: 0)
-                myMapView.removeAnnotation(annotationToRemove)
-            }
         }
     }
 }
@@ -211,7 +224,23 @@ extension MapVC:XMLParserDelegate {
             //Create a World map coordinate from the file
             let lat = attributeDict["lat"]!
             let lon = attributeDict["lon"]!
-            self.routeCoordinates.append(CLLocationCoordinate2DMake(CLLocationDegrees(lat)!, CLLocationDegrees(lon)!))
+            let point = CLLocationCoordinate2DMake(CLLocationDegrees(lat)!, CLLocationDegrees(lon)!)
+            let value = myMapView.convert(point, toPointTo: myMapView)
+            if leftValue == nil {
+                leftValue = value.x
+                leftPoint = point
+            } else if Double(value.x) < Double(leftValue!) {
+                leftValue = value.x
+                leftPoint = point
+            }
+            if rightValue == nil {
+                rightValue = value.x
+                rightPoint = point
+            } else if Double(value.x) > Double(rightValue!) {
+                rightValue = value.x
+                rightPoint = point
+            }
+            self.routeCoordinates.append(point)
         }
     }
 }

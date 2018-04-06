@@ -987,16 +987,42 @@
                                 <rect key="frame" x="167" y="673" width="39" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r4V-x8-3NB">
+                                <rect key="frame" x="690" y="372" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="3Vy-Lc-cDO"/>
+                                    <constraint firstAttribute="width" constant="40" id="ykf-hG-WTy"/>
+                                </constraints>
+                                <state key="normal" image="User Location"/>
+                                <connections>
+                                    <action selector="userLocationBtnTapped:" destination="Kx0-OC-aqq" eventType="touchUpInside" id="BIy-1N-MUV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fms-x0-js0">
+                                <rect key="frame" x="20" y="372" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="8X8-2Y-7uv"/>
+                                    <constraint firstAttribute="height" constant="40" id="Ey3-gU-go7"/>
+                                </constraints>
+                                <state key="normal" image="Event Location"/>
+                                <connections>
+                                    <action selector="eventLocationBtnTapped:" destination="Kx0-OC-aqq" eventType="touchUpInside" id="eVh-Vq-5qb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="cet-iQ-fY1" firstAttribute="top" secondItem="Fms-x0-js0" secondAttribute="bottom" constant="18" id="2Rq-zX-7IY"/>
                             <constraint firstItem="Y2y-2W-K3A" firstAttribute="leading" secondItem="vXh-4r-VJD" secondAttribute="leading" constant="16" id="39q-SZ-SrF"/>
+                            <constraint firstItem="cet-iQ-fY1" firstAttribute="top" secondItem="r4V-x8-3NB" secondAttribute="bottom" constant="18" id="8tZ-Ft-3aG"/>
+                            <constraint firstItem="Fms-x0-js0" firstAttribute="leading" secondItem="vXh-4r-VJD" secondAttribute="leading" constant="20" id="9ob-jr-GvB"/>
                             <constraint firstItem="2Cm-c5-ceN" firstAttribute="leading" secondItem="vXh-4r-VJD" secondAttribute="leading" id="Tkg-JF-69s"/>
                             <constraint firstItem="cet-iQ-fY1" firstAttribute="top" secondItem="2Cm-c5-ceN" secondAttribute="bottom" id="cHP-el-AEW"/>
                             <constraint firstItem="Y2y-2W-K3A" firstAttribute="top" secondItem="cet-iQ-fY1" secondAttribute="bottom" constant="32" id="coy-81-mz3"/>
                             <constraint firstItem="2Cm-c5-ceN" firstAttribute="top" secondItem="fhR-VE-p3M" secondAttribute="top" id="dat-98-7gl"/>
                             <constraint firstItem="vXh-4r-VJD" firstAttribute="trailing" secondItem="Y2y-2W-K3A" secondAttribute="trailing" constant="16" id="gT6-F7-P0b"/>
                             <constraint firstItem="2Cm-c5-ceN" firstAttribute="trailing" secondItem="vXh-4r-VJD" secondAttribute="trailing" id="hCH-NC-4nG"/>
+                            <constraint firstItem="vXh-4r-VJD" firstAttribute="trailing" secondItem="r4V-x8-3NB" secondAttribute="trailing" constant="20" id="jdm-8n-hP4"/>
                             <constraint firstItem="Y2y-2W-K3A" firstAttribute="bottom" secondItem="vXh-4r-VJD" secondAttribute="bottom" constant="-20" id="sgk-vg-9rK"/>
                             <constraint firstItem="cet-iQ-fY1" firstAttribute="leading" secondItem="vXh-4r-VJD" secondAttribute="leading" id="zh1-sY-aMN"/>
                         </constraints>
@@ -1020,6 +1046,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Event Location" width="100" height="100"/>
+        <image name="User Location" width="100" height="100"/>
         <image name="close_btn" width="300" height="300"/>
     </resources>
 </document>
