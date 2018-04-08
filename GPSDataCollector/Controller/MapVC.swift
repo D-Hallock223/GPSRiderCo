@@ -18,13 +18,7 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
     var finalDestination = CLLocation(latitude: 33.4484, longitude: 112.07)
     var startAnno:MKPointAnnotation!
     var endAnno:MKPointAnnotation!
-    
-    
-    var leftValue:CGFloat?
-    var rightValue:CGFloat?
-    
-    var leftPoint:CLLocationCoordinate2D!
-    var rightPoint:CLLocationCoordinate2D!
+
     
 
     
@@ -64,13 +58,14 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
         myMapView.setRegion(region, animated: true)
         myMapView.userTrackingMode = .followWithHeading
         
-        getCoordinatesFromDownloadURL(fileURL: "https://firebasestorage.googleapis.com/v0/b/gpsdatacollector-44050.appspot.com/o/1.gpx?alt=media&token=a33334b0-d6c1-40b5-88fd-82bb61568455") { (Success) in
+        getCoordinatesFromDownloadURL(fileURL: "https://firebasestorage.googleapis.com/v0/b/gpsdatacollector-44050.appspot.com/o/2.gpx?alt=media&token=dee38451-017e-477e-994f-696a9cc4b340") { (Success) in
             if Success {
                 self.drawLinesOnMap()
             }else{
                 print("failed")
             }
         }
+        
         
     }
     
@@ -143,20 +138,17 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
     @IBAction func userLocationBtnTapped(_ sender: Any) {
         
         let userLocation = myMapView.userLocation.coordinate
-        myMapView.setCenter(userLocation, animated: true)
+        myMapView.userTrackingMode = .followWithHeading
         
     }
     
     @IBAction func eventLocationBtnTapped(_ sender: Any) {
-        
-        let anno1 = MKPointAnnotation()
-        anno1.coordinate = leftPoint
-        let anno2 = MKPointAnnotation()
-        anno2.coordinate = rightPoint
-        myMapView.showAnnotations([anno1,anno2], animated: true)
-        
-        
     
+        if let first = self.myMapView.overlays.first {
+            let rect = self.myMapView.overlays.reduce(first.boundingMapRect, {MKMapRectUnion($0, $1.boundingMapRect)})
+            self.myMapView.setVisibleMapRect(rect, edgePadding: UIEdgeInsets(top: 50.0, left: 50.0, bottom: 50.0, right: 50.0), animated: true)
+        }
+
     }
     
     
@@ -225,21 +217,6 @@ extension MapVC:XMLParserDelegate {
             let lat = attributeDict["lat"]!
             let lon = attributeDict["lon"]!
             let point = CLLocationCoordinate2DMake(CLLocationDegrees(lat)!, CLLocationDegrees(lon)!)
-            let value = myMapView.convert(point, toPointTo: myMapView)
-            if leftValue == nil {
-                leftValue = value.x
-                leftPoint = point
-            } else if Double(value.x) < Double(leftValue!) {
-                leftValue = value.x
-                leftPoint = point
-            }
-            if rightValue == nil {
-                rightValue = value.x
-                rightPoint = point
-            } else if Double(value.x) > Double(rightValue!) {
-                rightValue = value.x
-                rightPoint = point
-            }
             self.routeCoordinates.append(point)
         }
     }

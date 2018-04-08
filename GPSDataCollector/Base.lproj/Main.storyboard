@@ -388,6 +388,7 @@
                             </segmentedControl>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="mAe-9D-RQs">
                                 <rect key="frame" x="169" y="388" width="37" height="37"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ahX-gI-4mb">
                                 <rect key="frame" x="0.0" y="182" width="375" height="630"/>
@@ -551,11 +552,11 @@
                                     <constraint firstAttribute="height" constant="246" id="6pv-hw-WAk"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="npu-XI-xnW">
-                                <rect key="frame" x="16" y="407" width="343" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="npu-XI-xnW" customClass="FancyButton" customModule="GPSDataCollector" customModuleProvider="target">
+                                <rect key="frame" x="16" y="399" width="343" height="47"/>
                                 <color key="backgroundColor" red="0.56862745100000001" green="0.78039215689999997" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="36" id="8BE-ux-Ihl"/>
+                                    <constraint firstAttribute="height" constant="47" id="8BE-ux-Ihl"/>
                                     <constraint firstAttribute="width" constant="343" id="qSY-ch-q7T"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
@@ -653,12 +654,12 @@
                                 </constraints>
                             </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Z9e-KG-zRd">
-                                <rect key="frame" x="168" y="758" width="39" height="37"/>
+                                <rect key="frame" x="168" y="761" width="39" height="37"/>
                             </pageControl>
                         </subviews>
                         <color key="backgroundColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="npu-XI-xnW" firstAttribute="top" secondItem="cWa-68-M4W" secondAttribute="bottom" constant="25" id="4g0-vB-0hT"/>
+                            <constraint firstItem="npu-XI-xnW" firstAttribute="top" secondItem="cWa-68-M4W" secondAttribute="bottom" constant="17" id="4g0-vB-0hT"/>
                             <constraint firstItem="bPO-5d-iuv" firstAttribute="leading" secondItem="9tu-BE-xps" secondAttribute="leading" id="8Cu-cy-jml"/>
                             <constraint firstItem="npu-XI-xnW" firstAttribute="leading" secondItem="9tu-BE-xps" secondAttribute="leading" constant="16" id="FWf-dK-koN"/>
                             <constraint firstItem="Z9e-KG-zRd" firstAttribute="top" secondItem="Dgc-l2-d1L" secondAttribute="bottom" constant="8" id="J40-R1-3ae"/>
@@ -769,7 +770,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0EZ-a1-PM8">
-                                        <rect key="frame" x="113" y="39.000000000000007" width="150" height="68.666666666666686"/>
+                                        <rect key="frame" x="113" y="43.333333333333336" width="150" height="68.666666666666657"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rider Track" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQZ-Nr-znp">
                                                 <rect key="frame" x="11.666666666666664" y="0.0" width="126.66666666666669" height="28.666666666666668"/>
@@ -778,7 +779,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZn-Jw-b0t" customClass="FancyButton" customModule="GPSDataCollector" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="38.666666666666671" width="150" height="30"/>
+                                                <rect key="frame" x="0.0" y="38.666666666666664" width="150" height="29.999999999999993"/>
                                                 <color key="backgroundColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="150" id="nPH-ZN-reR"/>
@@ -797,7 +798,7 @@
                                 <constraints>
                                     <constraint firstItem="0EZ-a1-PM8" firstAttribute="centerX" secondItem="GwE-sE-nsM" secondAttribute="centerX" id="4Kl-ty-g88"/>
                                     <constraint firstAttribute="height" constant="125" id="8Zl-s3-4pR"/>
-                                    <constraint firstItem="0EZ-a1-PM8" firstAttribute="centerY" secondItem="GwE-sE-nsM" secondAttribute="centerY" constant="10" id="nxp-Ec-hZY"/>
+                                    <constraint firstItem="0EZ-a1-PM8" firstAttribute="centerY" secondItem="GwE-sE-nsM" secondAttribute="centerY" constant="15" id="nxp-Ec-hZY"/>
                                 </constraints>
                             </view>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iu4-wu-i8W">
@@ -830,7 +831,7 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello Random User" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wwt-HD-jHV">
                                 <rect key="frame" x="16" y="165" width="343" height="30"/>
-                                <fontDescription key="fontDescription" type="italicSystem" pointSize="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
