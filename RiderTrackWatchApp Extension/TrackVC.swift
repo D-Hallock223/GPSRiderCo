@@ -23,7 +23,7 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
     @IBOutlet var altitudeLbl: WKInterfaceLabel!
     @IBOutlet var distanceLbl: WKInterfaceLabel!
     
-    let URL_SEND_DATA_TO_SERVER = "https://athlete-tracker.herokuapp.com/tracking/saveloc"
+    let URL_SEND_DATA_TO_SERVER = "https://athlete-tracker-preprod.herokuapp.com/tracking/saveloc"
     
     
     var locationPoint:CLLocation?

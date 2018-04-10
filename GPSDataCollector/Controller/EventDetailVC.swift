@@ -109,19 +109,19 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate {
             return true
         }
         return false
-//        let startTime = Formatter.iso8601.date(from: event.startTime)
-//        let endTime = Formatter.iso8601.date(from: event.endTime)
-//        let date = Date()
-//        let calendar = Calendar.current
-//        let Chour = calendar.component(.hour, from: date)
-//        let Shour = calendar.component(.hour, from: startTime!)
-//        let Ehour = calendar.component(.hour, from: endTime!)
-//
-//        if Shour <= Chour && Chour <= Ehour {
-//            return true
-//        }
-//
-//        return false
+        //        let startTime = Formatter.iso8601.date(from: event.startTime)
+        //        let endTime = Formatter.iso8601.date(from: event.endTime)
+        //        let date = Date()
+        //        let calendar = Calendar.current
+        //        let Chour = calendar.component(.hour, from: date)
+        //        let Shour = calendar.component(.hour, from: startTime!)
+        //        let Ehour = calendar.component(.hour, from: endTime!)
+        //
+        //        if Shour <= Chour && Chour <= Ehour {
+        //            return true
+        //        }
+        //
+        //        return false
         
     }
     
@@ -169,21 +169,16 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate {
             return
         }
         
-        DataSource.sharedInstance.registerForanEvent(eventId: event.id, token: user.token) { (Success,isNew) in
+        DataSource.sharedInstance.registerForanEvent(eventId: event.id, token: user.token) { (Success) in
             if Success {
-                if isNew {
-                    self.displayAlert(title: "Registration Successfull!", Message: "You have successfully enrolled in the event")
-                    if self.raceStartCheck() {
-                        self.registerBtn.setTitle("Let's Go", for: .normal)
-                    }else{
-                        self.registerBtn.setTitle("Registered Already!", for: .normal)
-                        self.registerBtn.isEnabled = false
-                        self.registerBtn.backgroundColor = UIColor(red:0.39216, green:0.39216, blue:0.39216, alpha:1.00000)
-                    }
+                self.displayAlert(title: "Registration Successfull!", Message: "You have successfully enrolled in the event")
+                if self.raceStartCheck() {
+                    self.registerBtn.setTitle("Let's Go", for: .normal)
                 }else{
-                    self.displayAlert(title: "Already Registered!", Message: "You have already enrolled in the event")
+                    self.registerBtn.setTitle("Registered Already!", for: .normal)
+                    self.registerBtn.isEnabled = false
+                    self.registerBtn.backgroundColor = UIColor(red:0.39216, green:0.39216, blue:0.39216, alpha:1.00000)
                 }
-                
             }else{
                 self.displayAlert(title: "Registration Failed!", Message: "Failed to register for the event")
                 self.registerBtn.setTitle("Register", for: .normal)

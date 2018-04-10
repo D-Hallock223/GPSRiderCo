@@ -9,8 +9,17 @@
 import UIKit
 import MapKit
 import Alamofire
-//
-class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
+
+
+
+
+
+class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate,raceOverCloseProtocol {
+    
+    
+    
+    
+    
     
     
     weak var homeVC:HomeVC?
@@ -18,7 +27,9 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
     var finalDestination = CLLocation(latitude: 33.4484, longitude: 112.07)
     var startAnno:MKPointAnnotation!
     var endAnno:MKPointAnnotation!
+    
 
+    
     
 
     
@@ -33,7 +44,8 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
     
     var locationPoint:CLLocation!
     
-    var routeCoordinates = [CLLocationCoordinate2D]()
+    var routeCoordinates:[CLLocationCoordinate2D]!
+    
     
     
     override func viewDidLoad() {
@@ -47,6 +59,7 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
         
         if let homeVC = homeVC {
             homeVC.protocolDelegate = self
+            homeVC.closeDelegate = self
         }
 
 
@@ -57,15 +70,7 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
         let region:MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
         myMapView.setRegion(region, animated: true)
         myMapView.userTrackingMode = .followWithHeading
-        
-        getCoordinatesFromDownloadURL(fileURL: "https://firebasestorage.googleapis.com/v0/b/gpsdatacollector-44050.appspot.com/o/2.gpx?alt=media&token=dee38451-017e-477e-994f-696a9cc4b340") { (Success) in
-            if Success {
-                self.drawLinesOnMap()
-            }else{
-                print("failed")
-            }
-        }
-        
+        drawLinesOnMap()
         
     }
     
@@ -73,7 +78,12 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
         super.viewDidDisappear(animated)
         
         homeVC?.protocolDelegate = nil
+        homeVC?.closeDelegate = nil
         homeVC = nil
+    }
+    
+    func closeWidow() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     func drawLinesOnMap() {
@@ -137,7 +147,6 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
     
     @IBAction func userLocationBtnTapped(_ sender: Any) {
         
-        let userLocation = myMapView.userLocation.coordinate
         myMapView.userTrackingMode = .followWithHeading
         
     }
@@ -177,50 +186,7 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate {
     }
 }
 
-extension MapVC:XMLParserDelegate {
-    
-    func getCoordinatesFromDownloadURL(fileURL:String,completion:@escaping (Bool)->()) {
-        guard let fileRequestURL = URL(string: fileURL) else {
-            print("URL error occured")
-            completion(false)
-            return
-        }
-        
-        Alamofire.request(fileRequestURL).responseData { (response) in
-            if response.result.error != nil {
-                print("request error occured")
-                completion(false)
-                return
-            } else {
-                let parser = XMLParser(data: response.data!)
-                parser.delegate = self
-                
-                //Parse the data, here the file will be read
-                let success = parser.parse()
-                
-                //Log an error if the parsing failed
-                if !success {
-                    print("parsing error occured")
-                    completion(false)
-                    return
-                }
-                completion(true)
-                
-            }
-        }
-    }
-    
-    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
-        
-        if elementName == "trkpt" || elementName == "wpt" {
-            //Create a World map coordinate from the file
-            let lat = attributeDict["lat"]!
-            let lon = attributeDict["lon"]!
-            let point = CLLocationCoordinate2DMake(CLLocationDegrees(lat)!, CLLocationDegrees(lon)!)
-            self.routeCoordinates.append(point)
-        }
-    }
-}
+
 
 
 

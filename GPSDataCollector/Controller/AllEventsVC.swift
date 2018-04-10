@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import WatchConnectivity
+import KRProgressHUD
 
 class AllEventsVC: UIViewController,WCSessionDelegate {
     
@@ -17,7 +18,6 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
     
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var mySegmentControl: UISegmentedControl!
-    @IBOutlet weak var myActivityIndicator: UIActivityIndicatorView!
     
     
     
@@ -35,6 +35,7 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
     var user:User!
     var session:WCSession?
     
+    var firstTime = true
     
     
     
@@ -67,10 +68,12 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
         self.myTableView.addSubview(refreshControl)
         loadData()
     }
+
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        getRegisteredEventsForTheCurrentUser()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        getRegisteredEventsForTheCurrentUser(refresh: false)
+        
     }
     
     //MARK:- WCSession protocol Delegate Methods
@@ -89,7 +92,12 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
     
     //MARK:- Functions
     
-    func getRegisteredEventsForTheCurrentUser() {
+    func getRegisteredEventsForTheCurrentUser(refresh:Bool) {
+        
+        if firstTime || refresh {
+            KRProgressHUD.show(withMessage: "Loading", completion: nil)
+        }
+
         DataSource.sharedInstance.getEventsRegisteredForCurrentUser(token: user.token) { (eventArr) in
             if let arr = eventArr {
                 self.currentRegisteredEvents = arr
@@ -100,13 +108,18 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
                     return days1! < days2!
                 }
                 self.myTableView.reloadData()
+                if self.firstTime || refresh {
+                    KRProgressHUD.dismiss()
+                    self.firstTime = false
+                }
+                self.noLabelCheck()
             }
         }
     }
     
     
     func loadData() {
-        myActivityIndicator.startAnimating()
+        KRProgressHUD.show(withMessage: "Loading", completion: nil)
         self.allEvents = []
         self.upcomingEvent = []
         self.pastEvents = []
@@ -116,15 +129,16 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
                 self.allEvents = eventArr
                 self.segregateData()
                 self.myTableView.reloadData()
-                self.myActivityIndicator.stopAnimating()
+                KRProgressHUD.dismiss()
                 self.refreshControl.endRefreshing()
+                self.noLabelCheck()
             }
         }
     }
     
     @objc func refresh() {
         if mySegmentControl.selectedSegmentIndex == 0{
-            getRegisteredEventsForTheCurrentUser()
+            getRegisteredEventsForTheCurrentUser(refresh: true)
         } else {
             loadData()
         }
@@ -169,11 +183,38 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
         return false
     }
     
+    func noLabelCheck() {
+        var youHaveData:Int!
+        if mySegmentControl.selectedSegmentIndex == 0 {
+            youHaveData = currentRegisteredEvents.count
+        } else if mySegmentControl.selectedSegmentIndex == 1 {
+            youHaveData = upcomingEvent.count
+        } else {
+            youHaveData = pastEvents.count
+        }
+        if youHaveData > 0
+        {
+            myTableView.backgroundView = nil
+            myTableView.separatorStyle = .singleLine
+        }
+        else
+        {
+            let noDataLabel: UILabel     = UILabel(frame: CGRect(x: 0, y: 0, width: myTableView.bounds.size.width, height: myTableView.bounds.size.height))
+            noDataLabel.text = "No data available!"
+            noDataLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
+            noDataLabel.textColor     = UIColor.white
+            noDataLabel.textAlignment = .center
+            myTableView.backgroundView  = noDataLabel
+            myTableView.separatorStyle  = .none
+        }
+    }
+    
     
     //MARK:- IBActions
     
     @IBAction func segmentControlTapped(_ sender: Any) {
         self.myTableView.reloadData()
+        self.noLabelCheck()
     }
     
     @IBAction func SignOutBtnTapped(_ sender: Any) {
@@ -229,40 +270,8 @@ extension AllEventsVC:UITableViewDelegate,UITableViewDataSource {
         }
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        var numOfSections: Int = 0
-        var youHaveData:Int!
-        if mySegmentControl.selectedSegmentIndex == 0 {
-            youHaveData = currentRegisteredEvents.count
-        } else if mySegmentControl.selectedSegmentIndex == 1 {
-            youHaveData = upcomingEvent.count
-        } else {
-            youHaveData = pastEvents.count
-        }
-        if youHaveData > 0
-        {
-            numOfSections            = 1
-            tableView.backgroundView = nil
-            tableView.separatorStyle = .singleLine
-        }
-        else
-        {
-            let noDataLabel: UILabel     = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-            if myActivityIndicator.isAnimating {
-                noDataLabel.text = "Loading"
-            }else{
-                noDataLabel.text = "No data available!"
-            }
-            noDataLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
-            noDataLabel.textColor     = UIColor.white
-            noDataLabel.textAlignment = .center
-            tableView.backgroundView  = noDataLabel
-            tableView.separatorStyle  = .none
-        }
-        return numOfSections
-    }
     
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

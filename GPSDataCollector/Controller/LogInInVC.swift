@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import KRProgressHUD
 
 
 
@@ -14,14 +15,16 @@ class LogInInVC: UIViewController{
     
     @IBOutlet weak var userNameTxtFld: UITextField!
     @IBOutlet weak var passwordTxtFld: UITextField!
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
+        
     }
+    
+   
     
     
     
@@ -29,17 +32,17 @@ class LogInInVC: UIViewController{
     
     
     @IBAction func logInBtnPrsd(_ sender: Any) {
-        spinner.startAnimating()
+        KRProgressHUD.show()
         guard let email = userNameTxtFld.text,email != "" else {
             displayAlert(title: "Enter the email", Message: "Please enter your email")
-            self.spinner.stopAnimating()
+            KRProgressHUD.dismiss()
             self.userNameTxtFld.resignFirstResponder()
             return
         }
         
         guard let password = passwordTxtFld.text,password != "" else {
             displayAlert(title: "Enter the password", Message: "Please enter your password")
-            self.spinner.stopAnimating()
+            KRProgressHUD.dismiss()
             self.passwordTxtFld.resignFirstResponder()
             return
         }
@@ -49,7 +52,7 @@ class LogInInVC: UIViewController{
             self.passwordTxtFld.text = ""
             if success {
                 guard let user  = returnedUser else {return}
-                self.spinner.stopAnimating()
+                KRProgressHUD.dismiss()
                 
                 let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "allEventsVC") as! AllEventsVC
                 vc.user = user
@@ -57,7 +60,7 @@ class LogInInVC: UIViewController{
                 
             } else {
                 self.displayAlert(title: "ERROR", Message: "Error while logging in")
-                self.spinner.stopAnimating()
+                KRProgressHUD.dismiss()
             }
             self.view.endEditing(true)
         }

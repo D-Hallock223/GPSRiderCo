@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import KRProgressHUD
 
 class SignUPVC: UIViewController {
     
@@ -15,7 +16,6 @@ class SignUPVC: UIViewController {
     @IBOutlet weak var userNameTxtField: UITextField!
     @IBOutlet weak var emailtxtFld: UITextField!
     @IBOutlet weak var passwordTxtFld: UITextField!
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
 
     override func viewDidLoad() {
@@ -28,22 +28,22 @@ class SignUPVC: UIViewController {
     
 
     @IBAction func signUpBtnPrssd(_ sender: Any) {
-        spinner.startAnimating()
+        KRProgressHUD.show()
         guard let email = emailtxtFld.text,email != "" else {
             displayAlert(title: "Enter the email", Message: "Please enter your email")
-            self.spinner.stopAnimating()
+            KRProgressHUD.dismiss()
             self.emailtxtFld.resignFirstResponder()
             return
         }
         guard let password = passwordTxtFld.text,password != "" else {
             displayAlert(title: "Enter the password", Message: "Please enter your password")
-            self.spinner.stopAnimating()
+            KRProgressHUD.dismiss()
             self.passwordTxtFld.resignFirstResponder()
             return
         }
         guard let username = userNameTxtField.text, username != "" else {
             displayAlert(title: "Enter the username", Message: "Please enter your username")
-            self.spinner.stopAnimating()
+            KRProgressHUD.dismiss()
             self.userNameTxtField.resignFirstResponder()
             return
         }
@@ -54,13 +54,13 @@ class SignUPVC: UIViewController {
             self.emailtxtFld.text = ""
             if success {
                 guard let user  = returnedUser else {return}
-                self.spinner.stopAnimating()
+                KRProgressHUD.dismiss()
                 let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "allEventsVC") as! AllEventsVC
                 vc.user = user
                 self.present(vc, animated: true, completion: nil)
             } else {
                 self.displayAlert(title: "ERROR", Message: "Error cccured while signing up")
-                self.spinner.stopAnimating()
+                KRProgressHUD.dismiss()
             }
             self.view.endEditing(true)
         }
