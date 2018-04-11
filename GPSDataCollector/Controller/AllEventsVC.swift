@@ -10,8 +10,10 @@ import UIKit
 import SDWebImage
 import WatchConnectivity
 import KRProgressHUD
+import CoreLocation
 
-class AllEventsVC: UIViewController,WCSessionDelegate {
+
+class AllEventsVC: UIViewController,WCSessionDelegate,CLLocationManagerDelegate {
     
     
     //MARK:- IBOutlets
@@ -38,6 +40,20 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
     var firstTime = true
     
     
+    var locationManager:CLLocationManager!
+    private var _locationPoint:CLLocation?
+    var locationPoint:CLLocation? {
+        get {
+            return self._locationPoint
+        }set{
+            self._locationPoint = newValue
+            self.locationManager.stopUpdatingLocation()
+        }
+    }
+    
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +72,6 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
         
         
         
-        
         myTableView.dataSource = self
         myTableView.delegate = self
         refreshControl = UIRefreshControl()
@@ -67,8 +82,9 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         self.myTableView.addSubview(refreshControl)
         loadData()
+        locationSetup()
     }
-
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -92,12 +108,36 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
     
     //MARK:- Functions
     
+    fileprivate func locationSetup() {
+        
+        
+        locationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        let status = CLLocationManager.authorizationStatus()
+        if status == .notDetermined || status == .denied || status == .authorizedWhenInUse {
+            
+            locationManager.requestAlwaysAuthorization()
+            locationManager.requestWhenInUseAuthorization()
+        }
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.startUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else {return}
+        self.locationPoint = location
+        print(self.locationPoint)
+    }
+    
+    
     func getRegisteredEventsForTheCurrentUser(refresh:Bool) {
         
         if firstTime || refresh {
             KRProgressHUD.show(withMessage: "Loading", completion: nil)
         }
-
+        
         DataSource.sharedInstance.getEventsRegisteredForCurrentUser(token: user.token) { (eventArr) in
             if let arr = eventArr {
                 self.currentRegisteredEvents = arr
@@ -221,7 +261,7 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
                 completion(sortedArr)
             }
         }
-}
+    }
     
     func lengthFilterer(arr:[Event],completion:@escaping ([Event])->()){
         DispatchQueue.global().async {
@@ -249,7 +289,20 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
         }
     }
     
-    
+    func locationFilterer(arr:[Event],completion:@escaping ([Event])->()){
+        DispatchQueue.global().async {
+            var sortedArr = arr
+            
+            sortedArr.sort(by: { (e1, e2) -> Bool in
+                let location1 = CLLocation(latitude: e1.trackCoordinateLat, longitude: e1.trackCoordinateLong)
+                let location2 = CLLocation(latitude: e2.trackCoordinateLat, longitude: e2.trackCoordinateLong)
+                return self.locationPoint!.distance(from: location1) < self.locationPoint!.distance(from: location2)
+            })
+            DispatchQueue.main.async {
+                completion(sortedArr)
+            }
+        }
+    }
     
     //MARK:- IBActions
     
@@ -264,7 +317,7 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
     }
     
     @IBAction func filterBtnTapped(_ sender: Any) {
-        
+        self.locationManager.startUpdatingLocation()
         let filterAlert = UIAlertController(title: "Filter By", message: nil, preferredStyle: .actionSheet)
         let daysFilter = UIAlertAction(title: "Days remaining", style: .default) { (action) in
             print("days filtered")
@@ -335,20 +388,42 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
                 })
             }
         }
-//        let locationFilter = UIAlertAction(title: "Location closest to you", style: .default) { (action) in
-//            print("location filter")
-//        }
+        let locationFilter = UIAlertAction(title: "Location closest to you", style: .default) { (action) in
+            print("location filter")
+            KRProgressHUD.show()
+            if self.mySegmentControl.selectedSegmentIndex == 0 {
+                self.locationFilterer(arr: self.currentRegisteredEvents, completion: { (eventArr) in
+                    self.currentRegisteredEvents = eventArr
+                    self.myTableView.reloadData()
+                    KRProgressHUD.dismiss()
+                })
+            } else if self.mySegmentControl.selectedSegmentIndex == 1 {
+                self.locationFilterer(arr: self.upcomingEvent, completion: { (eventArr) in
+                    self.upcomingEvent = eventArr
+                    self.myTableView.reloadData()
+                    KRProgressHUD.dismiss()
+                })
+            }else {
+                self.locationFilterer(arr: self.pastEvents, completion: { (eventArr) in
+                    self.pastEvents = eventArr
+                    self.myTableView.reloadData()
+                    KRProgressHUD.dismiss()
+                })
+            }
+        }
+        
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { (action) in
             filterAlert.dismiss(animated: true, completion: nil)
         }
         filterAlert.addAction(daysFilter)
         filterAlert.addAction(lengthFilter)
         filterAlert.addAction(difficultyFilter)
-//        filterAlert.addAction(locationFilter)
+        filterAlert.addAction(locationFilter)
         filterAlert.addAction(cancelAction)
         
         present(filterAlert, animated: true, completion: nil)
-
+        
     }
     
     
@@ -412,7 +487,7 @@ extension AllEventsVC:UITableViewDelegate,UITableViewDataSource {
     }
     
     
-
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

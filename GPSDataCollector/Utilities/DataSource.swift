@@ -53,7 +53,10 @@ class DataSource {
                     } else {
                         diffValue = 1
                     }
-                    let eventObj = Event(length: Dlength, difficulty: diffValue, raceWinners: DraceWinners as? [String], id: Did, name: Dname, eventImgLink: DeventImgLink, eventDescription: Ddescription, date: Ddate, location: Dlocation, eventTimeRange: DeventTimeRange, startTime: DstartTime, endTime: DendTime)
+                    let DlatValue = event["startLocation"]["lat"].doubleValue
+                    let DlongValue = event["startLocation"]["long"].doubleValue
+                    
+                    let eventObj = Event(length: Dlength, trackCoordinateLat: DlatValue, trackCoordinateLong: DlongValue, difficulty: diffValue, raceWinners: DraceWinners as? [String], id: Did, name: Dname, eventImgLink: DeventImgLink, eventDescription: Ddescription, date: Ddate, location: Dlocation, eventTimeRange: DeventTimeRange, startTime: DstartTime, endTime: DendTime)
                     
                     events.append(eventObj)
                 }
@@ -124,7 +127,7 @@ class DataSource {
                     let DstartTime = event["startTime"].stringValue
                     let DendTime = event["endTime"].stringValue
                     let Dlength = event["track"]["length"].intValue
-                    var Ddifficulty = event["track"]["difficulty"].stringValue
+                    let Ddifficulty = event["track"]["difficulty"].stringValue
                     var diffValue:Int!
                     if Ddifficulty == "Beginner" {
                         diffValue = 0
@@ -133,7 +136,11 @@ class DataSource {
                     } else {
                         diffValue = 1
                     }
-                    let eventObj = Event(length: Dlength, difficulty: diffValue, raceWinners: DraceWinners as? [String], id: Did, name: Dname, eventImgLink: DeventImgLink, eventDescription: Ddescription, date: Ddate, location: Dlocation, eventTimeRange: DeventTimeRange, startTime: DstartTime, endTime: DendTime)
+                    let DlatValue = event["startLocation"]["lat"].doubleValue
+                    let DlongValue = event["startLocation"]["long"].doubleValue
+                    
+                    let eventObj = Event(length: Dlength, trackCoordinateLat: DlatValue, trackCoordinateLong: DlongValue, difficulty: diffValue, raceWinners: DraceWinners as? [String], id: Did, name: Dname, eventImgLink: DeventImgLink, eventDescription: Ddescription, date: Ddate, location: Dlocation, eventTimeRange: DeventTimeRange, startTime: DstartTime, endTime: DendTime)
+                    
                     events.append(eventObj)
                 }
                 completion(events)

@@ -12,6 +12,8 @@ import Foundation
 struct Event {
     
     let length:Int
+    let trackCoordinateLat:Double
+    let trackCoordinateLong:Double
     let difficulty:Int
     var raceWinners:[String]?
     let id:String
