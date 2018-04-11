@@ -209,6 +209,47 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
         }
     }
     
+    func daysSorter(arr:[Event],completion:@escaping ([Event])->()){
+        DispatchQueue.global().async {
+            var sortedArr = arr
+            sortedArr.sort { (e1, e2) -> Bool in
+                let days1 = RemainingDays(date: e1.date)
+                let days2 = RemainingDays(date: e2.date)
+                return days1! < days2!
+            }
+            DispatchQueue.main.async {
+                completion(sortedArr)
+            }
+        }
+}
+    
+    func lengthFilterer(arr:[Event],completion:@escaping ([Event])->()){
+        DispatchQueue.global().async {
+            var sortedArr = arr
+            
+            sortedArr.sort { (e1, e2) -> Bool in
+                return e1.length < e2.length
+            }
+            DispatchQueue.main.async {
+                completion(sortedArr)
+            }
+        }
+    }
+    
+    func difficultyFilterer(arr:[Event],completion:@escaping ([Event])->()){
+        DispatchQueue.global().async {
+            var sortedArr = arr
+            
+            sortedArr.sort { (e1, e2) -> Bool in
+                return e1.difficulty < e2.difficulty
+            }
+            DispatchQueue.main.async {
+                completion(sortedArr)
+            }
+        }
+    }
+    
+    
     
     //MARK:- IBActions
     
@@ -221,6 +262,97 @@ class AllEventsVC: UIViewController,WCSessionDelegate {
         
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func filterBtnTapped(_ sender: Any) {
+        
+        let filterAlert = UIAlertController(title: "Filter By", message: nil, preferredStyle: .actionSheet)
+        let daysFilter = UIAlertAction(title: "Days remaining", style: .default) { (action) in
+            print("days filtered")
+            KRProgressHUD.show()
+            if self.mySegmentControl.selectedSegmentIndex == 0 {
+                self.daysSorter(arr: self.currentRegisteredEvents, completion: { (eventArr) in
+                    self.currentRegisteredEvents = eventArr
+                    self.myTableView.reloadData()
+                    KRProgressHUD.dismiss()
+                })
+            } else if self.mySegmentControl.selectedSegmentIndex == 1 {
+                self.daysSorter(arr: self.upcomingEvent, completion: { (eventArr) in
+                    self.upcomingEvent = eventArr
+                    self.myTableView.reloadData()
+                    KRProgressHUD.dismiss()
+                })
+            }else {
+                self.daysSorter(arr: self.pastEvents, completion: { (eventArr) in
+                    self.pastEvents = eventArr
+                    self.myTableView.reloadData()
+                    KRProgressHUD.dismiss()
+                })
+            }
+        }
+        let lengthFilter = UIAlertAction(title: "Length of the track", style: .default) { (action) in
+            print("lenfth filtered")
+            KRProgressHUD.show()
+            if self.mySegmentControl.selectedSegmentIndex == 0 {
+                self.lengthFilterer(arr: self.currentRegisteredEvents, completion: { (eventArr) in
+                    self.currentRegisteredEvents = eventArr
+                    self.myTableView.reloadData()
+                    KRProgressHUD.dismiss()
+                })
+            } else if self.mySegmentControl.selectedSegmentIndex == 1 {
+                self.lengthFilterer(arr: self.upcomingEvent, completion: { (eventArr) in
+                    self.upcomingEvent = eventArr
+                    self.myTableView.reloadData()
+                    KRProgressHUD.dismiss()
+                })
+            }else {
+                self.lengthFilterer(arr: self.pastEvents, completion: { (eventArr) in
+                    self.pastEvents = eventArr
+                    self.myTableView.reloadData()
+                    KRProgressHUD.dismiss()
+                })
+            }
+        }
+        let difficultyFilter = UIAlertAction(title: "Based on difficulty", style: .default) { (action) in
+            print("difficulty filter")
+            KRProgressHUD.show()
+            if self.mySegmentControl.selectedSegmentIndex == 0 {
+                self.difficultyFilterer(arr: self.currentRegisteredEvents, completion: { (eventArr) in
+                    self.currentRegisteredEvents = eventArr
+                    self.myTableView.reloadData()
+                    KRProgressHUD.dismiss()
+                })
+            } else if self.mySegmentControl.selectedSegmentIndex == 1 {
+                self.difficultyFilterer(arr: self.upcomingEvent, completion: { (eventArr) in
+                    self.upcomingEvent = eventArr
+                    self.myTableView.reloadData()
+                    KRProgressHUD.dismiss()
+                })
+            }else {
+                self.difficultyFilterer(arr: self.pastEvents, completion: { (eventArr) in
+                    self.pastEvents = eventArr
+                    self.myTableView.reloadData()
+                    KRProgressHUD.dismiss()
+                })
+            }
+        }
+//        let locationFilter = UIAlertAction(title: "Location closest to you", style: .default) { (action) in
+//            print("location filter")
+//        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { (action) in
+            filterAlert.dismiss(animated: true, completion: nil)
+        }
+        filterAlert.addAction(daysFilter)
+        filterAlert.addAction(lengthFilter)
+        filterAlert.addAction(difficultyFilter)
+//        filterAlert.addAction(locationFilter)
+        filterAlert.addAction(cancelAction)
+        
+        present(filterAlert, animated: true, completion: nil)
+
+    }
+    
+    
+    
 }
 
 
@@ -247,6 +379,7 @@ extension AllEventsVC:UITableViewDelegate,UITableViewDataSource {
             event = pastEvents[indexPath.row]
         }
         if let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? AllEventsCell {
+            cell.separatorInset = UIEdgeInsets.zero
             cell.eventNameLbl.text = event!.name
             let daysremValue = RemainingDays(date: event!.date)
             if let value = daysremValue, value >= 0 {
@@ -258,7 +391,15 @@ extension AllEventsVC:UITableViewDelegate,UITableViewDataSource {
             } else {
                 cell.daysRemainingLbl.text = "Not Applicable"
             }
-            cell.locationLbl.text = event?.location
+            cell.locationLbl.text = event!.location
+            cell.lengthLbl.text = "\(event!.length) Miles"
+            if event?.difficulty == 0 {
+                cell.difficultyLbl.text = "Beginner"
+            } else if event?.difficulty == 1{
+                cell.difficultyLbl.text = "Medium"
+            } else {
+                cell.difficultyLbl.text = "Hard"
+            }
             if let imgURL = URL(string: event!.eventImgLink) {
                 cell.eventsImageView.sd_setImage(with: imgURL, placeholderImage: #imageLiteral(resourceName: "placeholder"), options: [.continueInBackground,.scaleDownLargeImages], completed: nil)
             } else {

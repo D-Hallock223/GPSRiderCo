@@ -19,7 +19,9 @@ class AllEventsCell: UITableViewCell {
     
     @IBOutlet weak var locationLbl: UILabel!
     
+    @IBOutlet weak var lengthLbl: UILabel!
     
+    @IBOutlet weak var difficultyLbl: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
