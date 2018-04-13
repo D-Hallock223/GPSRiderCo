@@ -47,6 +47,8 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
     weak var protocolDelegate:SendData?
     weak var closeDelegate:raceOverCloseProtocol?
     
+//    var lastTimeStamp:Date?
+    
     
     
     
@@ -123,6 +125,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
             locationManager.requestWhenInUseAuthorization()
         }
         locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.pausesLocationUpdatesAutomatically = false
         locationManager.startUpdatingLocation()
     }
     
@@ -140,6 +143,9 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
             raceEndAlert()
             return
         }
+//        if !timeChecker(){
+//            return
+//        }
         self.latitudeLbl.text = "\(location.coordinate.latitude)" + "°"
         self.longitudeLbl.text = "\(location.coordinate.longitude)" + "°"
         
@@ -148,6 +154,17 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
         guard let delegate = protocolDelegate else {return}
         delegate.receiveAndUpdate(location: location)
     }
+    
+//    func timeChecker() -> Bool {
+//        let now = Date()
+//        let interval = (self.lastTimeStamp != nil) ? now.timeIntervalSince(self.lastTimeStamp!) : 0.0
+//        if (self.lastTimeStamp == nil || interval >= 60) {
+//            self.lastTimeStamp = now
+//            return true
+//        } else {
+//            return false
+//        }
+//    }
 
     
     func raceEndCheck(location:CLLocation) -> Bool {
@@ -211,8 +228,8 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
         Alamofire.request(sendURL, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
             if response.result.isSuccess{
                 let json = try! JSON(data: response.data!)
-                let result = json["result"].stringValue.lowercased()
-                if result == "ok" {
+                let result = json["result"].boolValue
+                if result == true {
                     print("Data successfully sent to the server")
                 }else{
                     print("Error sending data")

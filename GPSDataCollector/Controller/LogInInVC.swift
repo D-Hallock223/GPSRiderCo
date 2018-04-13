@@ -84,7 +84,9 @@ class LogInInVC: UIViewController{
     }
     
     func passwordReset(email:String) {
+        KRProgressHUD.show()
         Authentication.sharedInstance.forgotPassword(email: email) { (Success) in
+            KRProgressHUD.dismiss()
             if Success {
                 self.displayAlert(title: "Password reset successfull", Message: "A password reset link has been sent to your registered email id")
             }else{

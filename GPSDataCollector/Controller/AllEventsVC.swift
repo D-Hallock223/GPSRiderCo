@@ -388,7 +388,7 @@ class AllEventsVC: UIViewController,WCSessionDelegate,CLLocationManagerDelegate 
                 })
             }
         }
-        let locationFilter = UIAlertAction(title: "Location closest to you", style: .default) { (action) in
+        let locationFilter = UIAlertAction(title: "Event closest to you", style: .default) { (action) in
             print("location filter")
             KRProgressHUD.show()
             if self.mySegmentControl.selectedSegmentIndex == 0 {

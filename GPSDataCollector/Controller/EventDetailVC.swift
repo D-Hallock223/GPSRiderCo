@@ -98,8 +98,27 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate {
         formatter.dateFormat = "dd-MMM-yyyy"
         let myStringafd = formatter.string(from: yourDate!)
         dateLbl.text = myStringafd
-        timeLbl.text = event.eventTimeRange
+        timeLbl.text = getTimeRange(event: event)
         descriptionLbl.text = event.eventDescription
+    }
+    
+    func getTimeRange(event:Event) -> String {
+        let startDate = Formatter.iso8601.date(from: event.startTime)
+        let endDate = Formatter.iso8601.date(from: event.endTime)
+        let calendar = Calendar.current
+        var startHour = calendar.component(.hour, from: startDate!)
+        var endHour = calendar.component(.hour, from: endDate!)
+        var startSym = "AM"
+        var endSym = "AM"
+        if startHour >= 12 {
+            startSym = startHour == 24 ? "AM" : "PM"
+            startHour = startHour > 12 ? (startHour % 12) : startHour
+        }
+        if endHour >= 12 {
+            endSym = endHour == 24 ? "AM" : "PM"
+            endHour = endHour > 12 ? (endHour % 12) : endHour
+        }
+        return "\(startHour)\(startSym) - \(endHour)\(endSym)"
     }
     
     
