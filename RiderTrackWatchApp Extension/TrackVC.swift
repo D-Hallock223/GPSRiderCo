@@ -28,11 +28,14 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
     
     var locationPoint:CLLocation?
     
-    var finalDestination = CLLocation(latitude: 33.4484, longitude: 112.07)
+    var finalDestination = CLLocation(latitude: (WatchUser.sharedInstance.eventStartPointLat)!, longitude: (WatchUser.sharedInstance.eventStartPointLon)!)
     
     var locationManager:CLLocationManager!
     
     weak var delegate:dataTransmission?
+    
+    
+    var endLocationCoordinate:CLLocation!
     
     
     
@@ -42,7 +45,7 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 50.0
+        locationManager.distanceFilter = kCLDistanceFilterNone
         let status = CLLocationManager.authorizationStatus()
         if status == .notDetermined || status == .denied || status == .authorizedWhenInUse {
             
@@ -50,6 +53,7 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
             locationManager.requestWhenInUseAuthorization()
         }
         locationManager.startUpdatingLocation()
+        endLocationCoordinate = CLLocation(latitude: WatchUser.sharedInstance.eventEndPointLat!, longitude: WatchUser.sharedInstance.eventEndPointLon!)
         
     }
     
@@ -80,12 +84,32 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
         speedLbl.setText("\(location.speed) m/s")
         altitudeLbl.setText("\(location.altitude) m")
         distanceLbl.setText("\(Int(location.distance(from: finalDestination))) m")
+        if raceEndCheck() {
+            sendEndMessageToServer()
+            locationManager.stopUpdatingLocation()
+//            pushController(withName: "endVC", context: nil)
+            presentController(withName: "endVC", context: nil)
+            return
+        }
         sendDataToserver()
         delegate?.getData(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         
+        
     }
     
-    //TODO:- sending Event id and distance
+    func sendEndMessageToServer() {
+        print("end message sent")
+    }
+    
+    func raceEndCheck() -> Bool {
+        let distance = (self.locationPoint?.distance(from: endLocationCoordinate))!
+//        if distance < 1.0 {
+//            return true
+//        }
+//        return false
+        return true
+    }
+    
     func sendDataToserver() {
         
         guard let sendURL = URL(string: URL_SEND_DATA_TO_SERVER) else {return}

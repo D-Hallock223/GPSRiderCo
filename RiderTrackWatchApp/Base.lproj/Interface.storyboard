@@ -53,8 +53,8 @@
                             <items>
                                 <imageView width="94" height="64" alignment="center" image="RunnerImg" contentMode="scaleAspectFit" id="bm4-we-a8q"/>
                                 <button width="1" alignment="left" title="START" id="w8n-vq-WlS">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="backgroundColor" red="0.72549019607843135" green="0.90980392156862744" blue="0.54509803921568623" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="backgroundColor" red="0.56862745100000001" green="0.78039215689999997" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="font" type="italicSystem" weight="bold" pointSize="40"/>
                                     <connections>
                                         <action selector="startBtnTapped" destination="Ir8-2l-Ff0" id="ois-86-Z14"/>
@@ -180,6 +180,33 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="989" y="399"/>
+        </scene>
+        <!--endVC-->
+        <scene sceneID="uXP-j8-Hma">
+            <objects>
+                <controller identifier="endVC" id="Ra3-Dx-Lrh" customClass="EndScreenVC" customModule="RiderTrackWatchApp_Extension">
+                    <items>
+                        <imageView width="94" height="64" alignment="center" image="RunnerImg" contentMode="scaleAspectFit" id="3q8-4i-feY"/>
+                        <label alignment="center" verticalAlignment="center" text="Event Completed!" textAlignment="center" id="D64-Cm-i2b">
+                            <color key="textColor" red="0.5725490196078431" green="0.77647058823529413" blue="0.44705882352941173" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" type="system" weight="semibold" pointSize="18"/>
+                        </label>
+                        <label width="1" alignment="center" verticalAlignment="center" text="Thank you for participating!" textAlignment="center" numberOfLines="0" id="nkS-eE-NZ2">
+                            <fontDescription key="font" type="system" weight="light" pointSize="16"/>
+                        </label>
+                        <button width="87" height="35" alignment="center" verticalAlignment="center" title="Close" id="yjg-gw-Snd">
+                            <color key="titleColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.56862745100000001" green="0.78039215689999997" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="font" type="system" weight="medium" pointSize="20"/>
+                            <connections>
+                                <action selector="closeBtnTapped" destination="Ra3-Dx-Lrh" id="Rwb-vm-xYi"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="1264.9743589743591" y="398.84615384615387"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">

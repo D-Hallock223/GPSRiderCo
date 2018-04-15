@@ -30,6 +30,10 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
     @IBOutlet weak var mapInfoLbl: UILabel!
     @IBOutlet weak var currentUserNameTxtLbl: UILabel!
     @IBOutlet weak var mapVCBtn: UIButton!
+    @IBOutlet weak var latitudeLbl: UILabel!
+    @IBOutlet weak var longitudeLbl: UILabel!
+    
+    
     
     var session:WCSession?
     var user:User?
@@ -47,13 +51,13 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
     weak var protocolDelegate:SendData?
     weak var closeDelegate:raceOverCloseProtocol?
     
-//    var lastTimeStamp:Date?
+    
+    var fixedStartPoint:CLLocation!
+    //    var lastTimeStamp:Date?
     
     
     
     
-    @IBOutlet weak var latitudeLbl: UILabel!
-    @IBOutlet weak var longitudeLbl: UILabel!
     
     
     
@@ -65,6 +69,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
         self.currentUserNameTxtLbl.text = "Hello \((self.user?.username)!)"
         stopUpdating = false
         startUpdateBtn.isEnabled = false
+        fixedStartPoint = CLLocation(latitude: selectedEvent.trackCoordinateLat, longitude: selectedEvent.trackCoordinateLong)
     }
     
     override func viewDidLayoutSubviews() {
@@ -134,7 +139,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
         
         guard let location = locations.last else {return}
         self.locationPoint = location
-        print(self.locationPoint)
+        //        print(self.locationPoint)
         if raceNotStarted {
             return
         }
@@ -143,29 +148,29 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
             raceEndAlert()
             return
         }
-//        if !timeChecker(){
-//            return
-//        }
         self.latitudeLbl.text = "\(location.coordinate.latitude)" + "°"
         self.longitudeLbl.text = "\(location.coordinate.longitude)" + "°"
-        
         sendDataToserver()
-        
         guard let delegate = protocolDelegate else {return}
         delegate.receiveAndUpdate(location: location)
+        //        if !timeChecker(){
+        //            return
+        //        }
+        
+        
     }
     
-//    func timeChecker() -> Bool {
-//        let now = Date()
-//        let interval = (self.lastTimeStamp != nil) ? now.timeIntervalSince(self.lastTimeStamp!) : 0.0
-//        if (self.lastTimeStamp == nil || interval >= 60) {
-//            self.lastTimeStamp = now
-//            return true
-//        } else {
-//            return false
-//        }
-//    }
-
+    //    func timeChecker() -> Bool {
+    //        let now = Date()
+    //        let interval = (self.lastTimeStamp != nil) ? now.timeIntervalSince(self.lastTimeStamp!) : 0.0
+    //        if (self.lastTimeStamp == nil || interval >= 60) {
+    //            self.lastTimeStamp = now
+    //            return true
+    //        } else {
+    //            return false
+    //        }
+    //    }
+    
     
     func raceEndCheck(location:CLLocation) -> Bool {
         let finalDestination = self.previousRouteCoordinates[self.previousRouteCoordinates.count - 1]
@@ -210,18 +215,18 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
         }
     }
     
-    //TODO:- Fix sending event id and distance
     @objc func sendDataToserver() {
         
         guard let sendURL = URL(string: URL_SEND_DATA_TO_SERVER) else {
             self.displayAlert(title: "Error", Message: "Error sending data to the server")
             return}
+        let distanceField = self.locationPoint?.distance(from: fixedStartPoint).rounded()
         let parameters:[String:Any] = ["eventid":self.selectedEvent.id,
                                        "lat":"\(self.locationPoint?.coordinate.latitude ?? 0.0)",
             "lng":"\(self.locationPoint?.coordinate.longitude ?? 0.0)",
             "speed":"\(self.locationPoint?.speed ?? 0.0)",
             "alt":"\(self.locationPoint?.altitude ?? 0)",
-            "distLeft":"30000"]
+            "distLeft":"\(distanceField!)"]
         let headers = ["Content-Type":"application/x-www-form-urlencoded",
                        "Authorization":"Bearer \(self.user?.token ?? "")"]
         
@@ -232,10 +237,10 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
                 if result == true {
                     print("Data successfully sent to the server")
                 }else{
-                    print("Error sending data")
+                    print("Error sending data inside")
                 }
             }else{
-                print("Error sending data")
+                print("Error sending data outside")
             }
         }
     }

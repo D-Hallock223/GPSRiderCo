@@ -123,11 +123,12 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate {
     
     
     func raceStartCheck() -> Bool {
-        let num = arc4random_uniform(2)
-        if num == 1 {
-            return true
-        }
-        return false
+        return true
+//        let num = arc4random_uniform(2)
+//        if num == 1 {
+//            return true
+//        }
+//        return false
         //        let startTime = Formatter.iso8601.date(from: event.startTime)
         //        let endTime = Formatter.iso8601.date(from: event.endTime)
         //        let date = Date()
@@ -164,7 +165,11 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate {
                                    "username":user.username,
                                    "email":user.email,
                                    "token":user.token,
-                                   "eventId":event.id], replyHandler: nil, errorHandler: { (error) in
+                                   "eventId":event.id,
+                                   "startPointLat":event.trackCoordinateLat,
+                                   "startPointLon":event.trackCoordinateLong,
+                                   "endPointLat":event.endvalueLat,
+                                   "endPointLon":event.endvalueLon], replyHandler: nil, errorHandler: { (error) in
                                     print("watch connectivity error occured")
         })
     }

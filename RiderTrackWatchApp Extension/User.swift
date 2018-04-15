@@ -15,6 +15,12 @@ class WatchUser {
     var token:String?
     var participatingEventId:String?
     
+    var eventStartPointLat:Double?
+    var eventStartPointLon:Double?
+    
+    var eventEndPointLat:Double?
+    var eventEndPointLon:Double?
+    
     private init() {}
     
     static let sharedInstance = WatchUser()

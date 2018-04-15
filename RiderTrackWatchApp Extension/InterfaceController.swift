@@ -68,6 +68,10 @@ class InterfaceController: WKInterfaceController,WCSessionDelegate {
         var wEmail = ""
         var wToken = ""
         var wEventID = ""
+        var wStartPointLat = 0.0
+        var wStartPointLon = 0.0
+        var wEndPointLat = 0.0
+        var wEndPointLon = 0.0
         
         if let username = message["username"] as? String {
             wUsername = username
@@ -81,11 +85,27 @@ class InterfaceController: WKInterfaceController,WCSessionDelegate {
         if let eventID = message["eventId"] as? String {
             wEventID = eventID
         }
-        if wUsername != "" && wEmail != "" && wToken != "" && wEventID != "" {
+        if let lat = message["startPointLat"] as? Double {
+            wStartPointLat = lat
+        }
+        if let lon = message["startPointLon"] as? Double {
+            wStartPointLon = lon
+        }
+        if let endLat = message["endPointLat"] as? Double {
+            wEndPointLat = endLat
+        }
+        if let endLon = message["endPointLon"] as? Double {
+            wEndPointLon = endLon
+        }
+        if wUsername != "" && wEmail != "" && wToken != "" && wEventID != "" && wStartPointLat != 0.0 && wStartPointLon != 0.0 && wEndPointLat != 0.0 && wEndPointLon != 0.0 {
             WatchUser.sharedInstance.username = wUsername
             WatchUser.sharedInstance.email = wEmail
             WatchUser.sharedInstance.token = wToken
             WatchUser.sharedInstance.participatingEventId = wEventID
+            WatchUser.sharedInstance.eventStartPointLat = wStartPointLat
+            WatchUser.sharedInstance.eventStartPointLon = wStartPointLon
+            WatchUser.sharedInstance.eventEndPointLat = wEndPointLat
+            WatchUser.sharedInstance.eventEndPointLon = wEndPointLon
         }
     }
 
@@ -102,10 +122,6 @@ class InterfaceController: WKInterfaceController,WCSessionDelegate {
                 DispatchQueue.main.async {
                     self.popToRootController()
                 }
-//                WatchUser.sharedInstance.username = nil
-//                WatchUser.sharedInstance.email = nil
-//                WatchUser.sharedInstance.token = nil
-//                WatchUser.sharedInstance.participatingEventId = nil
                 isLoggedInFlag = false
                 DispatchQueue.main.async {
                     self.labelBtn.setTitle("Select an event from iPhone to continue!")

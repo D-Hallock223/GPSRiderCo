@@ -56,7 +56,10 @@ class DataSource {
                     let DlatValue = event["startLocation"]["lat"].doubleValue
                     let DlongValue = event["startLocation"]["long"].doubleValue
                     
-                    let eventObj = Event(length: Dlength, trackCoordinateLat: DlatValue, trackCoordinateLong: DlongValue, difficulty: diffValue, raceWinners: DraceWinners as? [String], id: Did, name: Dname, eventImgLink: DeventImgLink, eventDescription: Ddescription, date: Ddate, location: Dlocation,startTime: DstartTime, endTime: DendTime)
+                    let DendLatValue = event["endLocation"]["lat"].doubleValue
+                    let DendLonValue = event["endLocation"]["long"].doubleValue
+                    
+                    let eventObj = Event(length: Dlength, trackCoordinateLat: DlatValue, trackCoordinateLong: DlongValue, endvalueLat: DendLatValue, endvalueLon: DendLonValue, difficulty: diffValue, raceWinners: DraceWinners as? [String], id: Did, name: Dname, eventImgLink: DeventImgLink, eventDescription: Ddescription, date: Ddate, location: Dlocation,startTime: DstartTime, endTime: DendTime)
                     
                     events.append(eventObj)
                 }
@@ -138,8 +141,10 @@ class DataSource {
                     }
                     let DlatValue = event["startLocation"]["lat"].doubleValue
                     let DlongValue = event["startLocation"]["long"].doubleValue
+                    let DendLatValue = event["endLocation"]["lat"].doubleValue
+                    let DendLonValue = event["endLocation"]["long"].doubleValue
                     
-                    let eventObj = Event(length: Dlength, trackCoordinateLat: DlatValue, trackCoordinateLong: DlongValue, difficulty: diffValue, raceWinners: DraceWinners as? [String], id: Did, name: Dname, eventImgLink: DeventImgLink, eventDescription: Ddescription, date: Ddate, location: Dlocation, startTime: DstartTime, endTime: DendTime)
+                    let eventObj = Event(length: Dlength, trackCoordinateLat: DlatValue, trackCoordinateLong: DlongValue, endvalueLat: DendLatValue, endvalueLon: DendLonValue, difficulty: diffValue, raceWinners: DraceWinners as? [String], id: Did, name: Dname, eventImgLink: DeventImgLink, eventDescription: Ddescription, date: Ddate, location: Dlocation,startTime: DstartTime, endTime: DendTime)
                     
                     events.append(eventObj)
                 }

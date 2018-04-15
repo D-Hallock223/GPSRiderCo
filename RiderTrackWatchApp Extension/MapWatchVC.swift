@@ -36,7 +36,6 @@ class MapWatchVC: WKInterfaceController,dataTransmission {
         let location:CLLocationCoordinate2D = self.userLocation.coordinate
         let region:MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
         watchMapView.setRegion(region)
-    
         watchMapView.addAnnotation(self.userLocation.coordinate, with: .red)
         
     }

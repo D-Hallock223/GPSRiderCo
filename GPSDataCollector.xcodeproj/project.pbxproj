@@ -11,6 +11,7 @@
 		891322FA2057573E004B9C0D /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891322F92057573E004B9C0D /* Authentication.swift */; };
 		891322FC205757C3004B9C0D /* UserClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891322FB205757C3004B9C0D /* UserClass.swift */; };
 		891322FE20575A15004B9C0D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891322FD20575A15004B9C0D /* Constants.swift */; };
+		891EE98220816277002099A2 /* EndScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891EE98120816277002099A2 /* EndScreenVC.swift */; };
 		892A6724205A3A4D00243972 /* FancyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892A6723205A3A4D00243972 /* FancyButton.swift */; };
 		892A6726205A3A6300243972 /* FancyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892A6725205A3A6300243972 /* FancyView.swift */; };
 		8940272720296D5C003832B1 /* LogInInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940272620296D5C003832B1 /* LogInInVC.swift */; };
@@ -91,6 +92,7 @@
 		891322F92057573E004B9C0D /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		891322FB205757C3004B9C0D /* UserClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClass.swift; sourceTree = "<group>"; };
 		891322FD20575A15004B9C0D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		891EE98120816277002099A2 /* EndScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndScreenVC.swift; sourceTree = "<group>"; };
 		892A6723205A3A4D00243972 /* FancyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyButton.swift; sourceTree = "<group>"; };
 		892A6725205A3A6300243972 /* FancyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyView.swift; sourceTree = "<group>"; };
 		8940272620296D5C003832B1 /* LogInInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInInVC.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				89961817203BCB260055364A /* PushNotificationPayload.apns */,
 				89961828203BE2720055364A /* WatchAppConstants.swift */,
 				8994E1A92069D22F0072DBF0 /* User.swift */,
+				891EE98120816277002099A2 /* EndScreenVC.swift */,
 			);
 			path = "RiderTrackWatchApp Extension";
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				89961811203BCB260055364A /* ExtensionDelegate.swift in Sources */,
 				8994E1AA2069D22F0072DBF0 /* User.swift in Sources */,
 				89631B69203E730F0063CCE0 /* MapWatchVC.swift in Sources */,
+				891EE98220816277002099A2 /* EndScreenVC.swift in Sources */,
 				8996180F203BCB260055364A /* InterfaceController.swift in Sources */,
 				89961829203BE2720055364A /* WatchAppConstants.swift in Sources */,
 			);

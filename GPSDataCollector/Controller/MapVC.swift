@@ -24,7 +24,10 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate,ra
     
     weak var homeVC:HomeVC?
     var username:String?
-    var finalDestination = CLLocation(latitude: 33.4484, longitude: 112.07)
+    
+    var startDestination:CLLocation!
+    
+    
     var startAnno:MKPointAnnotation!
     var endAnno:MKPointAnnotation!
     
@@ -61,6 +64,8 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate,ra
             homeVC.protocolDelegate = self
             homeVC.closeDelegate = self
         }
+        
+        startDestination = CLLocation(latitude: (homeVC?.selectedEvent.trackCoordinateLat)!, longitude: (homeVC?.selectedEvent.trackCoordinateLong)!)
 
 
         let latdelta:CLLocationDegrees = 0.01
@@ -181,7 +186,7 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate,ra
             self.longitudeLbl.text = "\(location.coordinate.longitude)"
             self.speedLbl.text = "\(location.speed) m/h"
             self.altitudeLbl.text = "\(location.altitude) ft"
-            self.distanceLbl.text = "\(location.distance(from: finalDestination)) m"
+            self.distanceLbl.text = "\(Int(location.distance(from: startDestination))) m"
         }
     }
 }
