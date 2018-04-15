@@ -11,7 +11,7 @@ import SDWebImage
 import WatchConnectivity
 
 
-class EventDetailVC: UIViewController,UIScrollViewDelegate {
+class EventDetailVC: UIViewController,UIScrollViewDelegate,WCSessionDelegate {
     
     
     //MARK:- IBOutlets
@@ -50,8 +50,37 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate {
         myScrollView.delegate = self
         myScrollView.contentSize = CGSize(width: (UIScreen.main.bounds.width) * 3, height: 290)
         setupEventData()
+    }
+    
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        session?.delegate = self
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        session?.delegate = nil
+    }
+    
+    // watch session code
+    
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         
+    }
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {
         
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        
+    }
+    
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+
     }
     
     //MARK:- Functions
@@ -161,7 +190,7 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate {
     
     
     func sendMessageToWatch() {
-        self.session?.sendMessage(["loggedIn":true,
+        self.session!.sendMessage(["loggedIn":true,
                                    "username":user.username,
                                    "email":user.email,
                                    "token":user.token,

@@ -10,7 +10,8 @@ import WatchKit
 import MapKit
 
 class MapWatchVC: WKInterfaceController,dataTransmission {
-    
+
+
     var trackObject:TrackVC!
     
     @IBOutlet var watchMapView: WKInterfaceMap!
@@ -63,6 +64,8 @@ class MapWatchVC: WKInterfaceController,dataTransmission {
         watchMapView.setRegion(region)
         watchMapView.addAnnotation(location, with: .red)
     }
+    
+
     
     
 }

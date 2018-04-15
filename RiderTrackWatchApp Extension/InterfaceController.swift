@@ -133,7 +133,7 @@ class InterfaceController: WKInterfaceController,WCSessionDelegate {
 
     @IBAction func labelBtnTapped() {
         if isLoggedInFlag {
-            pushController(withName: "StartVC", context: nil)
+            pushController(withName: "StartVC", context: session)
         } else{
             return
         }

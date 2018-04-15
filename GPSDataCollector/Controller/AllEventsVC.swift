@@ -85,6 +85,13 @@ class AllEventsVC: UIViewController,WCSessionDelegate,CLLocationManagerDelegate 
         locationSetup()
     }
     
+
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        session?.delegate = nil
+    }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -104,6 +111,15 @@ class AllEventsVC: UIViewController,WCSessionDelegate,CLLocationManagerDelegate 
     func sessionDidDeactivate(_ session: WCSession) {
         
     }
+    
+//    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
+//        
+//        displayAlert(title: "fessf", Message: "sefse")
+//    }
+//    
+//    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+//        displayAlert(title: "aea", Message: "Sef")
+//    }
     
     
     //MARK:- Functions

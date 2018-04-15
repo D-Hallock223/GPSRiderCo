@@ -8,14 +8,17 @@
 
 import WatchKit
 import Foundation
+import WatchConnectivity
 
 class EndScreenVC: WKInterfaceController {
     
+    var session:WCSession!
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-      
-       
+        self.session = context as! WCSession
+        self.setTitle("")
+        
     }
     
     override func willActivate() {
@@ -28,14 +31,20 @@ class EndScreenVC: WKInterfaceController {
         super.didDeactivate()
     }
     
+    
+
+    
     @IBAction func closeBtnTapped() {
         sendMessagetoPhone()
         UserDefaults.standard.set(false, forKey: "loggedIn")
         self.dismiss()
     }
+
     
     func sendMessagetoPhone() {
-        
+        session?.sendMessage(["close":true], replyHandler: nil, errorHandler: { (error) in
+            print(error.localizedDescription)
+            print("error sending message to iphone")
+        })
     }
-
 }

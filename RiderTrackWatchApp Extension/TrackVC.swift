@@ -8,6 +8,7 @@
 
 import WatchKit
 import CoreLocation
+import WatchConnectivity
 
 
 
@@ -37,11 +38,12 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
     
     var endLocationCoordinate:CLLocation!
     
-    
+    var session:WCSession!
     
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
+        self.session = context as! WCSession
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -87,8 +89,7 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
         if raceEndCheck() {
             sendEndMessageToServer()
             locationManager.stopUpdatingLocation()
-//            pushController(withName: "endVC", context: nil)
-            presentController(withName: "endVC", context: nil)
+            presentController(withName: "endVC", context: session)
             return
         }
         sendDataToserver()
@@ -96,18 +97,18 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
         
         
     }
-    
+    //TODO:- send message to server
     func sendEndMessageToServer() {
         print("end message sent")
     }
-    
+    //TODO:- Change end location
     func raceEndCheck() -> Bool {
-        let distance = (self.locationPoint?.distance(from: endLocationCoordinate))!
-//        if distance < 1.0 {
-//            return true
-//        }
-//        return false
-        return true
+        endLocationCoordinate = CLLocation(latitude: 43.066844000, longitude: -89.304744000)
+        let distance = (self.locationPoint!.distance(from: endLocationCoordinate))
+        if distance < CLLocationDistance(exactly: 1.0)! {
+            return true
+        }
+        return false
     }
     
     func sendDataToserver() {
@@ -122,7 +123,7 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
         request.httpMethod = "POST"
         request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer \(WatchUser.sharedInstance.token!)", forHTTPHeaderField: "Authorization")
-
+        
         request.httpBody = parameters
         
         URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in

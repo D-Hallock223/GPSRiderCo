@@ -22,7 +22,11 @@ protocol raceOverCloseProtocol:class {
     func closeWidow()
 }
 
-class HomeVC: UIViewController,CLLocationManagerDelegate {
+class HomeVC: UIViewController,CLLocationManagerDelegate,WCSessionDelegate {
+    
+    
+    
+    
     
     
     
@@ -36,6 +40,8 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
     
     
     var session:WCSession?
+    var mapVCClose:Bool!
+    
     var user:User?
     var locationPoint:CLLocation?
     var locationManager:CLLocationManager!
@@ -63,7 +69,11 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         locationSetup()
+        mapVCClose = false
+        
+        
         self._latitude = CLLocationDegrees()
         self._longitude = CLLocationDegrees()
         self.currentUserNameTxtLbl.text = "Hello \((self.user?.username)!)"
@@ -85,7 +95,50 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
             getMapData()
         }
         
+        if mapVCClose {
+            raceEndAlert(forWatch: true)
+        }
+        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        session?.delegate = self
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        session?.delegate = nil
+    }
+    
+    
+    // watch session code
+    
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        
+    }
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        
+    }
+    
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        if let value = message["close"] as? Bool {
+            if value {
+                closeDelegate?.closeWidow()
+                raceEndAlert(forWatch: true)
+            }
+        }
+    }
+    
+    
+    
     
     func getMapData() {
         firstTime = false
@@ -145,7 +198,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
         }
         if raceEndCheck(location: location) {
             closeDelegate?.closeWidow()
-            raceEndAlert()
+            raceEndAlert(forWatch: false)
             return
         }
         self.latitudeLbl.text = "\(location.coordinate.latitude)" + "°"
@@ -177,23 +230,25 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
         let endClLocation = CLLocation(latitude: finalDestination.latitude, longitude: finalDestination.longitude)
         
         let distance = location.distance(from: endClLocation)
-        if distance < 1.0 {
+        if distance < CLLocationDistance(exactly: 1.0)! {
             return true
         }
         return false
         
     }
     
-    func raceEndAlert() {
+    func raceEndAlert(forWatch:Bool) {
         let alert = UIAlertController(title: "Race Completed", message: "You have successfully completed the race", preferredStyle: .alert)
         let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel) { (action) in
             self.locationManager.stopUpdatingLocation()
             self.sendRaceOverMessageToServer()
             self.user = nil
-            self.session?.sendMessage(["loggedIn":false], replyHandler: nil, errorHandler: { (error) in
-                self.displayAlert(title: "Error Occured", Message: error.localizedDescription)
-                return
-            })
+            if !forWatch {
+                self.session?.sendMessage(["loggedIn":false], replyHandler: nil, errorHandler: { (error) in
+                    print(error.localizedDescription)
+                    return
+                })
+            }
             self.dismiss(animated: true, completion: nil)
         }
         alert.addAction(dismissAction)
@@ -212,6 +267,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
             destination.locationPoint = locationPoint
             destination.username = username
             destination.routeCoordinates = self.previousRouteCoordinates
+            destination.session = self.session
         }
     }
     
@@ -322,7 +378,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
             self.locationManager.stopUpdatingLocation()
             self.user = nil
             self.session?.sendMessage(["loggedIn":false], replyHandler: nil, errorHandler: { (error) in
-                self.displayAlert(title: "Error Occured", Message: error.localizedDescription)
+                print(error.localizedDescription)
                 return
             })
             self.dismiss(animated: true, completion: nil)
@@ -332,6 +388,9 @@ class HomeVC: UIViewController,CLLocationManagerDelegate {
         alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
     }
+    
+    
+    
     
 }
 

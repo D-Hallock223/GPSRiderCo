@@ -9,12 +9,11 @@
 import UIKit
 import MapKit
 import Alamofire
+import WatchConnectivity
 
 
 
-
-
-class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate,raceOverCloseProtocol {
+class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate,raceOverCloseProtocol,WCSessionDelegate {
     
     
     
@@ -32,7 +31,7 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate,ra
     var endAnno:MKPointAnnotation!
     
 
-    
+    var session:WCSession!
     
 
     
@@ -85,6 +84,41 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate,ra
         homeVC?.protocolDelegate = nil
         homeVC?.closeDelegate = nil
         homeVC = nil
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        session?.delegate = self
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        session?.delegate = nil
+    }
+    
+    
+    // watch session code
+    
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        
+    }
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {
+        
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        
+    }
+    
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        if let value = message["close"] as? Bool {
+            if value {
+                homeVC?.mapVCClose = true
+                closeWidow()
+            }
+        }
     }
     
     func closeWidow() {

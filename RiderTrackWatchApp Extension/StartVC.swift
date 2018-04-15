@@ -7,6 +7,8 @@
 //
 
 import WatchKit
+import WatchConnectivity
+
 
 
 class StartVC: WKInterfaceController {
@@ -15,11 +17,14 @@ class StartVC: WKInterfaceController {
     @IBOutlet var startBtn: WKInterfaceButton!
     
     
+    var session:WCSession!
+    
     var showStopBtn:Bool!
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         showStopBtn = false
+        self.session = context as! WCSession
     }
     
     override func willActivate() {
@@ -44,7 +49,7 @@ class StartVC: WKInterfaceController {
             self.popToRootController()
         }else{
             showStopBtn = true
-            pushController(withName: "TrackVC", context: nil)
+            pushController(withName: "TrackVC", context: session)
         }
         
     }
