@@ -22,5 +22,7 @@ let URL_REGISTER_FOR_EVENT = "https://athlete-tracker-preprod.herokuapp.com/even
 
 let URL_GET_REGISTERED_EVENTS = "https://athlete-tracker-preprod.herokuapp.com/events/registered_events"
 
+let URL_UNREGISTER_EVENT = "https://athlete-tracker-preprod.herokuapp.com/events/unregister"
+
 
 

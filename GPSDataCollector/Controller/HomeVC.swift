@@ -143,7 +143,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate,WCSessionDelegate {
     func getMapData() {
         firstTime = false
         KRProgressHUD.show(withMessage: "Fetching Map Information", completion: nil)
-        getCoordinatesFromDownloadURL(fileURL: "https://firebasestorage.googleapis.com/v0/b/gpsdatacollector-44050.appspot.com/o/1.gpx?alt=media&token=a33334b0-d6c1-40b5-88fd-82bb61568455") { (Success) in
+        getCoordinatesFromDownloadURL(fileURL: selectedEvent.trackFileLink) { (Success) in
             if Success {
                 KRProgressHUD.showSuccess(withMessage: "Successfully fetched map information")
                 print("Successfully downloaded map path")

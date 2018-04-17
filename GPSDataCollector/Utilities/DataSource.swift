@@ -59,7 +59,9 @@ class DataSource {
                     let DendLatValue = event["endLocation"]["lat"].doubleValue
                     let DendLonValue = event["endLocation"]["long"].doubleValue
                     
-                    let eventObj = Event(length: Dlength, trackCoordinateLat: DlatValue, trackCoordinateLong: DlongValue, endvalueLat: DendLatValue, endvalueLon: DendLonValue, difficulty: diffValue, raceWinners: DraceWinners as? [String], id: Did, name: Dname, eventImgLink: DeventImgLink, eventDescription: Ddescription, date: Ddate, location: Dlocation,startTime: DstartTime, endTime: DendTime)
+                    let DTrackFileLink = event["trackFile"].stringValue
+                    
+                    let eventObj = Event(length: Dlength, trackCoordinateLat: DlatValue, trackCoordinateLong: DlongValue, endvalueLat: DendLatValue, endvalueLon: DendLonValue, difficulty: diffValue, raceWinners: DraceWinners as? [String], id: Did, name: Dname, eventImgLink: DeventImgLink, eventDescription: Ddescription, date: Ddate, location: Dlocation,startTime: DstartTime, endTime: DendTime, trackFileLink: DTrackFileLink)
                     
                     events.append(eventObj)
                 }
@@ -144,7 +146,9 @@ class DataSource {
                     let DendLatValue = event["endLocation"]["lat"].doubleValue
                     let DendLonValue = event["endLocation"]["long"].doubleValue
                     
-                    let eventObj = Event(length: Dlength, trackCoordinateLat: DlatValue, trackCoordinateLong: DlongValue, endvalueLat: DendLatValue, endvalueLon: DendLonValue, difficulty: diffValue, raceWinners: DraceWinners as? [String], id: Did, name: Dname, eventImgLink: DeventImgLink, eventDescription: Ddescription, date: Ddate, location: Dlocation,startTime: DstartTime, endTime: DendTime)
+                    let DTrackFileLink = event["trackFile"].stringValue
+                    
+                    let eventObj = Event(length: Dlength, trackCoordinateLat: DlatValue, trackCoordinateLong: DlongValue, endvalueLat: DendLatValue, endvalueLon: DendLonValue, difficulty: diffValue, raceWinners: DraceWinners as? [String], id: Did, name: Dname, eventImgLink: DeventImgLink, eventDescription: Ddescription, date: Ddate, location: Dlocation,startTime: DstartTime, endTime: DendTime, trackFileLink: DTrackFileLink)
                     
                     events.append(eventObj)
                 }
@@ -157,5 +161,37 @@ class DataSource {
             }
         }
         
-    } 
+    }
+    
+    func unregisterForTheEvent(eventId:String,token:String,completion:@escaping(Bool)->()) {
+        
+        guard let sendURL = URL(string: URL_UNREGISTER_EVENT) else {return}
+        let parameters:[String:Any] = ["eventId": eventId]
+        let headers = ["Content-Type":"application/x-www-form-urlencoded",
+                       "Authorization":"Bearer \(token)"
+        ]
+        Alamofire.request(sendURL, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
+            if response.result.error != nil {
+                print("error occured during registerForanEvent request")
+                completion(false)
+                return
+            }
+            if response.result.isSuccess {
+                let json = try! JSON(data: response.data!)
+                let value = json["Result"].boolValue
+                if value == true {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            } else {
+                print("error occured during registerForanEvent request")
+                completion(false)
+            }
+        }
+        
+    }
+    
+    
+    
 }

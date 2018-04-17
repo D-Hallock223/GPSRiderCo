@@ -26,5 +26,6 @@ struct Event {
     let location:String
     let startTime:String
     let endTime:String
+    let trackFileLink:String
     
 }

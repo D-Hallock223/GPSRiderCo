@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import WatchConnectivity
+import KRProgressHUD
 
 
 class EventDetailVC: UIViewController,UIScrollViewDelegate,WCSessionDelegate {
@@ -111,9 +112,9 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate,WCSessionDelegate {
                     registerBtn.setTitle("Let's Go", for: .normal)
                     registerBtn.isEnabled = true
                 }else{
-                    registerBtn.setTitle("Registered Already!", for: .normal)
-                    registerBtn.isEnabled = false
-                    registerBtn.backgroundColor = UIColor(red:0.39216, green:0.39216, blue:0.39216, alpha:1.00000)
+                    registerBtn.setTitle("Unregister", for: .normal)
+                    registerBtn.isEnabled = true
+                    registerBtn.backgroundColor = UIColor(red:0.69412, green:0.23137, blue:0.23922, alpha:1.00000)
                 }
             }
         }
@@ -152,7 +153,7 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate,WCSessionDelegate {
     
     
     func raceStartCheck() -> Bool {
-        return true
+        return false
 //        let num = arc4random_uniform(2)
 //        if num == 1 {
 //            return true
@@ -204,11 +205,31 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate,WCSessionDelegate {
     }
     
     
+    func unregisterEvent(){
+        KRProgressHUD.show()
+        DataSource.sharedInstance.unregisterForTheEvent(eventId: event.id, token: user.token) { (success) in
+            KRProgressHUD.dismiss()
+            if success {
+                self.displayAlert(title: "Success", Message: "You have successfully unregistered for the event")
+                self.registerBtn.setTitle("Register", for: .normal)
+                self.registerBtn.backgroundColor = UIColor(red:0.57255, green:0.77647, blue:0.44706, alpha:1.00000)
+            } else {
+                self.displayAlert(title: "Failure", Message: "Failed to unregister for the event")
+            }
+        }
+    }
+    
+    
     
     //MARK:- IBActions
     
     @IBAction func registerBtnTapped(_ sender: Any) {
         if registerBtn.isEnabled == false {
+            return
+        }
+        
+        if registerBtn.titleLabel?.text == "Unregister" {
+            unregisterEvent()
             return
         }
         
@@ -221,16 +242,17 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate,WCSessionDelegate {
             self.present(vc, animated: true, completion: nil)
             return
         }
-        
+        KRProgressHUD.show()
         DataSource.sharedInstance.registerForanEvent(eventId: event.id, token: user.token) { (Success) in
+            KRProgressHUD.dismiss()
             if Success {
                 self.displayAlert(title: "Registration Successfull!", Message: "You have successfully enrolled in the event")
                 if self.raceStartCheck() {
                     self.registerBtn.setTitle("Let's Go", for: .normal)
                 }else{
-                    self.registerBtn.setTitle("Registered Already!", for: .normal)
-                    self.registerBtn.isEnabled = false
-                    self.registerBtn.backgroundColor = UIColor(red:0.39216, green:0.39216, blue:0.39216, alpha:1.00000)
+                    self.registerBtn.setTitle("Unregister", for: .normal)
+                    self.registerBtn.isEnabled = true
+                    self.registerBtn.backgroundColor = UIColor(red:0.69412, green:0.23137, blue:0.23922, alpha:1.00000)
                 }
             }else{
                 self.displayAlert(title: "Registration Failed!", Message: "Failed to register for the event")
