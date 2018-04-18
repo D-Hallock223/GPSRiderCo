@@ -19,6 +19,8 @@
 		8940272B20296EDF003832B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8940272A20296EDF003832B1 /* GoogleService-Info.plist */; };
 		8949A362206B2A59007BC20E /* Extensions and helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8949A361206B2A59007BC20E /* Extensions and helpers.swift */; };
 		8949A364206B3AE7007BC20E /* EventDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8949A363206B3AE7007BC20E /* EventDetailVC.swift */; };
+		89599A3F2086E00D00DBA414 /* startAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89599A3E2086E00D00DBA414 /* startAnimation.swift */; };
+		89599A412086E33400DBA414 /* StartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89599A402086E33400DBA414 /* StartVC.swift */; };
 		89631B65203E370C0063CCE0 /* StartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89631B64203E370C0063CCE0 /* StartVC.swift */; };
 		89631B67203E72FE0063CCE0 /* TrackVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89631B66203E72FE0063CCE0 /* TrackVC.swift */; };
 		89631B69203E730F0063CCE0 /* MapWatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89631B68203E730F0063CCE0 /* MapWatchVC.swift */; };
@@ -100,6 +102,8 @@
 		8940272A20296EDF003832B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8949A361206B2A59007BC20E /* Extensions and helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions and helpers.swift"; sourceTree = "<group>"; };
 		8949A363206B3AE7007BC20E /* EventDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailVC.swift; sourceTree = "<group>"; };
+		89599A3E2086E00D00DBA414 /* startAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = startAnimation.swift; sourceTree = "<group>"; };
+		89599A402086E33400DBA414 /* StartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartVC.swift; sourceTree = "<group>"; };
 		89631B64203E370C0063CCE0 /* StartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartVC.swift; sourceTree = "<group>"; };
 		89631B66203E72FE0063CCE0 /* TrackVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackVC.swift; sourceTree = "<group>"; };
 		89631B68203E730F0063CCE0 /* MapWatchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapWatchVC.swift; sourceTree = "<group>"; };
@@ -271,6 +275,8 @@
 				8940272820296D68003832B1 /* SignUPVC.swift */,
 				8994E1AB2069F5BE0072DBF0 /* AllEventsVC.swift */,
 				8949A363206B3AE7007BC20E /* EventDetailVC.swift */,
+				89599A3E2086E00D00DBA414 /* startAnimation.swift */,
+				89599A402086E33400DBA414 /* StartVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -460,6 +466,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/KRActivityIndicatorView/KRActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/KRProgressHUD/KRProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -471,6 +478,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KRActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KRProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -539,11 +547,13 @@
 				8994E1B02069F7780072DBF0 /* DataSource.swift in Sources */,
 				89A1560F1FA6486F0081035B /* HomeVC.swift in Sources */,
 				891322FE20575A15004B9C0D /* Constants.swift in Sources */,
+				89599A412086E33400DBA414 /* StartVC.swift in Sources */,
 				89A156251FA64D170081035B /* MapVC.swift in Sources */,
 				8994E1B22069F8410072DBF0 /* Event.swift in Sources */,
 				8940272720296D5C003832B1 /* LogInInVC.swift in Sources */,
 				89A1560D1FA6486F0081035B /* AppDelegate.swift in Sources */,
 				8949A364206B3AE7007BC20E /* EventDetailVC.swift in Sources */,
+				89599A3F2086E00D00DBA414 /* startAnimation.swift in Sources */,
 				891322FC205757C3004B9C0D /* UserClass.swift in Sources */,
 				892A6726205A3A6300243972 /* FancyView.swift in Sources */,
 				8940272920296D68003832B1 /* SignUPVC.swift in Sources */,

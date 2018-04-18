@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '5D22738F3CB100CA765A6251B5C38278'
+               BlueprintIdentifier = 'A5898027903B15E3693AD1F8C3C09FD7'
                BlueprintName = 'Pods-GPSDataCollector'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods-GPSDataCollector.framework'>

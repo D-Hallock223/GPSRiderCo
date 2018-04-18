@@ -12,5 +12,6 @@ target 'GPSDataCollector' do
   pod 'SwiftyJSON', '~> 4.0'
   pod 'SDWebImage', '~> 4.0'
   pod 'KRProgressHUD'
+  pod 'MarqueeLabel/Swift'
 
 end

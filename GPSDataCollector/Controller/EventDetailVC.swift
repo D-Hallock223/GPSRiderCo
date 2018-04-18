@@ -10,6 +10,7 @@ import UIKit
 import SDWebImage
 import WatchConnectivity
 import KRProgressHUD
+import MarqueeLabel
 
 
 class EventDetailVC: UIViewController,UIScrollViewDelegate,WCSessionDelegate {
@@ -27,6 +28,8 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate,WCSessionDelegate {
     @IBOutlet weak var descriptionLbl: UILabel!
     @IBOutlet weak var raceWinnersLbl: UILabel!
     @IBOutlet weak var titleTextLbl: UILabel!
+        
+    @IBOutlet weak var myMarqueeLbl: MarqueeLabel!
     
     //MARK:- Properties
     
@@ -47,11 +50,13 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate,WCSessionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
         myScrollView.delegate = self
         myScrollView.contentSize = CGSize(width: (UIScreen.main.bounds.width) * 3, height: 290)
+        myMarqueeLbl.isHidden = true
         setupEventData()
     }
+    
+
     
     
     
@@ -111,10 +116,13 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate,WCSessionDelegate {
                 if raceStartCheck() {
                     registerBtn.setTitle("Let's Go", for: .normal)
                     registerBtn.isEnabled = true
+                    myMarqueeLbl.isHidden = true
                 }else{
                     registerBtn.setTitle("Unregister", for: .normal)
                     registerBtn.isEnabled = true
                     registerBtn.backgroundColor = UIColor(red:0.69412, green:0.23137, blue:0.23922, alpha:1.00000)
+                    myMarqueeLbl.isHidden = false
+
                 }
             }
         }
@@ -153,12 +161,11 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate,WCSessionDelegate {
     
     
     func raceStartCheck() -> Bool {
+        let num = arc4random_uniform(2)
+        if num == 1 {
+            return true
+        }
         return false
-//        let num = arc4random_uniform(2)
-//        if num == 1 {
-//            return true
-//        }
-//        return false
         //        let startTime = Formatter.iso8601.date(from: event.startTime)
         //        let endTime = Formatter.iso8601.date(from: event.endTime)
         //        let date = Date()
@@ -213,6 +220,7 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate,WCSessionDelegate {
                 self.displayAlert(title: "Success", Message: "You have successfully unregistered for the event")
                 self.registerBtn.setTitle("Register", for: .normal)
                 self.registerBtn.backgroundColor = UIColor(red:0.57255, green:0.77647, blue:0.44706, alpha:1.00000)
+                self.myMarqueeLbl.isHidden = true
             } else {
                 self.displayAlert(title: "Failure", Message: "Failed to unregister for the event")
             }
@@ -249,16 +257,21 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate,WCSessionDelegate {
                 self.displayAlert(title: "Registration Successfull!", Message: "You have successfully enrolled in the event")
                 if self.raceStartCheck() {
                     self.registerBtn.setTitle("Let's Go", for: .normal)
+                    self.myMarqueeLbl.isHidden = true
                 }else{
                     self.registerBtn.setTitle("Unregister", for: .normal)
                     self.registerBtn.isEnabled = true
                     self.registerBtn.backgroundColor = UIColor(red:0.69412, green:0.23137, blue:0.23922, alpha:1.00000)
+                    self.myMarqueeLbl.isHidden = false
+
                 }
             }else{
                 self.displayAlert(title: "Registration Failed!", Message: "Failed to register for the event")
                 self.registerBtn.setTitle("Register", for: .normal)
                 self.registerBtn.isEnabled = true
                 self.registerBtn.backgroundColor = UIColor(red:0.57255, green:0.77647, blue:0.44706, alpha:1.00000)
+                self.myMarqueeLbl.isHidden = true
+
             }
         }
         
