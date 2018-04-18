@@ -2,7 +2,7 @@
 //  IphoneXView.swift
 //  Exported from Kite Compositor for Mac 1.9.1
 //
-//  Created on 4/17/18, 7:14 PM.
+//  Created on 4/17/18, 8:23 PM.
 //
 
 
@@ -38,71 +38,71 @@ class IphoneXView: UIView
         // Paths
         //
         let pathPath = CGMutablePath()
-        pathPath.move(to: CGPoint(x: 0.591132, y: 60.527916))
-        pathPath.addLine(to: CGPoint(x: 47.038345, y: 16.652954))
-        pathPath.addCurve(to: CGPoint(x: 42.548527, y: 2.643147), control1: CGPoint(x: 41.051922, y: 11.433856), control2: CGPoint(x: 39.555317, y: 6.76392))
-        pathPath.addCurve(to: CGPoint(x: 61.827251, y: 4.735849), control1: CGPoint(x: 45.54174, y: -1.477627), control2: CGPoint(x: 51.967979, y: -0.78006))
-        pathPath.addCurve(to: CGPoint(x: 85.961212, y: 27.682713), control1: CGPoint(x: 78.587967, y: 17.358755), control2: CGPoint(x: 86.632622, y: 25.00771))
-        pathPath.addCurve(to: CGPoint(x: 75.905052, y: 41.218899), control1: CGPoint(x: 85.499916, y: 31.207716), control2: CGPoint(x: 85.672462, y: 36.157234))
-        pathPath.addCurve(to: CGPoint(x: 34.683521, y: 49.017906), control1: CGPoint(x: 64.847229, y: 46.949287), control2: CGPoint(x: 36.903252, y: 51.495312))
-        pathPath.addLine(to: CGPoint(x: 69.718117, y: 31.221598))
-        pathPath.addCurve(to: CGPoint(x: 63.601948, y: 26.134645), control1: CGPoint(x: 69.406906, y: 29.390921), control2: CGPoint(x: 67.368187, y: 27.695269))
-        pathPath.addCurve(to: CGPoint(x: 40.143417, y: 41.218899), control1: CGPoint(x: 51.012657, y: 34.498886), control2: CGPoint(x: 43.193146, y: 39.526974))
-        pathPath.addCurve(to: CGPoint(x: 34.683521, y: 44.280476), control1: CGPoint(x: 38.389885, y: 42.191723), control2: CGPoint(x: 35.296349, y: 44.181915))
-        pathPath.addCurve(to: CGPoint(x: 7.077745, y: 58.878742), control1: CGPoint(x: 16.279671, y: 54.012653), control2: CGPoint(x: 7.077745, y: 58.878742))
-        pathPath.addCurve(to: CGPoint(x: 1.554957, y: 60.992439), control1: CGPoint(x: 5.071686, y: 60.243), control2: CGPoint(x: 3.230757, y: 60.947567))
-        pathPath.addCurve(to: CGPoint(x: 0.591132, y: 60.527916), control1: CGPoint(x: -0.120842, y: 61.037312), control2: CGPoint(x: -0.442117, y: 60.882469))
+        pathPath.move(to: CGPoint(x: 0.591, y: 60.528))
+        pathPath.addLine(to: CGPoint(x: 47.037998, y: 16.653))
+        pathPath.addCurve(to: CGPoint(x: 42.549, y: 2.643), control1: CGPoint(x: 41.051998, y: 11.434), control2: CGPoint(x: 39.555, y: 6.764))
+        pathPath.addCurve(to: CGPoint(x: 61.827, y: 4.736), control1: CGPoint(x: 45.542, y: -1.478), control2: CGPoint(x: 51.967999, y: -0.78))
+        pathPath.addCurve(to: CGPoint(x: 85.960999, y: 27.683001), control1: CGPoint(x: 78.587997, y: 17.358999), control2: CGPoint(x: 86.633003, y: 25.007999))
+        pathPath.addCurve(to: CGPoint(x: 75.904999, y: 41.219002), control1: CGPoint(x: 85.5, y: 31.208), control2: CGPoint(x: 85.671997, y: 36.157001))
+        pathPath.addCurve(to: CGPoint(x: 34.683998, y: 49.018002), control1: CGPoint(x: 64.847, y: 46.949001), control2: CGPoint(x: 36.903, y: 51.494999))
+        pathPath.addLine(to: CGPoint(x: 69.718002, y: 31.222))
+        pathPath.addCurve(to: CGPoint(x: 63.602001, y: 26.135), control1: CGPoint(x: 69.406998, y: 29.391001), control2: CGPoint(x: 67.367996, y: 27.695))
+        pathPath.addCurve(to: CGPoint(x: 40.143002, y: 41.219002), control1: CGPoint(x: 51.013, y: 34.499001), control2: CGPoint(x: 43.193001, y: 39.527))
+        pathPath.addCurve(to: CGPoint(x: 34.683998, y: 44.279999), control1: CGPoint(x: 38.389999, y: 42.192001), control2: CGPoint(x: 35.296001, y: 44.181999))
+        pathPath.addCurve(to: CGPoint(x: 7.078, y: 58.879002), control1: CGPoint(x: 16.280001, y: 54.013), control2: CGPoint(x: 7.078, y: 58.879002))
+        pathPath.addCurve(to: CGPoint(x: 1.555, y: 60.992001), control1: CGPoint(x: 5.072, y: 60.243), control2: CGPoint(x: 3.231, y: 60.948002))
+        pathPath.addCurve(to: CGPoint(x: 0.591, y: 60.528), control1: CGPoint(x: -0.121, y: 61.036999), control2: CGPoint(x: -0.442, y: 60.882))
         pathPath.closeSubpath()
-        pathPath.move(to: CGPoint(x: 0.591132, y: 60.527916))
+        pathPath.move(to: CGPoint(x: 0.591, y: 60.528))
         
         let ovalPath = CGMutablePath()
         ovalPath.move(to: CGPoint(x: 19.5, y: 11))
-        ovalPath.addCurve(to: CGPoint(x: 39, y: 5.5), control1: CGPoint(x: 30.269552, y: 11), control2: CGPoint(x: 39, y: 8.537566))
-        ovalPath.addCurve(to: CGPoint(x: 19.5, y: 0), control1: CGPoint(x: 39, y: 2.462434), control2: CGPoint(x: 30.269552, y: 0))
-        ovalPath.addCurve(to: CGPoint(x: 0, y: 5.5), control1: CGPoint(x: 8.730448, y: 0), control2: CGPoint(x: 0, y: 2.462434))
-        ovalPath.addCurve(to: CGPoint(x: 19.5, y: 11), control1: CGPoint(x: 0, y: 8.537566), control2: CGPoint(x: 8.730448, y: 11))
+        ovalPath.addCurve(to: CGPoint(x: 39, y: 5.5), control1: CGPoint(x: 30.27, y: 11), control2: CGPoint(x: 39, y: 8.538))
+        ovalPath.addCurve(to: CGPoint(x: 19.5, y: 0), control1: CGPoint(x: 39, y: 2.462), control2: CGPoint(x: 30.27, y: 0))
+        ovalPath.addCurve(to: CGPoint(x: 0, y: 5.5), control1: CGPoint(x: 8.73, y: 0), control2: CGPoint(x: 0, y: 2.462))
+        ovalPath.addCurve(to: CGPoint(x: 19.5, y: 11), control1: CGPoint(x: 0, y: 8.538), control2: CGPoint(x: 8.73, y: 11))
         ovalPath.closeSubpath()
         ovalPath.move(to: CGPoint(x: 19.5, y: 11))
         
         let ovalPath1 = CGMutablePath()
         ovalPath1.move(to: CGPoint(x: 12.5, y: 23))
-        ovalPath1.addCurve(to: CGPoint(x: 25, y: 11.5), control1: CGPoint(x: 19.403559, y: 23), control2: CGPoint(x: 25, y: 17.851274))
-        ovalPath1.addCurve(to: CGPoint(x: 12.5, y: 0), control1: CGPoint(x: 25, y: 5.148726), control2: CGPoint(x: 19.403559, y: 0))
-        ovalPath1.addCurve(to: CGPoint(x: 0, y: 11.5), control1: CGPoint(x: 5.596441, y: 0), control2: CGPoint(x: 0, y: 5.148726))
-        ovalPath1.addCurve(to: CGPoint(x: 12.5, y: 23), control1: CGPoint(x: 0, y: 17.851274), control2: CGPoint(x: 5.596441, y: 23))
+        ovalPath1.addCurve(to: CGPoint(x: 25, y: 11.5), control1: CGPoint(x: 19.403999, y: 23), control2: CGPoint(x: 25, y: 17.851))
+        ovalPath1.addCurve(to: CGPoint(x: 12.5, y: 0), control1: CGPoint(x: 25, y: 5.149), control2: CGPoint(x: 19.403999, y: 0))
+        ovalPath1.addCurve(to: CGPoint(x: 0, y: 11.5), control1: CGPoint(x: 5.596, y: 0), control2: CGPoint(x: 0, y: 5.149))
+        ovalPath1.addCurve(to: CGPoint(x: 12.5, y: 23), control1: CGPoint(x: 0, y: 17.851), control2: CGPoint(x: 5.596, y: 23))
         ovalPath1.closeSubpath()
         ovalPath1.move(to: CGPoint(x: 12.5, y: 23))
         
         let pathPath1 = CGMutablePath()
-        pathPath1.move(to: CGPoint(x: 1.810478, y: 38))
-        pathPath1.addCurve(to: CGPoint(x: 4.113055, y: 8.481183), control1: CGPoint(x: -1.215737, y: 23.437437), control2: CGPoint(x: -0.448212, y: 13.597831))
-        pathPath1.addCurve(to: CGPoint(x: 32.695965, y: 2.764267), control1: CGPoint(x: 10.954955, y: 0.806211), control2: CGPoint(x: 19.401352, y: -2.952648))
-        pathPath1.addCurve(to: CGPoint(x: 45.990578, y: 20.154545), control1: CGPoint(x: 45.990578, y: 8.481183), control2: CGPoint(x: 46.067257, y: 19.769701))
-        pathPath1.addCurve(to: CGPoint(x: 45.190777, y: 21.972469), control1: CGPoint(x: 45.95644, y: 20.325867), control2: CGPoint(x: 45.940838, y: 21.340832))
-        pathPath1.addCurve(to: CGPoint(x: 42.153675, y: 23.164286), control1: CGPoint(x: 44.255959, y: 22.759697), control2: CGPoint(x: 42.521721, y: 23.171282))
-        pathPath1.addCurve(to: CGPoint(x: 29.532545, y: 18.205114), control1: CGPoint(x: 41.490318, y: 23.15168), control2: CGPoint(x: 34.450928, y: 24.464792))
-        pathPath1.addCurve(to: CGPoint(x: 17.873535, y: 11.945437), control1: CGPoint(x: 26.253622, y: 14.031996), control2: CGPoint(x: 22.367285, y: 11.945437))
-        pathPath1.addCurve(to: CGPoint(x: 6.642778, y: 24.890774), control1: CGPoint(x: 13.036413, y: 13.653346), control2: CGPoint(x: 9.292828, y: 17.968458))
-        pathPath1.addCurve(to: CGPoint(x: 1.810478, y: 38), control1: CGPoint(x: 3.99273, y: 31.813089), control2: CGPoint(x: 2.381963, y: 36.182831))
+        pathPath1.move(to: CGPoint(x: 1.81, y: 38))
+        pathPath1.addCurve(to: CGPoint(x: 4.113, y: 8.481), control1: CGPoint(x: -1.216, y: 23.437), control2: CGPoint(x: -0.448, y: 13.598))
+        pathPath1.addCurve(to: CGPoint(x: 32.695999, y: 2.764), control1: CGPoint(x: 10.955, y: 0.806), control2: CGPoint(x: 19.400999, y: -2.953))
+        pathPath1.addCurve(to: CGPoint(x: 45.991001, y: 20.155001), control1: CGPoint(x: 45.991001, y: 8.481), control2: CGPoint(x: 46.067001, y: 19.77))
+        pathPath1.addCurve(to: CGPoint(x: 45.191002, y: 21.972), control1: CGPoint(x: 45.956001, y: 20.326), control2: CGPoint(x: 45.941002, y: 21.341))
+        pathPath1.addCurve(to: CGPoint(x: 42.153999, y: 23.164), control1: CGPoint(x: 44.256001, y: 22.76), control2: CGPoint(x: 42.521999, y: 23.171))
+        pathPath1.addCurve(to: CGPoint(x: 29.533001, y: 18.205), control1: CGPoint(x: 41.490002, y: 23.152), control2: CGPoint(x: 34.451, y: 24.465))
+        pathPath1.addCurve(to: CGPoint(x: 17.874001, y: 11.945), control1: CGPoint(x: 26.254, y: 14.032), control2: CGPoint(x: 22.367001, y: 11.945))
+        pathPath1.addCurve(to: CGPoint(x: 6.643, y: 24.891001), control1: CGPoint(x: 13.036, y: 13.653), control2: CGPoint(x: 9.293, y: 17.968))
+        pathPath1.addCurve(to: CGPoint(x: 1.81, y: 38), control1: CGPoint(x: 3.993, y: 31.813), control2: CGPoint(x: 2.382, y: 36.182999))
         pathPath1.closeSubpath()
-        pathPath1.move(to: CGPoint(x: 1.810478, y: 38))
+        pathPath1.move(to: CGPoint(x: 1.81, y: 38))
         
         let pathPath2 = CGMutablePath()
-        pathPath2.move(to: CGPoint(x: 7.194646, y: 4.541625))
-        pathPath2.addCurve(to: CGPoint(x: 9.890882, y: 5.92593), control1: CGPoint(x: 8.553073, y: 5.116388), control2: CGPoint(x: 9.451818, y: 5.577823))
-        pathPath2.addCurve(to: CGPoint(x: 14.405637, y: 12.839663), control1: CGPoint(x: 12.63053, y: 8.098024), control2: CGPoint(x: 13.777154, y: 10.51525))
-        pathPath2.addCurve(to: CGPoint(x: 25.846066, y: 21.036514), control1: CGPoint(x: 15.574986, y: 17.164446), control2: CGPoint(x: 20.990501, y: 23.577374))
-        pathPath2.addCurve(to: CGPoint(x: 44.128681, y: 0.001982), control1: CGPoint(x: 30.701632, y: 18.495653), control2: CGPoint(x: 46.8368, y: 1.861468))
-        pathPath2.addCurve(to: CGPoint(x: 45.843548, y: 0.001982), control1: CGPoint(x: 45.065536, y: 0.004596), control2: CGPoint(x: 45.637157, y: 0.004596))
-        pathPath2.addCurve(to: CGPoint(x: 40.287682, y: 19.953674), control1: CGPoint(x: 46.156452, y: -0.001982), control2: CGPoint(x: 46.538029, y: 12.368549))
-        pathPath2.addCurve(to: CGPoint(x: 31.247147, y: 28.872286), control1: CGPoint(x: 37.617943, y: 23.193544), control2: CGPoint(x: 34.758053, y: 26.48069))
-        pathPath2.addCurve(to: CGPoint(x: 17.566809, y: 32.646145), control1: CGPoint(x: 26.538382, y: 32.079853), control2: CGPoint(x: 21.097843, y: 33.785534))
-        pathPath2.addCurve(to: CGPoint(x: 0.297083, y: 16.493471), control1: CGPoint(x: 11.402997, y: 30.657219), control2: CGPoint(x: 1.491158, y: 24.968143))
-        pathPath2.addCurve(to: CGPoint(x: 2.715775, y: 5.671114), control1: CGPoint(x: -0.896992, y: 8.018798), control2: CGPoint(x: 1.835854, y: 6.081121))
-        pathPath2.addCurve(to: CGPoint(x: 5.332663, y: 4.541625), control1: CGPoint(x: 3.139678, y: 5.473593), control2: CGPoint(x: 3.962196, y: 4.846882))
-        pathPath2.addCurve(to: CGPoint(x: 7.194646, y: 4.541625), control1: CGPoint(x: 5.683358, y: 4.463511), control2: CGPoint(x: 6.304018, y: 4.463511))
+        pathPath2.move(to: CGPoint(x: 7.195, y: 4.542))
+        pathPath2.addCurve(to: CGPoint(x: 9.891, y: 5.926), control1: CGPoint(x: 8.553, y: 5.116), control2: CGPoint(x: 9.452, y: 5.578))
+        pathPath2.addCurve(to: CGPoint(x: 14.406, y: 12.84), control1: CGPoint(x: 12.631, y: 8.098), control2: CGPoint(x: 13.777, y: 10.515))
+        pathPath2.addCurve(to: CGPoint(x: 25.846001, y: 21.037001), control1: CGPoint(x: 15.575, y: 17.164), control2: CGPoint(x: 20.990999, y: 23.577))
+        pathPath2.addCurve(to: CGPoint(x: 44.129002, y: 0.002), control1: CGPoint(x: 30.702, y: 18.496), control2: CGPoint(x: 46.837002, y: 1.861))
+        pathPath2.addCurve(to: CGPoint(x: 45.844002, y: 0.002), control1: CGPoint(x: 45.066002, y: 0.005), control2: CGPoint(x: 45.637001, y: 0.005))
+        pathPath2.addCurve(to: CGPoint(x: 40.287998, y: 19.954), control1: CGPoint(x: 46.155998, y: -0.002), control2: CGPoint(x: 46.537998, y: 12.369))
+        pathPath2.addCurve(to: CGPoint(x: 31.247, y: 28.872), control1: CGPoint(x: 37.618, y: 23.194), control2: CGPoint(x: 34.757999, y: 26.481001))
+        pathPath2.addCurve(to: CGPoint(x: 17.566999, y: 32.646), control1: CGPoint(x: 26.538, y: 32.080002), control2: CGPoint(x: 21.098, y: 33.785999))
+        pathPath2.addCurve(to: CGPoint(x: 0.297, y: 16.493), control1: CGPoint(x: 11.403, y: 30.657), control2: CGPoint(x: 1.491, y: 24.968))
+        pathPath2.addCurve(to: CGPoint(x: 2.716, y: 5.671), control1: CGPoint(x: -0.897, y: 8.019), control2: CGPoint(x: 1.836, y: 6.081))
+        pathPath2.addCurve(to: CGPoint(x: 5.333, y: 4.542), control1: CGPoint(x: 3.14, y: 5.474), control2: CGPoint(x: 3.962, y: 4.847))
+        pathPath2.addCurve(to: CGPoint(x: 7.195, y: 4.542), control1: CGPoint(x: 5.683, y: 4.464), control2: CGPoint(x: 6.304, y: 4.464))
         pathPath2.closeSubpath()
-        pathPath2.move(to: CGPoint(x: 7.194646, y: 4.541625))
+        pathPath2.move(to: CGPoint(x: 7.195, y: 4.542))
         
         // iPhone X
         //
@@ -124,7 +124,7 @@ class IphoneXView: UIView
         let runnerLayer = CALayer()
         runnerLayer.name = "Runner"
         runnerLayer.bounds = CGRect(x: 0, y: 0, width: 145, height: 100)
-        runnerLayer.position = CGPoint(x: 187.5, y: 411)
+        runnerLayer.position = CGPoint(x: 187.5, y: 406)
         runnerLayer.contentsGravity = kCAGravityCenter
         runnerLayer.contentsScale = 2
         
@@ -148,12 +148,13 @@ class IphoneXView: UIView
         // transform.scale.xy
         //
         let transformScaleXyAnimation1 = CASpringAnimation()
-        transformScaleXyAnimation1.beginTime = self.layer.convertTime(CACurrentMediaTime(), from: nil) + 1.49321
+        transformScaleXyAnimation1.beginTime = self.layer.convertTime(CACurrentMediaTime(), from: nil) + 1.500001
         transformScaleXyAnimation1.duration = 0.5
+        transformScaleXyAnimation1.speed = 1.5
         transformScaleXyAnimation1.fillMode = kCAFillModeForwards
         transformScaleXyAnimation1.isRemovedOnCompletion = false
         transformScaleXyAnimation1.keyPath = "transform.scale.xy"
-        transformScaleXyAnimation1.toValue = 2.3
+        transformScaleXyAnimation1.toValue = 2.56
         transformScaleXyAnimation1.fromValue = 0.5
         transformScaleXyAnimation1.stiffness = 200
         transformScaleXyAnimation1.damping = 10
@@ -165,11 +166,11 @@ class IphoneXView: UIView
         // opacity
         //
         let opacityAnimation = CABasicAnimation()
-        opacityAnimation.beginTime = self.layer.convertTime(CACurrentMediaTime(), from: nil) + 1.49321
-        opacityAnimation.duration = 0.773457
+        opacityAnimation.beginTime = self.layer.convertTime(CACurrentMediaTime(), from: nil) + 1.500001
+        opacityAnimation.duration = 0.441427
         opacityAnimation.fillMode = kCAFillModeForwards
         opacityAnimation.isRemovedOnCompletion = false
-        opacityAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        opacityAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
         opacityAnimation.keyPath = "opacity"
         opacityAnimation.toValue = 0
         opacityAnimation.fromValue = 1
@@ -204,14 +205,10 @@ class IphoneXView: UIView
         ovalLayer.position = CGPoint(x: 85.5, y: 37.5)
         ovalLayer.contentsGravity = kCAGravityCenter
         ovalLayer.contentsScale = 2
-        ovalLayer.transform = CATransform3D( m11: 0.809497, m12: -0.587124, m13: 0, m14: 0,
-                                             m21: 0.587124, m22: 0.809497, m23: 0, m24: 0,
+        ovalLayer.transform = CATransform3D( m11: 0.755842, m12: -0.654754, m13: 0, m14: 0,
+                                             m21: 0.654754, m22: 0.755842, m23: 0, m24: 0,
                                              m31: 0, m32: 0, m33: 1, m34: 0,
                                              m41: 0, m42: 0, m43: 0, m44: 1 )
-        ovalLayer.sublayerTransform = CATransform3D( m11: 1, m12: 0, m13: 0, m14: 0,
-                                                     m21: -0, m22: 1, m23: 0, m24: 0,
-                                                     m31: -0, m32: -0, m33: 1, m34: 0,
-                                                     m41: 0, m42: 0, m43: 0, m44: 1 )
         ovalLayer.path = ovalPath
         ovalLayer.fillColor = fillColor.cgColor
         ovalLayer.strokeColor = strokeColor.cgColor
@@ -279,11 +276,11 @@ class IphoneXView: UIView
     
     // MARK: - Responder
     
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)
-//    {
-//        guard let location = touches.first?.location(in: self.superview),
-//            let hitLayer = self.layer.presentation()?.hitTest(location) else { return }
-//        
-//        print("Layer \(hitLayer.name ?? String(describing: hitLayer)) was tapped.")
-//    }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)
+    {
+        guard let location = touches.first?.location(in: self.superview),
+            let hitLayer = self.layer.presentation()?.hitTest(location) else { return }
+        
+        print("Layer \(hitLayer.name ?? String(describing: hitLayer)) was tapped.")
+    }
 }
