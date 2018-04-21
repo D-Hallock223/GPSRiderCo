@@ -89,7 +89,7 @@ class DataSource {
             }
             if response.result.isSuccess {
                 let json = try! JSON(data: response.data!)
-                let value = json["Result"].boolValue
+                let value = json["result"].boolValue
                 if value == true{
                     completion(true)
                 } else {
@@ -178,7 +178,7 @@ class DataSource {
             }
             if response.result.isSuccess {
                 let json = try! JSON(data: response.data!)
-                let value = json["Result"].boolValue
+                let value = json["result"].boolValue
                 if value == true {
                     completion(true)
                 } else {

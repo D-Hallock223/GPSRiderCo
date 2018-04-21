@@ -39,17 +39,14 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5f8-w3-DAd">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rider Track" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJE-5n-ty6">
-                                                <rect key="frame" x="124.66666666666666" y="64.666666666666671" width="126.66666666666666" height="28.666666666666671"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                                <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rider-Track 2" translatesAutoresizingMaskIntoConstraints="NO" id="blv-zc-o9n">
+                                                <rect key="frame" x="100.66666666666669" y="51.666666666666657" width="174" height="55"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.56862745098039214" green="0.7803921568627451" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="jJE-5n-ty6" firstAttribute="centerX" secondItem="5f8-w3-DAd" secondAttribute="centerX" id="Cfk-41-JCv"/>
-                                            <constraint firstItem="jJE-5n-ty6" firstAttribute="centerY" secondItem="5f8-w3-DAd" secondAttribute="centerY" constant="15" id="qMN-rS-sPU"/>
+                                            <constraint firstItem="blv-zc-o9n" firstAttribute="centerX" secondItem="5f8-w3-DAd" secondAttribute="centerX" id="LZt-XJ-mGL"/>
+                                            <constraint firstItem="blv-zc-o9n" firstAttribute="centerY" secondItem="5f8-w3-DAd" secondAttribute="centerY" constant="15" id="mg5-gZ-px1"/>
                                             <constraint firstAttribute="height" constant="128" id="sLp-up-XRd"/>
                                         </constraints>
                                     </view>
@@ -191,7 +188,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wux-UU-Aei" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3774" y="134"/>
+            <point key="canvasLocation" x="-3775.1999999999998" y="133.74384236453201"/>
         </scene>
         <!--SignUPVC-->
         <scene sceneID="CKP-Nj-z1C">
@@ -204,18 +201,15 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zuy-rM-5Vg">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rider Track" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lE2-j8-SeS">
-                                        <rect key="frame" x="124.66666666666666" y="64.666666666666671" width="126.66666666666666" height="28.666666666666671"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                        <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rider-Track 2" translatesAutoresizingMaskIntoConstraints="NO" id="iUz-o9-7OU">
+                                        <rect key="frame" x="100" y="52" width="174" height="55"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.56862745098039214" green="0.7803921568627451" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="1gq-Si-B0P"/>
-                                    <constraint firstItem="lE2-j8-SeS" firstAttribute="centerY" secondItem="Zuy-rM-5Vg" secondAttribute="centerY" constant="15" id="Jnw-PS-LyT"/>
-                                    <constraint firstItem="lE2-j8-SeS" firstAttribute="centerX" secondItem="Zuy-rM-5Vg" secondAttribute="centerX" id="slu-gf-cUP"/>
+                                    <constraint firstItem="iUz-o9-7OU" firstAttribute="centerX" secondItem="Zuy-rM-5Vg" secondAttribute="centerX" id="RUg-Z0-mC8"/>
+                                    <constraint firstItem="iUz-o9-7OU" firstAttribute="centerY" secondItem="Zuy-rM-5Vg" secondAttribute="centerY" constant="15" id="Rel-Ct-9mG"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vig-ME-WnL" customClass="FancyView" customModule="GPSDataCollector" customModuleProvider="target">
@@ -347,8 +341,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3gN-QO-8d2">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rider Track" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CzM-SR-PIT">
-                                        <rect key="frame" x="124" y="50" width="127" height="29"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CzM-SR-PIT">
+                                        <rect key="frame" x="154" y="50" width="67" height="29"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1146,6 +1140,7 @@
     </scenes>
     <resources>
         <image name="Event Location" width="100" height="100"/>
+        <image name="Rider-Track 2" width="174" height="55"/>
         <image name="User Location" width="100" height="100"/>
         <image name="close_btn" width="300" height="300"/>
         <image name="filterImg" width="512" height="512"/>

@@ -216,10 +216,10 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate,ra
         
         if let location = location {
             
-            self.latitudeLbl.text = "\(location.coordinate.latitude)"
-            self.longitudeLbl.text = "\(location.coordinate.longitude)"
-            self.speedLbl.text = "\(location.speed) m/h"
-            self.altitudeLbl.text = "\(location.altitude) ft"
+            self.latitudeLbl.text = "\(location.coordinate.latitude.truncate(3))°"
+            self.longitudeLbl.text = "\(location.coordinate.longitude.truncate(3))°"
+            self.speedLbl.text = "\(location.speed.truncate(2)) m/h"
+            self.altitudeLbl.text = "\(location.altitude.truncate(2)) ft"
             self.distanceLbl.text = "\(Int(location.distance(from: startDestination))) m"
         }
     }

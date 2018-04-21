@@ -17,6 +17,14 @@ extension Formatter {
     }()
 }
 
+extension Double
+{
+    func truncate(_ places : Int)-> Double
+    {
+        return Double(floor(pow(10.0, Double(places)) * self)/pow(10.0, Double(places)))
+    }
+}
+
 
 func RemainingDays(date:String) -> Int? {
     let date3 = Formatter.iso8601.date(from: date)

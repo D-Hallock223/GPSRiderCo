@@ -81,10 +81,10 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
             return
         }
         self.locationPoint = location
-        latitudeLbl.setText("\(location.coordinate.latitude)")
-        longitudeLbl.setText("\(location.coordinate.longitude)")
-        speedLbl.setText("\(location.speed) m/s")
-        altitudeLbl.setText("\(location.altitude) m")
+        latitudeLbl.setText("\(location.coordinate.latitude.truncate(3))°")
+        longitudeLbl.setText("\(location.coordinate.longitude.truncate(3))°")
+        speedLbl.setText("\(location.speed.truncate(2)) m/s")
+        altitudeLbl.setText("\(location.altitude.truncate(2)) ft")
         distanceLbl.setText("\(Int(location.distance(from: finalDestination))) m")
         if raceEndCheck() {
             sendEndMessageToServer()

@@ -201,8 +201,8 @@ class HomeVC: UIViewController,CLLocationManagerDelegate,WCSessionDelegate {
             raceEndAlert(forWatch: false)
             return
         }
-        self.latitudeLbl.text = "\(location.coordinate.latitude)" + "°"
-        self.longitudeLbl.text = "\(location.coordinate.longitude)" + "°"
+        self.latitudeLbl.text = "\(location.coordinate.latitude.truncate(3))" + "°"
+        self.longitudeLbl.text = "\(location.coordinate.longitude.truncate(3))" + "°"
         sendDataToserver()
         guard let delegate = protocolDelegate else {return}
         delegate.receiveAndUpdate(location: location)

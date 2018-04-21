@@ -87,8 +87,8 @@ class Authentication {
             if response.result.isSuccess {
                 let json = try! JSON(data: response.data!)
                 print(json)
-                let result = json["result"].stringValue.lowercased()
-                if result == "ok" {
+                let result = json["result"].boolValue
+                if result == true {
                     completion(true)
                     return
                 }
