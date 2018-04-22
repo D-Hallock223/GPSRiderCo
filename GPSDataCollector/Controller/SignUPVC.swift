@@ -51,6 +51,7 @@ class SignUPVC: UIViewController {
         vc.userName = username
         vc.email = email
         vc.password = password
+        vc.isComingFromEventsVC = false
         self.userNameTxtField.text = ""
                     self.passwordTxtFld.text = ""
                     self.emailtxtFld.text = ""

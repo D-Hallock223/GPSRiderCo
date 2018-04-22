@@ -13,9 +13,9 @@ import KRProgressHUD
 import CoreLocation
 
 
-class AllEventsVC: UIViewController,WCSessionDelegate,CLLocationManagerDelegate {
-    
-    
+class AllEventsVC: UIViewController,WCSessionDelegate,CLLocationManagerDelegate,UpdateUser {
+
+
     //MARK:- IBOutlets
     
     @IBOutlet weak var myTableView: UITableView!
@@ -123,6 +123,11 @@ class AllEventsVC: UIViewController,WCSessionDelegate,CLLocationManagerDelegate 
     
     
     //MARK:- Functions
+    
+    
+    func updateUserValues(user: User) {
+        self.user = user
+    }
     
     fileprivate func locationSetup() {
         
@@ -321,6 +326,32 @@ class AllEventsVC: UIViewController,WCSessionDelegate,CLLocationManagerDelegate 
     }
     
     //MARK:- IBActions
+    
+    
+    @IBAction func userProfileBtnTapped(_ sender: Any) {
+        
+        let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "userProfileVC") as! UserProfileVC
+        vc.delegate = self
+        vc.userName = user.username
+        vc.email = user.email
+        vc.firstName = user.firstName
+        vc.lastName = user.lastName
+        vc.height = user.height
+        vc.weight = user.weight
+        vc.gender = user.gender
+        vc.bio = user.bio
+        vc.phone = user.phoneNum
+        vc.address = user.address
+        vc.image = user.profileImage
+        vc.token = user.token
+        vc.isComingFromEventsVC = true
+        present(vc, animated: true, completion: nil)
+    }
+    
+    
+    
+    
+    
     
     @IBAction func segmentControlTapped(_ sender: Any) {
         self.myTableView.reloadData()

@@ -328,7 +328,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PgO-YR-JOj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3034" y="134"/>
+            <point key="canvasLocation" x="-3034.4000000000001" y="133.74384236453201"/>
         </scene>
         <!--User ProfileVC-->
         <scene sceneID="FqB-bT-pmo">
@@ -358,7 +358,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.56862745100000001" green="0.78039215689999997" blue="0.43137254899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="FInish">
+                                <state key="normal" title="Finish">
                                     <color key="titleColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
@@ -371,9 +371,35 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rider-Track 2" translatesAutoresizingMaskIntoConstraints="NO" id="Xfi-eA-cta">
                                         <rect key="frame" x="100" y="52" width="174" height="55"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHl-wa-HAg">
+                                        <rect key="frame" x="8" y="66" width="32" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="Gey-DP-h4r"/>
+                                            <constraint firstAttribute="width" constant="32" id="GqT-LT-UOn"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="close_btn"/>
+                                        <connections>
+                                            <action selector="cancelBtnTapped:" destination="KAw-nr-SbI" eventType="touchUpInside" id="QfO-tr-AqT"/>
+                                        </connections>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVG-Ry-jS3">
+                                        <rect key="frame" x="337" y="64" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="6Me-xC-L7h"/>
+                                            <constraint firstAttribute="width" constant="30" id="KDz-v9-mzO"/>
+                                        </constraints>
+                                        <state key="normal" image="editIcon"/>
+                                        <connections>
+                                            <action selector="editIconBtnTapped:" destination="KAw-nr-SbI" eventType="touchUpInside" id="Qyu-8m-77a"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.56862745100000001" green="0.78039215689999997" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="eVG-Ry-jS3" firstAttribute="top" secondItem="60S-UC-Vz1" secondAttribute="top" constant="64" id="6Pm-hc-iVQ"/>
+                                    <constraint firstItem="CHl-wa-HAg" firstAttribute="leading" secondItem="60S-UC-Vz1" secondAttribute="leading" constant="8" id="6lR-L9-bKz"/>
+                                    <constraint firstItem="CHl-wa-HAg" firstAttribute="top" secondItem="60S-UC-Vz1" secondAttribute="top" constant="66" id="CeE-z5-fB2"/>
+                                    <constraint firstAttribute="trailing" secondItem="eVG-Ry-jS3" secondAttribute="trailing" constant="8" id="Kyv-nf-RzA"/>
                                     <constraint firstItem="Xfi-eA-cta" firstAttribute="centerY" secondItem="60S-UC-Vz1" secondAttribute="centerY" constant="15" id="Q7e-r3-Bzz"/>
                                     <constraint firstItem="Xfi-eA-cta" firstAttribute="centerX" secondItem="60S-UC-Vz1" secondAttribute="centerX" id="fYW-VJ-9wv"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="128" id="kgx-sZ-K2W"/>
@@ -509,6 +535,8 @@
                     <connections>
                         <outlet property="addressTxtField" destination="rja-Hb-ej1" id="16d-eC-mxk"/>
                         <outlet property="bioTxtView" destination="7mj-lZ-zmE" id="VzL-VF-GAR"/>
+                        <outlet property="editIconBtn" destination="eVG-Ry-jS3" id="Ww2-RM-nue"/>
+                        <outlet property="finishBtn" destination="yKO-tZ-8ZS" id="ec7-sA-yPP"/>
                         <outlet property="firstNameTxtField" destination="bcr-XF-3gF" id="gfT-pP-fel"/>
                         <outlet property="genderSegmentControl" destination="8HO-CV-TJr" id="YXg-6y-mAt"/>
                         <outlet property="heightTxtField" destination="qOx-aL-iir" id="6y7-6d-Bqk"/>
@@ -563,12 +591,25 @@
                                             <action selector="filterBtnTapped:" destination="8FG-oR-Kvw" eventType="touchUpInside" id="zYG-ig-w88"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n6m-ni-73F">
+                                        <rect key="frame" x="20" y="52" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="fn9-9q-zgm"/>
+                                            <constraint firstAttribute="width" constant="30" id="hEV-6y-vAc"/>
+                                        </constraints>
+                                        <state key="normal" image="userImg"/>
+                                        <connections>
+                                            <action selector="userProfileBtnTapped:" destination="8FG-oR-Kvw" eventType="touchUpInside" id="gET-x0-vlV"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.56862745100000001" green="0.78039215689999997" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="CzM-SR-PIT" firstAttribute="centerX" secondItem="3gN-QO-8d2" secondAttribute="centerX" id="5zu-dk-B0M"/>
                                     <constraint firstItem="NPT-26-KZo" firstAttribute="top" secondItem="3gN-QO-8d2" secondAttribute="top" constant="50" id="Hdr-Dg-KTN"/>
                                     <constraint firstItem="CzM-SR-PIT" firstAttribute="centerY" secondItem="3gN-QO-8d2" secondAttribute="centerY" id="JnL-bT-eAx"/>
+                                    <constraint firstItem="n6m-ni-73F" firstAttribute="leading" secondItem="3gN-QO-8d2" secondAttribute="leading" constant="20" id="dmU-B1-10f"/>
+                                    <constraint firstItem="n6m-ni-73F" firstAttribute="top" secondItem="3gN-QO-8d2" secondAttribute="top" constant="52" id="ege-uh-UPy"/>
                                     <constraint firstItem="LhB-5O-JtA" firstAttribute="centerX" secondItem="3gN-QO-8d2" secondAttribute="centerX" id="h6K-d6-GIa"/>
                                     <constraint firstItem="LhB-5O-JtA" firstAttribute="top" secondItem="CzM-SR-PIT" secondAttribute="bottom" constant="8" id="h8w-mQ-rot"/>
                                     <constraint firstAttribute="trailing" secondItem="NPT-26-KZo" secondAttribute="trailing" constant="20" id="ti8-IK-kNJ"/>
@@ -1335,8 +1376,10 @@
         <image name="Rider-Track 2" width="174" height="55"/>
         <image name="User Location" width="100" height="100"/>
         <image name="close_btn" width="300" height="300"/>
+        <image name="editIcon" width="512" height="512"/>
         <image name="filterImg" width="512" height="512"/>
         <image name="newmusical_btn" width="50" height="50"/>
+        <image name="userImg" width="2240" height="2240"/>
         <image name="userPlaceholder" width="600" height="600"/>
     </resources>
 </document>
