@@ -11,15 +11,14 @@ import FirebaseStorage
 import KRProgressHUD
 import SDWebImage
 
-protocol UpdateUser:class  {
-    func updateUserValues(user:User)
-}
+
 
 class UserProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
     
     //MARK:- IBOutletes
     
+    @IBOutlet weak var selectImgBtn: UIButton!
     @IBOutlet weak var myImageView: UIImageView!
     @IBOutlet weak var firstNameTxtField: UITextField!
     @IBOutlet weak var lastNameTxtField: UITextField!
@@ -34,12 +33,13 @@ class UserProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
     @IBOutlet weak var editIconBtn: UIButton!
     
     //MARK:- Properties
-    weak var delegate:UpdateUser?
     var isComingFromEventsVC:Bool!
     
     var userName:String!
     var email:String!
     var password:String?
+    
+    var keyBoardPresent = false
     
     // iFComingfromEVentsVC
     var firstName:String?
@@ -58,7 +58,11 @@ class UserProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(UserProfileVC.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(UserProfileVC.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
         if isComingFromEventsVC {
+            toggleButton(toggle: false)
             self.finishBtn.isHidden = true
             self.finishBtn.setTitle("Update", for: .normal)
             self.editIconBtn.isHidden = false
@@ -87,11 +91,66 @@ class UserProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.delegate = nil
     }
     
     
     //MARK:- Functions
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if !(keyBoardPresent) {
+            self.keyBoardPresent = true
+            if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                if self.view.frame.origin.y == 0{
+                    self.view.frame.origin.y -= keyboardSize.height
+                }
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if keyBoardPresent {
+            self.keyBoardPresent = false
+            if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                if self.view.frame.origin.y != 0{
+                    self.view.frame.origin.y += keyboardSize.height
+                }
+            }
+        }
+    }
+    
+    func toggleButton(toggle:Bool) {
+        self.selectImgBtn.isEnabled = toggle
+        self.firstNameTxtField.isEnabled = toggle
+        self.lastNameTxtField.isEnabled = toggle
+        self.heightTxtField.isEnabled = toggle
+        self.weightTxtField.isEnabled = toggle
+        self.genderSegmentControl.isEnabled = toggle
+        self.phoneTxtField.isEnabled = toggle
+        self.addressTxtField.isEnabled = toggle
+        self.bioTxtView.isEditable = toggle
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func animation(layer:CALayer){
+        let transformScaleXyAnimation = CASpringAnimation()
+        transformScaleXyAnimation.beginTime = layer.convertTime(CACurrentMediaTime(), from: nil) + 0.000001
+        transformScaleXyAnimation.duration = 0.5
+        transformScaleXyAnimation.autoreverses = true
+        transformScaleXyAnimation.fillMode = kCAFillModeForwards
+        transformScaleXyAnimation.isRemovedOnCompletion = false
+        transformScaleXyAnimation.keyPath = "transform.scale.xy"
+        transformScaleXyAnimation.toValue = 1.3
+        transformScaleXyAnimation.fromValue = 1
+        transformScaleXyAnimation.stiffness = 200
+        transformScaleXyAnimation.damping = 10
+        transformScaleXyAnimation.mass = 0.7
+        transformScaleXyAnimation.initialVelocity = 4
+        
+        layer.add(transformScaleXyAnimation, forKey: "transformScaleXyAnimation")
+    }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
@@ -119,6 +178,21 @@ class UserProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
     }
     
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? SWRevealViewController {
+            let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "allEventsVC") as! AllEventsVC
+            destination.setFront(vc, animated: true)
+            if let _ = destination.frontViewController as? AllEventsVC {
+                if let sen = sender as? User {
+                    vc.user = sen
+                }
+            }
+        } else {
+            print("this is wrong route 2i493399393")
+        }
+    }
+    
+    
     //MARK:- IBActions
     
     @IBAction func cancelBtnTapped(_ sender: Any) {
@@ -130,10 +204,11 @@ class UserProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
     
     
     @IBAction func editIconBtnTapped(_ sender: Any) {
+        let layer = self.finishBtn.layer
+        animation(layer: layer)
         self.finishBtn.isHidden = false
+        toggleButton(toggle: true)
     }
-    
-    
     
     
     @IBAction func imagePickBtnTapped(_ sender: Any) {
@@ -200,7 +275,7 @@ class UserProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
                                 KRProgressHUD.showError(withMessage: "Error Occured.Please try again!")
                                 return
                             }
-                            self.delegate?.updateUserValues(user: returnedUser!)
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateUser"), object: nil, userInfo: ["user":returnedUser!])
                             KRProgressHUD.showSuccess(withMessage: "Successfully Updated")
                             
                             self.finishBtn.isHidden = true
@@ -249,9 +324,7 @@ class UserProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
                                     return
                                 }
                                 KRProgressHUD.dismiss()
-                                let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "allEventsVC") as! AllEventsVC
-                                vc.user = returnedUser
-                                self.present(vc, animated: true, completion: nil)
+                                self.performSegue(withIdentifier: "SWReveal", sender: returnedUser)
                                 
                             })
                         })

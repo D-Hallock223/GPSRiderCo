@@ -13,11 +13,12 @@ import KRProgressHUD
 import CoreLocation
 
 
-class AllEventsVC: UIViewController,WCSessionDelegate,CLLocationManagerDelegate,UpdateUser {
+class AllEventsVC: UIViewController,WCSessionDelegate,CLLocationManagerDelegate {
 
 
     //MARK:- IBOutlets
     
+    @IBOutlet weak var userProfileBtn: UIButton!
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var mySegmentControl: UISegmentedControl!
     
@@ -61,6 +62,12 @@ class AllEventsVC: UIViewController,WCSessionDelegate,CLLocationManagerDelegate,
         // Do any additional setup after loading the view.
         
         //watch part
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUser(_:)), name: NSNotification.Name(rawValue: "updateUser"), object: nil)
+        
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        self.view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
+        
+        userProfileBtn.addTarget(self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)), for: .touchUpInside)
         
         if WCSession.isSupported() {
             session = WCSession.default
@@ -111,23 +118,18 @@ class AllEventsVC: UIViewController,WCSessionDelegate,CLLocationManagerDelegate,
     func sessionDidDeactivate(_ session: WCSession) {
         
     }
-    
-//    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
-//        
-//        displayAlert(title: "fessf", Message: "sefse")
-//    }
-//    
-//    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-//        displayAlert(title: "aea", Message: "Sef")
-//    }
-    
+
     
     //MARK:- Functions
     
     
-    func updateUserValues(user: User) {
-        self.user = user
+    
+    @objc func updateUser(_ notification:NSNotification) {
+        if let returnedUser = notification.userInfo!["user"] as? User {
+            self.user = returnedUser
+        }
     }
+    
     
     fileprivate func locationSetup() {
         
@@ -327,41 +329,13 @@ class AllEventsVC: UIViewController,WCSessionDelegate,CLLocationManagerDelegate,
     
     //MARK:- IBActions
     
-    
-    @IBAction func userProfileBtnTapped(_ sender: Any) {
-        
-        let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "userProfileVC") as! UserProfileVC
-        vc.delegate = self
-        vc.userName = user.username
-        vc.email = user.email
-        vc.firstName = user.firstName
-        vc.lastName = user.lastName
-        vc.height = user.height
-        vc.weight = user.weight
-        vc.gender = user.gender
-        vc.bio = user.bio
-        vc.phone = user.phoneNum
-        vc.address = user.address
-        vc.image = user.profileImage
-        vc.token = user.token
-        vc.isComingFromEventsVC = true
-        present(vc, animated: true, completion: nil)
-    }
-    
-    
-    
-    
-    
+
     
     @IBAction func segmentControlTapped(_ sender: Any) {
         self.myTableView.reloadData()
         self.noLabelCheck()
     }
     
-    @IBAction func SignOutBtnTapped(_ sender: Any) {
-        
-        self.dismiss(animated: true, completion: nil)
-    }
     
     @IBAction func filterBtnTapped(_ sender: Any) {
         self.locationManager.startUpdatingLocation()

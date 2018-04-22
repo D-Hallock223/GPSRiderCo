@@ -53,10 +53,7 @@ class LogInInVC: UIViewController{
             if success {
                 guard let user  = returnedUser else {return}
                 KRProgressHUD.dismiss()
-                
-                let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "allEventsVC") as! AllEventsVC
-                vc.user = user
-                self.present(vc, animated: true, completion: nil)
+                self.performSegue(withIdentifier: "toswreveal", sender: user)
                 
             } else {
                 self.displayAlert(title: "ERROR", Message: "Error while logging in")
@@ -65,6 +62,22 @@ class LogInInVC: UIViewController{
             self.view.endEditing(true)
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? SWRevealViewController {
+            let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "allEventsVC") as! AllEventsVC
+            destination.setFront(vc, animated: true)
+            if let _ = destination.frontViewController as? AllEventsVC {
+                if let sen = sender as? User {
+                    print(sen.firstName,sen.lastName)
+                    vc.user = sen
+                }
+            }
+        } else {
+            print("this is wrong route 2i493399393")
+        }
+    }
+    
     
     
     func displayAlert(title:String,Message:String) {
