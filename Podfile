@@ -7,6 +7,7 @@ target 'GPSDataCollector' do
 
   # Pods for GPSDataCollector
   pod 'Firebase/Core'
+  pod 'Firebase/Storage'
   pod 'Firebase/Auth'
   pod 'Alamofire', '~> 4.7'
   pod 'SwiftyJSON', '~> 4.0'

@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import FirebaseStorage
 
 class DataSource {
     
@@ -189,6 +190,40 @@ class DataSource {
                 completion(false)
             }
         }
+        
+    }
+    
+    
+    func uploadImageToFirebase(image:UIImage,completion:@escaping (Bool,URL?)->()) {
+        
+        let storageReference = Storage.storage().reference()
+        let id = UUID().uuidString
+        let riversRef = storageReference.child("\(id).png")
+        let currentImage = image
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/png"
+        if let data = UIImagePNGRepresentation(currentImage) {
+            riversRef.putData(data, metadata: metadata) { (metadata, error) in
+                if error != nil {
+                    print("uploading image error occured")
+                    completion(false,nil)
+                    return
+                }
+                riversRef.downloadURL(completion: { (url, err) in
+                    if err != nil {
+                        completion(false,nil)
+                        print("no download URL")
+                        return
+                    }
+                    completion(true,url)
+                })
+                
+            }
+        } else {
+            completion(false,nil)
+            return
+        }
+        
         
     }
     

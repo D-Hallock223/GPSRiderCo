@@ -1,6 +1,6 @@
 //
 //  IphoneXView.swift
-//  Exported from Kite Compositor for Mac 1.9.1
+//  
 //
 //  Created on 4/17/18, 8:23 PM.
 //

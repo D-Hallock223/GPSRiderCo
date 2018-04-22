@@ -56,5 +56,11 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Please provide permission inorder to access camera and take a picture</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Please provide permission to access your photo library to select an image</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Please provide permission to access your photo library to select an image</string>
 </dict>
 </plist>

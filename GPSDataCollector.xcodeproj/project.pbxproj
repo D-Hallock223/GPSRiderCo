@@ -14,6 +14,9 @@
 		891EE98220816277002099A2 /* EndScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891EE98120816277002099A2 /* EndScreenVC.swift */; };
 		892A6724205A3A4D00243972 /* FancyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892A6723205A3A4D00243972 /* FancyButton.swift */; };
 		892A6726205A3A6300243972 /* FancyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892A6725205A3A6300243972 /* FancyView.swift */; };
+		8934837B208BB8FE003C8D1C /* UserProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8934837A208BB8FE003C8D1C /* UserProfileVC.swift */; };
+		8934837D208BCD5C003C8D1C /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8934837C208BCD5C003C8D1C /* Camera.swift */; };
+		8934837F208BDFFA003C8D1C /* FancyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8934837E208BDFFA003C8D1C /* FancyImageView.swift */; };
 		8940272720296D5C003832B1 /* LogInInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940272620296D5C003832B1 /* LogInInVC.swift */; };
 		8940272920296D68003832B1 /* SignUPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940272820296D68003832B1 /* SignUPVC.swift */; };
 		8940272B20296EDF003832B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8940272A20296EDF003832B1 /* GoogleService-Info.plist */; };
@@ -97,6 +100,9 @@
 		891EE98120816277002099A2 /* EndScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndScreenVC.swift; sourceTree = "<group>"; };
 		892A6723205A3A4D00243972 /* FancyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyButton.swift; sourceTree = "<group>"; };
 		892A6725205A3A6300243972 /* FancyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyView.swift; sourceTree = "<group>"; };
+		8934837A208BB8FE003C8D1C /* UserProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileVC.swift; sourceTree = "<group>"; };
+		8934837C208BCD5C003C8D1C /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		8934837E208BDFFA003C8D1C /* FancyImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyImageView.swift; sourceTree = "<group>"; };
 		8940272620296D5C003832B1 /* LogInInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInInVC.swift; sourceTree = "<group>"; };
 		8940272820296D68003832B1 /* SignUPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPVC.swift; sourceTree = "<group>"; };
 		8940272A20296EDF003832B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -221,6 +227,7 @@
 				891322F92057573E004B9C0D /* Authentication.swift */,
 				8994E1AF2069F7780072DBF0 /* DataSource.swift */,
 				8949A361206B2A59007BC20E /* Extensions and helpers.swift */,
+				8934837C208BCD5C003C8D1C /* Camera.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -277,6 +284,7 @@
 				8949A363206B3AE7007BC20E /* EventDetailVC.swift */,
 				89599A3E2086E00D00DBA414 /* startAnimation.swift */,
 				89599A402086E33400DBA414 /* StartVC.swift */,
+				8934837A208BB8FE003C8D1C /* UserProfileVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -287,6 +295,7 @@
 				892A6723205A3A4D00243972 /* FancyButton.swift */,
 				892A6725205A3A6300243972 /* FancyView.swift */,
 				8994E1AD2069F5F50072DBF0 /* AllEventsCell.swift */,
+				8934837E208BDFFA003C8D1C /* FancyImageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -547,13 +556,16 @@
 				8994E1B02069F7780072DBF0 /* DataSource.swift in Sources */,
 				89A1560F1FA6486F0081035B /* HomeVC.swift in Sources */,
 				891322FE20575A15004B9C0D /* Constants.swift in Sources */,
+				8934837B208BB8FE003C8D1C /* UserProfileVC.swift in Sources */,
 				89599A412086E33400DBA414 /* StartVC.swift in Sources */,
+				8934837D208BCD5C003C8D1C /* Camera.swift in Sources */,
 				89A156251FA64D170081035B /* MapVC.swift in Sources */,
 				8994E1B22069F8410072DBF0 /* Event.swift in Sources */,
 				8940272720296D5C003832B1 /* LogInInVC.swift in Sources */,
 				89A1560D1FA6486F0081035B /* AppDelegate.swift in Sources */,
 				8949A364206B3AE7007BC20E /* EventDetailVC.swift in Sources */,
 				89599A3F2086E00D00DBA414 /* startAnimation.swift in Sources */,
+				8934837F208BDFFA003C8D1C /* FancyImageView.swift in Sources */,
 				891322FC205757C3004B9C0D /* UserClass.swift in Sources */,
 				892A6726205A3A6300243972 /* FancyView.swift in Sources */,
 				8940272920296D68003832B1 /* SignUPVC.swift in Sources */,

@@ -29,6 +29,7 @@ import Foundation
 
 
 let URL_SING_IN = "https://athlete-tracker-preprod.herokuapp.com/api/users"
+let URL_UPDATE_USER = "https://athlete-tracker-preprod.herokuapp.com/api/users/"
 let URL_LOG_IN = "https://athlete-tracker-preprod.herokuapp.com/api/users/login"
 let URL_FORGOT_PASSWORD = "https://athlete-tracker-preprod.herokuapp.com/api/users/forgotpwd"
 let URL_SEND_DATA_TO_SERVER = "https://athlete-tracker-preprod.herokuapp.com/api/tracking/saveloc"

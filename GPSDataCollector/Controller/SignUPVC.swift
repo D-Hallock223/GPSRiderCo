@@ -17,18 +17,17 @@ class SignUPVC: UIViewController {
     @IBOutlet weak var emailtxtFld: UITextField!
     @IBOutlet weak var passwordTxtFld: UITextField!
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-
+        
     }
     
     
-
+    
     @IBAction func signUpBtnPrssd(_ sender: Any) {
-        KRProgressHUD.show()
         guard let email = emailtxtFld.text,email != "" else {
             displayAlert(title: "Enter the email", Message: "Please enter your email")
             KRProgressHUD.dismiss()
@@ -48,22 +47,16 @@ class SignUPVC: UIViewController {
             return
         }
         
-        Authentication.sharedInstance.signInuser(userName: username, email: email, password: password) { (success, returnedUser) in
-            self.userNameTxtField.text = ""
-            self.passwordTxtFld.text = ""
-            self.emailtxtFld.text = ""
-            if success {
-                guard let user  = returnedUser else {return}
-                KRProgressHUD.dismiss()
-                let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "allEventsVC") as! AllEventsVC
-                vc.user = user
-                self.present(vc, animated: true, completion: nil)
-            } else {
-                self.displayAlert(title: "ERROR", Message: "Error cccured while signing up")
-                KRProgressHUD.dismiss()
-            }
-            self.view.endEditing(true)
-        }
+        let vc  = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "userProfileVC") as! UserProfileVC
+        vc.userName = username
+        vc.email = email
+        vc.password = password
+        self.userNameTxtField.text = ""
+                    self.passwordTxtFld.text = ""
+                    self.emailtxtFld.text = ""
+        self.view.endEditing(true)
+        self.present(vc, animated: true, completion: nil)
+
     }
     
     @IBAction func goToLoginBtnPrssd(_ sender: Any) {
