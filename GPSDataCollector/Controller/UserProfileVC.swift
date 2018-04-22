@@ -66,8 +66,20 @@ class UserProfileVC: UIViewController,UIImagePickerControllerDelegate,UINavigati
             self.finishBtn.isHidden = true
             self.finishBtn.setTitle("Update", for: .normal)
             self.editIconBtn.isHidden = false
+//            if let imgURL = URL(string: image!) {
+//                self.myImageView.sd_setImage(with: imgURL, placeholderImage: #imageLiteral(resourceName: "userPlaceholder"), options: [.continueInBackground,.scaleDownLargeImages], completed: nil)
+//            }else {
+//                self.myImageView.image = #imageLiteral(resourceName: "userPlaceholder")
+//            }
             if let imgURL = URL(string: image!) {
-                self.myImageView.sd_setImage(with: imgURL, placeholderImage: #imageLiteral(resourceName: "userPlaceholder"), options: [.continueInBackground,.scaleDownLargeImages], completed: nil)
+                self.myImageView.sd_setShowActivityIndicatorView(true)
+                self.myImageView.sd_setIndicatorStyle(.gray)
+                self.myImageView.sd_setImage(with: imgURL, placeholderImage: #imageLiteral(resourceName: "userPlaceholder"), options: [.avoidAutoSetImage,.continueInBackground,.scaleDownLargeImages], completed: { (image, error, cache, url) in
+                    
+                    UIView.transition(with: self.view, duration: 1.35, options: .transitionCrossDissolve, animations: {
+                        self.myImageView.image = image
+                    }, completion: nil)
+                })
             }else {
                 self.myImageView.image = #imageLiteral(resourceName: "userPlaceholder")
             }

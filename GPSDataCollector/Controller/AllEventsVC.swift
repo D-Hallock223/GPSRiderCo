@@ -496,9 +496,21 @@ extension AllEventsVC:UITableViewDelegate,UITableViewDataSource {
             } else {
                 cell.difficultyLbl.text = "Hard"
             }
+//            if let imgURL = URL(string: event!.eventImgLink) {
+//                cell.eventsImageView.sd_setImage(with: imgURL, placeholderImage: #imageLiteral(resourceName: "placeholder"), options: [.continueInBackground,.scaleDownLargeImages], completed: nil)
+//            } else {
+//                cell.eventsImageView.image = #imageLiteral(resourceName: "placeholder")
+//            }
             if let imgURL = URL(string: event!.eventImgLink) {
-                cell.eventsImageView.sd_setImage(with: imgURL, placeholderImage: #imageLiteral(resourceName: "placeholder"), options: [.continueInBackground,.scaleDownLargeImages], completed: nil)
-            } else {
+                cell.eventsImageView.sd_setShowActivityIndicatorView(true)
+                cell.eventsImageView.sd_setIndicatorStyle(.gray)
+                cell.eventsImageView.sd_setImage(with: imgURL, placeholderImage: #imageLiteral(resourceName: "placeholder"), options: [.avoidAutoSetImage,.continueInBackground,.scaleDownLargeImages], completed: { (image, error, cache, url) in
+                    
+                    UIView.transition(with: cell.eventsImageView, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                        cell.eventsImageView.image = image
+                    }, completion: nil)
+                })
+            }else {
                 cell.eventsImageView.image = #imageLiteral(resourceName: "placeholder")
             }
             return cell

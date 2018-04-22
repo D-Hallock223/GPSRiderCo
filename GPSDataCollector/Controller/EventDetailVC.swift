@@ -28,7 +28,7 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate,WCSessionDelegate {
     @IBOutlet weak var descriptionLbl: UILabel!
     @IBOutlet weak var raceWinnersLbl: UILabel!
     @IBOutlet weak var titleTextLbl: UILabel!
-        
+    
     @IBOutlet weak var myMarqueeLbl: MarqueeLabel!
     
     //MARK:- Properties
@@ -56,7 +56,7 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate,WCSessionDelegate {
         setupEventData()
     }
     
-
+    
     
     
     
@@ -86,7 +86,7 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate,WCSessionDelegate {
     
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-
+        
     }
     
     //MARK:- Functions
@@ -94,7 +94,15 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate,WCSessionDelegate {
     func setupEventData() {
         titleTextLbl.text = event.name
         guard let imgURL = URL(string: event.eventImgLink) else {return}
-        eventImageView.sd_setImage(with: imgURL, placeholderImage: #imageLiteral(resourceName: "placeholder"), options: [.continueInBackground,.scaleDownLargeImages], completed: nil)
+        //        eventImageView.sd_setImage(with: imgURL, placeholderImage: #imageLiteral(resourceName: "placeholder"), options: [.continueInBackground,.scaleDownLargeImages], completed: nil)
+        eventImageView.sd_setShowActivityIndicatorView(true)
+        eventImageView.sd_setIndicatorStyle(.gray)
+        eventImageView.sd_setImage(with: imgURL, placeholderImage: #imageLiteral(resourceName: "placeholder"), options: [.avoidAutoSetImage,.continueInBackground,.scaleDownLargeImages], completed: { (image, error, cache, url) in
+            
+            UIView.transition(with: self.view, duration: 1.35, options: .transitionCrossDissolve, animations: {
+                self.eventImageView.image = image
+            }, completion: nil)
+        })
         if isPast {
             registerBtn.setTitle("Cannot register now!", for: .normal)
             registerBtn.isEnabled = false
@@ -122,7 +130,7 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate,WCSessionDelegate {
                     registerBtn.isEnabled = true
                     registerBtn.backgroundColor = UIColor(red:0.69412, green:0.23137, blue:0.23922, alpha:1.00000)
                     myMarqueeLbl.isHidden = false
-
+                    
                 }
             }
         }
@@ -263,7 +271,7 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate,WCSessionDelegate {
                     self.registerBtn.isEnabled = true
                     self.registerBtn.backgroundColor = UIColor(red:0.69412, green:0.23137, blue:0.23922, alpha:1.00000)
                     self.myMarqueeLbl.isHidden = false
-
+                    
                 }
             }else{
                 self.displayAlert(title: "Registration Failed!", Message: "Failed to register for the event")
@@ -271,7 +279,7 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate,WCSessionDelegate {
                 self.registerBtn.isEnabled = true
                 self.registerBtn.backgroundColor = UIColor(red:0.57255, green:0.77647, blue:0.44706, alpha:1.00000)
                 self.myMarqueeLbl.isHidden = true
-
+                
             }
         }
         

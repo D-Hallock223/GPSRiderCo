@@ -19,6 +19,7 @@
 		8934837F208BDFFA003C8D1C /* FancyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8934837E208BDFFA003C8D1C /* FancyImageView.swift */; };
 		89348383208C2A5D003C8D1C /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89348382208C2A5D003C8D1C /* SWRevealViewController.m */; };
 		89348385208C2E1A003C8D1C /* SideVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89348384208C2E1A003C8D1C /* SideVC.swift */; };
+		89348387208D311F003C8D1C /* EnlargeImgVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89348386208D311F003C8D1C /* EnlargeImgVC.swift */; };
 		8940272720296D5C003832B1 /* LogInInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940272620296D5C003832B1 /* LogInInVC.swift */; };
 		8940272920296D68003832B1 /* SignUPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8940272820296D68003832B1 /* SignUPVC.swift */; };
 		8940272B20296EDF003832B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8940272A20296EDF003832B1 /* GoogleService-Info.plist */; };
@@ -109,6 +110,7 @@
 		89348381208C2A5D003C8D1C /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		89348382208C2A5D003C8D1C /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		89348384208C2E1A003C8D1C /* SideVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideVC.swift; sourceTree = "<group>"; };
+		89348386208D311F003C8D1C /* EnlargeImgVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnlargeImgVC.swift; sourceTree = "<group>"; };
 		8940272620296D5C003832B1 /* LogInInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInInVC.swift; sourceTree = "<group>"; };
 		8940272820296D68003832B1 /* SignUPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPVC.swift; sourceTree = "<group>"; };
 		8940272A20296EDF003832B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 				89599A402086E33400DBA414 /* StartVC.swift */,
 				8934837A208BB8FE003C8D1C /* UserProfileVC.swift */,
 				89348384208C2E1A003C8D1C /* SideVC.swift */,
+				89348386208D311F003C8D1C /* EnlargeImgVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				891322FC205757C3004B9C0D /* UserClass.swift in Sources */,
 				892A6726205A3A6300243972 /* FancyView.swift in Sources */,
 				8940272920296D68003832B1 /* SignUPVC.swift in Sources */,
+				89348387208D311F003C8D1C /* EnlargeImgVC.swift in Sources */,
 				89A156151FA6486F0081035B /* GPSDataCollector.xcdatamodeld in Sources */,
 				8949A362206B2A59007BC20E /* Extensions and helpers.swift in Sources */,
 				891322FA2057573E004B9C0D /* Authentication.swift in Sources */,

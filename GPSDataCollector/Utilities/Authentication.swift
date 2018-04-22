@@ -57,6 +57,13 @@ class Authentication {
         Alamofire.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseJSON { (response) in
             if response.result.isSuccess {
                 let json = try! JSON(data: response.data!)
+                let result = json["result"].bool
+                if let res = result {
+                    if res == false {
+                        completion(false,nil)
+                        return
+                    }
+                }
                 let user = json["user"].dictionaryValue
                 let DuserName = user["username"]!.stringValue
                 let Demail = user["email"]!.stringValue

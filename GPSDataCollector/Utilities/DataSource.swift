@@ -222,11 +222,6 @@ class DataSource {
         } else {
             completion(false,nil)
             return
-        }
-        
-        
+        }   
     }
-    
-    
-    
 }
