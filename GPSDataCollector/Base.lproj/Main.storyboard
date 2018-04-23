@@ -561,7 +561,7 @@
         <!--Enlarge ImgVC-->
         <scene sceneID="a7z-3j-AJn">
             <objects>
-                <viewController storyboardIdentifier="EnlargeVC" modalTransitionStyle="crossDissolve" id="NHl-j5-1BN" customClass="EnlargeImgVC" customModule="GPSDataCollector" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EnlargeVC" id="NHl-j5-1BN" customClass="EnlargeImgVC" customModule="GPSDataCollector" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Izf-Ti-jKw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

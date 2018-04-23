@@ -65,18 +65,18 @@ class Authentication {
                     }
                 }
                 let user = json["user"].dictionaryValue
-                let DuserName = user["username"]!.stringValue
-                let Demail = user["email"]!.stringValue
-                let DfirstName = user["firstName"]!.stringValue
-                let DlastName = user["lastName"]!.stringValue
-                let Dheight = user["height"]!.doubleValue
-                let Dweight = user["weight"]!.doubleValue
-                let Dgender = user["gender"]!.stringValue
-                let Dbio = user["bio"]!.stringValue
-                let DphoneNum = user["phoneNo"]!.stringValue
-                let Daddress = user["address"]!.stringValue
-                let Dimage = user["image"]!.stringValue
-                let Dtoken = user["token"]!.stringValue
+                let DuserName = user["username"]?.stringValue ?? ""
+                let Demail = user["email"]?.stringValue ?? ""
+                let DfirstName = user["firstName"]?.stringValue ?? ""
+                let DlastName = user["lastName"]?.stringValue ?? ""
+                let Dheight = user["height"]?.doubleValue ?? 0.0
+                let Dweight = user["weight"]?.doubleValue ?? 0.0
+                let Dgender = user["gender"]?.stringValue ?? ""
+                let Dbio = user["bio"]?.stringValue ?? ""
+                let DphoneNum = user["phoneNo"]?.stringValue ?? ""
+                let Daddress = user["address"]?.stringValue ?? ""
+                let Dimage = user["image"]?.stringValue ?? ""
+                let Dtoken = user["token"]?.stringValue ?? ""
                 
                 let newUser = User(username: DuserName, email: Demail, firstName: DfirstName, lastName: DlastName, height: Dheight, weight: Dweight, gender: Dgender, bio:Dbio, phoneNum: DphoneNum, address: Daddress, profileImage: Dimage, token: Dtoken)
                 
