@@ -561,7 +561,7 @@
         <!--Enlarge ImgVC-->
         <scene sceneID="a7z-3j-AJn">
             <objects>
-                <viewController storyboardIdentifier="EnlargeVC" id="NHl-j5-1BN" customClass="EnlargeImgVC" customModule="GPSDataCollector" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EnlargeVC" modalTransitionStyle="crossDissolve" id="NHl-j5-1BN" customClass="EnlargeImgVC" customModule="GPSDataCollector" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Izf-Ti-jKw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -586,7 +586,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="GUR-Nk-TeL" firstAttribute="top" secondItem="c4I-6L-msi" secondAttribute="top" id="SzW-Ct-X4B"/>
                             <constraint firstItem="oay-4r-WVb" firstAttribute="trailing" secondItem="c4I-6L-msi" secondAttribute="trailing" id="atv-b6-Trn"/>

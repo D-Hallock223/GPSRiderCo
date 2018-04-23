@@ -23,6 +23,13 @@ class EnlargeImgVC: UIViewController {
 
        self.myImageView.image = img
         
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(swipeDownCalled))
+        swipeDown.direction = UISwipeGestureRecognizerDirection.down
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeDownCalled))
+        swipeUp.direction = UISwipeGestureRecognizerDirection.up
+        self.view.addGestureRecognizer(swipeDown)
+        self.view.addGestureRecognizer(swipeUp)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,6 +39,13 @@ class EnlargeImgVC: UIViewController {
             self.myImageView.alpha = 1
         }
         
+    }
+    
+    //MARK:- Functions
+    
+    
+    @objc func swipeDownCalled() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     //MARK:- IBActions
