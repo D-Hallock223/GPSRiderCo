@@ -71,7 +71,7 @@ class Authentication {
                 let DlastName = user["lastName"]?.stringValue ?? ""
                 let Dheight = user["height"]?.doubleValue ?? 0.0
                 let Dweight = user["weight"]?.doubleValue ?? 0.0
-                let Dgender = user["gender"]?.stringValue ?? ""
+                let Dgender = user["gender"]?.stringValue ?? "Male"
                 let Dbio = user["bio"]?.stringValue ?? ""
                 let DphoneNum = user["phoneNo"]?.stringValue ?? ""
                 let Daddress = user["address"]?.stringValue ?? ""

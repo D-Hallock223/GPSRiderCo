@@ -59,7 +59,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate,WCSessionDelegate {
     
     
     var fixedStartPoint:CLLocation!
-    //    var lastTimeStamp:Date?
+    var lastTimeStamp:Date?
     
     
     
@@ -203,26 +203,24 @@ class HomeVC: UIViewController,CLLocationManagerDelegate,WCSessionDelegate {
         }
         self.latitudeLbl.text = "\(location.coordinate.latitude.truncate(3))" + "°"
         self.longitudeLbl.text = "\(location.coordinate.longitude.truncate(3))" + "°"
-        sendDataToserver()
         guard let delegate = protocolDelegate else {return}
         delegate.receiveAndUpdate(location: location)
-        //        if !timeChecker(){
-        //            return
-        //        }
-        
-        
+        if !timeChecker(){
+            return
+        }
+        sendDataToserver()
     }
     
-    //    func timeChecker() -> Bool {
-    //        let now = Date()
-    //        let interval = (self.lastTimeStamp != nil) ? now.timeIntervalSince(self.lastTimeStamp!) : 0.0
-    //        if (self.lastTimeStamp == nil || interval >= 60) {
-    //            self.lastTimeStamp = now
-    //            return true
-    //        } else {
-    //            return false
-    //        }
-    //    }
+    func timeChecker() -> Bool {
+        let now = Date()
+        let interval = (self.lastTimeStamp != nil) ? now.timeIntervalSince(self.lastTimeStamp!) : 0.0
+        if (self.lastTimeStamp == nil || interval >= 8) {
+            self.lastTimeStamp = now
+            return true
+        } else {
+            return false
+        }
+    }
     
     
     func raceEndCheck(location:CLLocation) -> Bool {
@@ -277,10 +275,14 @@ class HomeVC: UIViewController,CLLocationManagerDelegate,WCSessionDelegate {
             self.displayAlert(title: "Error", Message: "Error sending data to the server")
             return}
         let distanceField = self.locationPoint?.distance(from: fixedStartPoint).rounded()
+        var speed = self.locationPoint?.speed ?? 0.0
+        if speed < 0 {
+            speed = 0 
+        }
         let parameters:[String:Any] = ["eventid":self.selectedEvent.id,
                                        "lat":"\(self.locationPoint?.coordinate.latitude ?? 0.0)",
             "lng":"\(self.locationPoint?.coordinate.longitude ?? 0.0)",
-            "speed":"\(self.locationPoint?.speed ?? 0.0)",
+            "speed":"\(speed)",
             "alt":"\(self.locationPoint?.altitude ?? 0)",
             "distLeft":"\(distanceField!)"]
         let headers = ["Content-Type":"application/x-www-form-urlencoded",
@@ -293,6 +295,8 @@ class HomeVC: UIViewController,CLLocationManagerDelegate,WCSessionDelegate {
                 if result == true {
                     print("Data successfully sent to the server")
                 }else{
+                    print(response.response)
+                    print(response)
                     print("Error sending data inside")
                 }
             }else{
