@@ -214,7 +214,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate,WCSessionDelegate {
     func timeChecker() -> Bool {
         let now = Date()
         let interval = (self.lastTimeStamp != nil) ? now.timeIntervalSince(self.lastTimeStamp!) : 0.0
-        if (self.lastTimeStamp == nil || interval >= 8) {
+        if (self.lastTimeStamp == nil || interval >= 5) {
             self.lastTimeStamp = now
             return true
         } else {
@@ -228,7 +228,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate,WCSessionDelegate {
         let endClLocation = CLLocation(latitude: finalDestination.latitude, longitude: finalDestination.longitude)
         
         let distance = location.distance(from: endClLocation)
-        if distance < CLLocationDistance(exactly: 1.0)! {
+        if distance < CLLocationDistance(exactly: 5.0)! {
             return true
         }
         return false
@@ -277,7 +277,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate,WCSessionDelegate {
         let distanceField = self.locationPoint?.distance(from: fixedStartPoint).rounded()
         var speed = self.locationPoint?.speed ?? 0.0
         if speed < 0 {
-            speed = 0 
+            speed = 0.1
         }
         let parameters:[String:Any] = ["eventid":self.selectedEvent.id,
                                        "lat":"\(self.locationPoint?.coordinate.latitude ?? 0.0)",

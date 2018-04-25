@@ -94,7 +94,6 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate,WCSessionDelegate {
     func setupEventData() {
         titleTextLbl.text = event.name
         guard let imgURL = URL(string: event.eventImgLink) else {return}
-        //        eventImageView.sd_setImage(with: imgURL, placeholderImage: #imageLiteral(resourceName: "placeholder"), options: [.continueInBackground,.scaleDownLargeImages], completed: nil)
         eventImageView.sd_setShowActivityIndicatorView(true)
         eventImageView.sd_setIndicatorStyle(.gray)
         eventImageView.sd_setImage(with: imgURL, placeholderImage: #imageLiteral(resourceName: "placeholder"), options: [.avoidAutoSetImage,.continueInBackground,.scaleDownLargeImages], completed: { (image, error, cache, url) in

@@ -40,6 +40,8 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
     
     var session:WCSession!
     
+    var lastTimeStamp:Date?
+
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
@@ -83,7 +85,11 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
         self.locationPoint = location
         latitudeLbl.setText("\(location.coordinate.latitude.truncate(3))°")
         longitudeLbl.setText("\(location.coordinate.longitude.truncate(3))°")
-        speedLbl.setText("\(location.speed.truncate(2)) m/s")
+        var speedValue = location.speed
+        if speedValue < 0 {
+            speedValue = 0.1
+        }
+        speedLbl.setText("\(speedValue.truncate(2)) m/s")
         altitudeLbl.setText("\(location.altitude.truncate(2)) ft")
         distanceLbl.setText("\(Int(location.distance(from: finalDestination))) m")
         if raceEndCheck() {
@@ -92,23 +98,39 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
             presentController(withName: "endVC", context: session)
             return
         }
-        sendDataToserver()
         delegate?.getData(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-        
-        
+        if !timeChecker(){
+            return
+        }
+        sendDataToserver()
+
     }
+    
+    
     //TODO:- send message to server
     func sendEndMessageToServer() {
         print("end message sent")
     }
+    
     //TODO:- Change end location
     func raceEndCheck() -> Bool {
-        endLocationCoordinate = CLLocation(latitude: 43.066844000, longitude: -89.304744000)
+//        endLocationCoordinate = CLLocation(latitude: 43.066844000, longitude: -89.304744000)
         let distance = (self.locationPoint!.distance(from: endLocationCoordinate))
-        if distance < CLLocationDistance(exactly: 1.0)! {
+        if distance < CLLocationDistance(exactly: 5.0)! {
             return true
         }
         return false
+    }
+    
+    func timeChecker() -> Bool {
+        let now = Date()
+        let interval = (self.lastTimeStamp != nil) ? now.timeIntervalSince(self.lastTimeStamp!) : 0.0
+        if (self.lastTimeStamp == nil || interval >= 5) {
+            self.lastTimeStamp = now
+            return true
+        } else {
+            return false
+        }
     }
     
     func sendDataToserver() {
@@ -118,7 +140,11 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
         var request = URLRequest(url: sendURL)
         let id = WatchUser.sharedInstance.participatingEventId!
         guard let location = self.locationPoint else {return}
-        let parameters = "eventid=\(id)&lat=\(location.coordinate.latitude)&lng=\(location.coordinate.longitude)&speed=\(location.speed)&alt=\(location.altitude)&distLeft=\(location.distance(from: finalDestination))".data(using:String.Encoding.ascii, allowLossyConversion: false)
+        var speedValue = location.speed
+        if speedValue < 0 {
+            speedValue = 0.1
+        }
+        let parameters = "eventid=\(id)&lat=\(location.coordinate.latitude)&lng=\(location.coordinate.longitude)&speed=\(speedValue)&alt=\(location.altitude)&distLeft=\(location.distance(from: finalDestination))".data(using:String.Encoding.ascii, allowLossyConversion: false)
         
         request.httpMethod = "POST"
         request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")

@@ -143,9 +143,11 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate,ra
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseId = "pin"
         var pinImage:UIImage!
-        if annotation.title == "Start" {
+        guard let antTitle1 = annotation.title else {return nil}
+        guard let antTitle2 = antTitle1 else {return nil}
+        if antTitle2 == "Start" {
             pinImage = UIImage(named: "startPin")
-        } else if annotation.title == "End" {
+        } else if antTitle2 == "End" {
             pinImage = UIImage(named: "finishPin")
         } else {
             return nil
@@ -197,12 +199,7 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate,ra
         }
 
     }
-    
-    
-    
-    
-    
-    
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let page = myScrollView.contentOffset.x / myScrollView.frame.width
         if page == 0.0 || page == 1.0 {
@@ -219,7 +216,7 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate,ra
             self.longitudeLbl.text = "\(location.coordinate.longitude.truncate(3))°"
             var speed = location.speed.truncate(2)
             if speed < 0 {
-                speed = 0
+                speed = 0.1
             }
             self.speedLbl.text = "\(speed) m/h"
             self.altitudeLbl.text = "\(location.altitude.truncate(2)) ft"
