@@ -660,7 +660,7 @@
                                     <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="signOutBtnTapped:" destination="yI2-dy-bf9" eventType="touchUpInside" id="gg3-ew-WHR"/>
+                                    <segue destination="NHd-qL-h67" kind="unwind" unwindAction="unwindTOLogInVCWithSegue:" id="tVH-nY-gEK"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -684,6 +684,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6iE-dS-vWT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="NHd-qL-h67" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="9Sg-pL-AVX">
                     <connections>
                         <action selector="imageTapped:" destination="yI2-dy-bf9" id="fet-8Q-hQj"/>

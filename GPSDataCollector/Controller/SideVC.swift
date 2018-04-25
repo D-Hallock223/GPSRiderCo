@@ -98,10 +98,10 @@ class SideVC: UIViewController {
         present(vc, animated: true, completion: nil)
     }
     
-    
-    @IBAction func signOutBtnTapped(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
+//
+//    @IBAction func signOutBtnTapped(_ sender: Any) {
+//        self.dismiss(animated: true, completion: nil)
+//    }
     
     
 }

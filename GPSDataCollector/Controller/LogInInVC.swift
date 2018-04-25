@@ -24,13 +24,10 @@ class LogInInVC: UIViewController{
         
     }
     
-   
-    
-    
-    
-    
-    
-    
+    @IBAction func unwindTOLogInVC(segue:UIStoryboardSegue) {
+        
+    }
+ 
     @IBAction func logInBtnPrsd(_ sender: Any) {
         KRProgressHUD.show()
         guard let email = userNameTxtFld.text,email != "" else {

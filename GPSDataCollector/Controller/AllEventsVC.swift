@@ -496,11 +496,7 @@ extension AllEventsVC:UITableViewDelegate,UITableViewDataSource {
             } else {
                 cell.difficultyLbl.text = "Hard"
             }
-//            if let imgURL = URL(string: event!.eventImgLink) {
-//                cell.eventsImageView.sd_setImage(with: imgURL, placeholderImage: #imageLiteral(resourceName: "placeholder"), options: [.continueInBackground,.scaleDownLargeImages], completed: nil)
-//            } else {
-//                cell.eventsImageView.image = #imageLiteral(resourceName: "placeholder")
-//            }
+
             if let imgURL = URL(string: event!.eventImgLink) {
                 cell.eventsImageView.sd_setShowActivityIndicatorView(true)
                 cell.eventsImageView.sd_setIndicatorStyle(.gray)
