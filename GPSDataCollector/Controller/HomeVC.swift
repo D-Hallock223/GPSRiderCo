@@ -259,7 +259,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate,WCSessionDelegate {
     
     
     func raceAlreadyCompletedAlert() {
-        let alertVC = UIAlertController(title: "Bummerr", message: "You have already completed this race", preferredStyle: .alert)
+        let alertVC = UIAlertController(title: "Now Calm Down!", message: "You have already completed this race", preferredStyle: .alert)
         let action = UIAlertAction(title: "Dismiss", style: .cancel) { (action) in
             self.locationManager.stopUpdatingLocation()
             self.user = nil

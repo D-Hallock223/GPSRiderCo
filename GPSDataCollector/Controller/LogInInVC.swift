@@ -122,9 +122,4 @@ class LogInInVC: UIViewController{
         alertVC.addAction(cacelAction)
         present(alertVC, animated: true, completion: nil)
     }
-    
-    
-    
-    
-  
 }
