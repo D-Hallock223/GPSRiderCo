@@ -733,10 +733,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3gN-QO-8d2">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="17"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CzM-SR-PIT">
-                                        <rect key="frame" x="154" y="-5.5" width="67" height="29"/>
+                                        <rect key="frame" x="154" y="50" width="67" height="29"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -763,6 +763,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.56862745100000001" green="0.78039215689999997" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="2jV-GV-YlI"/>
                                     <constraint firstItem="CzM-SR-PIT" firstAttribute="centerX" secondItem="3gN-QO-8d2" secondAttribute="centerX" id="5zu-dk-B0M"/>
                                     <constraint firstItem="NPT-26-KZo" firstAttribute="top" secondItem="3gN-QO-8d2" secondAttribute="top" constant="50" id="Hdr-Dg-KTN"/>
                                     <constraint firstItem="CzM-SR-PIT" firstAttribute="centerY" secondItem="3gN-QO-8d2" secondAttribute="centerY" id="JnL-bT-eAx"/>
@@ -772,7 +773,7 @@
                                 </constraints>
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bZ3-Zc-oZZ">
-                                <rect key="frame" x="16" y="27" width="343" height="29"/>
+                                <rect key="frame" x="16" y="138" width="343" height="29"/>
                                 <segments>
                                     <segment title="Registered"/>
                                     <segment title="Upcoming"/>
@@ -788,7 +789,7 @@
                                 <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ahX-gI-4mb">
-                                <rect key="frame" x="0.0" y="71" width="375" height="596"/>
+                                <rect key="frame" x="0.0" y="182" width="375" height="485"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -945,7 +946,6 @@
                             <constraint firstItem="ahX-gI-4mb" firstAttribute="trailing" secondItem="6iR-Ly-Vki" secondAttribute="trailing" id="A8f-3t-b7e"/>
                             <constraint firstItem="ahX-gI-4mb" firstAttribute="leading" secondItem="6iR-Ly-Vki" secondAttribute="leading" id="FyA-xk-9DQ"/>
                             <constraint firstItem="bZ3-Zc-oZZ" firstAttribute="leading" secondItem="6iR-Ly-Vki" secondAttribute="leading" constant="16" id="RAo-Jq-GBN"/>
-                            <constraint firstItem="6iR-Ly-Vki" firstAttribute="bottom" secondItem="3gN-QO-8d2" secondAttribute="bottom" constant="650" id="TjP-Wr-FoZ"/>
                             <constraint firstItem="3gN-QO-8d2" firstAttribute="leading" secondItem="72M-cH-0Mw" secondAttribute="leading" id="ZOX-Qx-90s"/>
                             <constraint firstItem="6iR-Ly-Vki" firstAttribute="trailing" secondItem="bZ3-Zc-oZZ" secondAttribute="trailing" constant="16" id="b8c-Pz-qkH"/>
                             <constraint firstAttribute="trailing" secondItem="3gN-QO-8d2" secondAttribute="trailing" id="c8P-qd-SYn"/>
