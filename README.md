@@ -10,15 +10,20 @@ This repository consist of both the iOS and watchOS application.
 
 ### This application has been written purely in swift.
 
+## Features of the Application:
+https://docs.google.com/document/d/10UJde27JabxJyCl5ZKNeDJLVfpBTJUaaMKW7DfkNuhg/edit?usp=sharing
+
 ## 3rd party libraries used in this application are:
 1) Alamofire
 2) SwiftJSON
 3) SdWebImage
+4) KRProgressHUD
+5) MarqueeLabel/Swift
+6) Firebase/Storage
+
 
 ## Methods to run the application:
-Download the zip file. Xcode is required to open the project and run it. Change the schema to RiderTrackWatchApp and make sure both the iOS and watchOS simulators are selected. Finally run the project.
-
-P.S Looks perfect on iPhone X. Other device screen sizes may look little off.
+https://docs.google.com/document/d/1alWzMrAU9IN9axmIfYnLoVkxf-lGkEvE2QADBaFKAs4/edit?usp=sharing
 
 
 
