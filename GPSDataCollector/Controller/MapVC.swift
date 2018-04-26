@@ -220,7 +220,8 @@ class MapVC: UIViewController,SendData,UIScrollViewDelegate,MKMapViewDelegate,ra
             }
             self.speedLbl.text = "\(speed) m/h"
             self.altitudeLbl.text = "\(location.altitude.truncate(2)) ft"
-            self.distanceLbl.text = "\(Int(location.distance(from: startDestination))) m"
+            let distaceField = (location.distance(from: startDestination)) * 0.000621371
+            self.distanceLbl.text = "\(distaceField) miles"
         }
     }
 }

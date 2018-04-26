@@ -208,7 +208,7 @@ class HomeVC: UIViewController,CLLocationManagerDelegate,WCSessionDelegate {
         if !timeChecker(){
             return
         }
-        sendDataToserver()
+        sendDataToserver(isForEnd: false)
     }
     
     func timeChecker() -> Bool {
@@ -236,10 +236,9 @@ class HomeVC: UIViewController,CLLocationManagerDelegate,WCSessionDelegate {
     }
     
     func raceEndAlert(forWatch:Bool) {
+        self.sendRaceOverMessageToServer()
         let alert = UIAlertController(title: "Race Completed", message: "You have successfully completed the race", preferredStyle: .alert)
         let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel) { (action) in
-            self.locationManager.stopUpdatingLocation()
-            self.sendRaceOverMessageToServer()
             self.user = nil
             if !forWatch {
                 self.session?.sendMessage(["loggedIn":false], replyHandler: nil, errorHandler: { (error) in
@@ -254,7 +253,24 @@ class HomeVC: UIViewController,CLLocationManagerDelegate,WCSessionDelegate {
     }
     
     func sendRaceOverMessageToServer() {
-        print("race over message sent")
+        self.locationManager.stopUpdatingLocation()
+        sendDataToserver(isForEnd: true)
+    }
+    
+    
+    func raceAlreadyCompletedAlert() {
+        let alertVC = UIAlertController(title: "Bummerr", message: "You have already completed this race", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Dismiss", style: .cancel) { (action) in
+            self.locationManager.stopUpdatingLocation()
+            self.user = nil
+            self.session?.sendMessage(["loggedIn":false], replyHandler: nil, errorHandler: { (error) in
+                print(error.localizedDescription)
+                return
+            })
+            self.dismiss(animated: true, completion: nil)
+        }
+        alertVC.addAction(action)
+        present(alertVC, animated: true, completion: nil)
     }
     
     
@@ -269,22 +285,37 @@ class HomeVC: UIViewController,CLLocationManagerDelegate,WCSessionDelegate {
         }
     }
     
-    @objc func sendDataToserver() {
+    func sendDataToserver(isForEnd:Bool) {
         
         guard let sendURL = URL(string: URL_SEND_DATA_TO_SERVER) else {
             self.displayAlert(title: "Error", Message: "Error sending data to the server")
             return}
-        let distanceField = self.locationPoint?.distance(from: fixedStartPoint).rounded()
+        var distanceField = self.locationPoint?.distance(from: fixedStartPoint).rounded()
+        distanceField = distanceField! * 0.000621371
         var speed = self.locationPoint?.speed ?? 0.0
         if speed < 0 {
             speed = 0.1
         }
-        let parameters:[String:Any] = ["eventid":self.selectedEvent.id,
+        let parameters:[String:Any]!
+        
+        let parameters1:[String:Any] = ["eventid":self.selectedEvent.id,
                                        "lat":"\(self.locationPoint?.coordinate.latitude ?? 0.0)",
             "lng":"\(self.locationPoint?.coordinate.longitude ?? 0.0)",
             "speed":"\(speed)",
             "alt":"\(self.locationPoint?.altitude ?? 0)",
             "distLeft":"\(distanceField!)"]
+        let parameters2:[String:Any] = ["eventid":self.selectedEvent.id,
+                                        "lat":"\(self.locationPoint?.coordinate.latitude ?? 0.0)",
+            "lng":"\(self.locationPoint?.coordinate.longitude ?? 0.0)",
+            "speed":"\(speed)",
+            "alt":"\(self.locationPoint?.altitude ?? 0)",
+            "distLeft":"\(distanceField!)",
+            "completed":true]
+        if isForEnd {
+            parameters = parameters2
+        }else{
+            parameters = parameters1
+        }
         let headers = ["Content-Type":"application/x-www-form-urlencoded",
                        "Authorization":"Bearer \(self.user?.token ?? "")"]
         
@@ -295,9 +326,14 @@ class HomeVC: UIViewController,CLLocationManagerDelegate,WCSessionDelegate {
                 if result == true {
                     print("Data successfully sent to the server")
                 }else{
-                    print(response.response)
-                    print(response)
-                    print("Error sending data inside")
+                    let msg = "activity is already marked completed"
+                    let returnMSg = json["status"]["msg"].stringValue
+                    print(returnMSg,11111)
+                    if msg == returnMSg {
+                        self.raceAlreadyCompletedAlert()
+                    }else{
+                        print("some error occured while sending data")
+                    }
                 }
             }else{
                 print("Error sending data outside")

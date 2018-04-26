@@ -91,7 +91,8 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
         }
         speedLbl.setText("\(speedValue.truncate(2)) m/s")
         altitudeLbl.setText("\(location.altitude.truncate(2)) ft")
-        distanceLbl.setText("\(Int(location.distance(from: finalDestination))) m")
+        let dist = ((location.distance(from: finalDestination)) * 0.000621371).truncate(4)
+        distanceLbl.setText("\(dist) miles")
         if raceEndCheck() {
             sendEndMessageToServer()
             locationManager.stopUpdatingLocation()
@@ -102,14 +103,13 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
         if !timeChecker(){
             return
         }
-        sendDataToserver()
-
+        sendDataToserver(isForEnd: false)
     }
     
     
     //TODO:- send message to server
     func sendEndMessageToServer() {
-        print("end message sent")
+        sendDataToserver(isForEnd: true)
     }
     
     //TODO:- Change end location
@@ -133,7 +133,7 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
         }
     }
     
-    func sendDataToserver() {
+    func sendDataToserver(isForEnd:Bool) {
         
         guard let sendURL = URL(string: URL_SEND_DATA_TO_SERVER) else {return}
         
@@ -144,7 +144,17 @@ class TrackVC: WKInterfaceController,CLLocationManagerDelegate {
         if speedValue < 0 {
             speedValue = 0.1
         }
-        let parameters = "eventid=\(id)&lat=\(location.coordinate.latitude)&lng=\(location.coordinate.longitude)&speed=\(speedValue)&alt=\(location.altitude)&distLeft=\(location.distance(from: finalDestination))".data(using:String.Encoding.ascii, allowLossyConversion: false)
+        var distanceField = location.distance(from: finalDestination).rounded()
+        distanceField = distanceField * 0.000621371
+        let parameters:Data?
+        let parameters1 = "eventid=\(id)&lat=\(location.coordinate.latitude)&lng=\(location.coordinate.longitude)&speed=\(speedValue)&alt=\(location.altitude)&distLeft=\(distanceField)".data(using:String.Encoding.ascii, allowLossyConversion: false)
+        let parameters2 = "eventid=\(id)&lat=\(location.coordinate.latitude)&lng=\(location.coordinate.longitude)&speed=\(speedValue)&alt=\(location.altitude)&distLeft=\(distanceField)&completed=\(true)".data(using:String.Encoding.ascii, allowLossyConversion: false)
+        
+        if isForEnd {
+            parameters = parameters2
+        }else{
+            parameters = parameters1
+        }
         
         request.httpMethod = "POST"
         request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
