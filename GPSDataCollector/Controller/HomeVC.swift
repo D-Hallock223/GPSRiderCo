@@ -203,12 +203,12 @@ class HomeVC: UIViewController,CLLocationManagerDelegate,WCSessionDelegate {
         }
         self.latitudeLbl.text = "\(location.coordinate.latitude.truncate(3))" + "°"
         self.longitudeLbl.text = "\(location.coordinate.longitude.truncate(3))" + "°"
+
+        if timeChecker(){
+            sendDataToserver(isForEnd: false)
+        }
         guard let delegate = protocolDelegate else {return}
         delegate.receiveAndUpdate(location: location)
-        if !timeChecker(){
-            return
-        }
-        sendDataToserver(isForEnd: false)
     }
     
     func timeChecker() -> Bool {
