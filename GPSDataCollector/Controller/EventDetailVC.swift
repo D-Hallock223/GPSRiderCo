@@ -168,11 +168,12 @@ class EventDetailVC: UIViewController,UIScrollViewDelegate,WCSessionDelegate {
     
     
     func raceStartCheck() -> Bool {
-        let num = arc4random_uniform(2)
-        if num == 1 {
-            return true
-        }
-        return false
+//        let num = arc4random_uniform(2)
+//        if num == 1 {
+//            return true
+//        }
+//        return false
+        return true
         //        let startTime = Formatter.iso8601.date(from: event.startTime)
         //        let endTime = Formatter.iso8601.date(from: event.endTime)
         //        let date = Date()
