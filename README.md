@@ -8,8 +8,6 @@ The UI our application provided will be to cater a sport or two depending on the
 This is the client side app that is used for sending the required location data to the backend of the application.
 This repository consist of both the iOS and watchOS application.
 
-### This application has been written purely in swift.
-
 ## Features of the Application:
 https://docs.google.com/document/d/10UJde27JabxJyCl5ZKNeDJLVfpBTJUaaMKW7DfkNuhg/edit?usp=sharing
 
