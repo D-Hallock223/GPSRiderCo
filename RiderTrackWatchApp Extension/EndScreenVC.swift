@@ -37,7 +37,7 @@ class EndScreenVC: WKInterfaceController {
     @IBAction func closeBtnTapped() {
         sendMessagetoPhone()
         UserDefaults.standard.set(false, forKey: "loggedIn")
-        self.dismiss()
+        self.dismiss() 
     }
 
     
